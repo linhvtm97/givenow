@@ -67,10 +67,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if (config('app.debug') && config('app.env') == 'local') {
-            return parent::render($request, $exception);
-        }
-
         # Set default errors.
         $this->setStatus(JsonResponse::HTTP_INTERNAL_SERVER_ERROR)
             ->setMeta($exception->getMessage());
