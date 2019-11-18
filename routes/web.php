@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('{any}', function () {
+    if (Request::is('management*')) {
+        return view('backend');
+    } elseif (Request::is('sign-in')) {
+        return view('sign-in');
+    } else {
+        return view('frontend');
+    }
+
+})->where('any', '.*');
