@@ -1,8 +1,27 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
+import CategoriesRequests from '../../../requests/backend/CategoriesRequests';
 
 export default class extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { 
+            listCategories: [],
+            messageError: '',
+        };
+    }
+
+    componentDidMount() {
+        CategoriesRequests.getAll().then((response) => {
+            if (response.meta.status === 200) {
+                this.setState({listCategories: response.data});
+            } else {
+                this.state.messageError = response.meta.message;
+            }
+        });
+    }
+
     render() {
         return (
             <div>
@@ -33,23 +52,19 @@ export default class extends Component {
                                     <table className="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>Name</th>
+                                                <th>Description</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Doe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Moe</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Dooley</td>
-                                            </tr>
+                                            {this.state.listCategories.map((item, index) => {
+                                                return (
+                                                    <tr key={index}>
+                                                        <td>{item.name}</td>
+                                                        <td>{item.description}</td>
+                                                    </tr>
+                                                );
+                                            })}
                                         </tbody>
                                     </table>
                                 </div>
