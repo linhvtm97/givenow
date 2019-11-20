@@ -4,9 +4,12 @@ namespace App\Modules\V1\Item\Services;
 
 use App\Modules\V1\Item\Repositories\ItemRepository;
 use App\Modules\Service as BaseService;
+use App\Shared\Traits\Updater;
 
 class ItemService extends BaseService
 {
+    use Updater;
+
     /**
      * ItemService constructor.
      * @param ItemRepository $ItemRepository

@@ -16,7 +16,7 @@ class Event extends MainModel
      * @var array
      */
     protected $fillable = [
-        'name', 'cause_id', 'user_id', 'avatar', 'description', 'text', 'goal_item', 'start_date', 
+        'name', 'cause_id', 'user_id', 'image', 'description', 'text', 'goal_item', 'start_date',
         'end_date', 'location', 'status'
     ];
 
@@ -26,9 +26,9 @@ class Event extends MainModel
      * @var array
      */
     protected $hidden = [
-        'pivot', 'deleted_at', 'cause_id', 'user_id', 
+        'pivot', 'deleted_at', 'cause_id', 'user_id',
     ];
-  
+
     /**
      * User relation
      *

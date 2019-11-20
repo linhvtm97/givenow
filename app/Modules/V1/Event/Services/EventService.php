@@ -4,9 +4,12 @@ namespace App\Modules\V1\Event\Services;
 
 use App\Modules\V1\Event\Repositories\EventRepository;
 use App\Modules\Service as BaseService;
+use App\Shared\Traits\Updater;
 
 class EventService extends BaseService
 {
+    use Updater;
+
     /**
      * EventService constructor.
      * @param EventRepository $eventRepository

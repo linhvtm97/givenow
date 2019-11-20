@@ -57,6 +57,7 @@ class Service
      */
     public function store(array $data)
     {
+        $data = $this->prepareData($data);
         DB::beginTransaction();
         try {
             $object = $this->repository->create($data);
@@ -80,6 +81,7 @@ class Service
      */
     public function update(string $uid, array $data)
     {
+        $data = $this->prepareData($data);
         DB::beginTransaction();
         try {
             $object = $this->repository->update($data, $uid);

@@ -4,9 +4,11 @@ namespace App\Modules\V1\Charity\Services;
 
 use App\Modules\V1\Charity\Repositories\CharityRepository;
 use App\Modules\Service as BaseService;
+use App\Shared\Traits\Updater;
 
 class CharityService extends BaseService
 {
+    use Updater;
     /**
      * CharityService constructor.
      * @param CharityRepository $charityRepository

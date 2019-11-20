@@ -16,9 +16,9 @@ class Item extends MainModel
      * @var array
      */
     protected $fillable = [
-        'name', 'category_id', 'avatar', 'description', 'text', 'price'
+        'name', 'category_id', 'image', 'description', 'text', 'price'
     ];
-  
+
     /**
      * User relation
      *
