@@ -1,5 +1,5 @@
 import axios from 'axios';
-import AuthHelper from "../helpers/AuthHelper";
+import AuthHelper from "../helpers/AuthHelperBackEnd";
 
 function getHeader(header) {
     return header;

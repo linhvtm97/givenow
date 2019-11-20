@@ -1,5 +1,5 @@
 import Request from '../Request';
-import AuthHelper from '../../helpers/AuthHelper';
+import AuthHelper from '../../helpers/AuthHelperBackEnd';
 const API_URL = '/api/v1';
 
 export default class {
