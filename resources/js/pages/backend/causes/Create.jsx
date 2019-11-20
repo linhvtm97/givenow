@@ -14,6 +14,17 @@ export default class extends Component {
         };
     }
 
+    handleOnChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    submitForm = event => {
+        event.preventDefault();
+        console.log(this.state.formData)
+    }
+
     render() {
         return (
             <div>
@@ -37,9 +48,11 @@ export default class extends Component {
                                 <form>
                                     <div className="form-group">
                                         <label htmlFor="name">Name</label>
-                                        <input type="text" className="form-control" id="name"/>
+                                        <input type="text" className="form-control" id="name" 
+                                            onChange={this.handleOnChange}/>
                                     </div>
-                                    <button type="button" className="btn btn-primary">Submit</button>
+                                    <button type="button" className="btn btn-primary" 
+                                        onClick={this.submitForm}>Submit</button>
                                     <Link to={RouteConst.backEnd.categories.index.path}>
                                         <button type="button" className="btn btn-secondary ml-2">Cancel</button>
                                     </Link>

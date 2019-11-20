@@ -3,11 +3,11 @@ import Data from '../constants/Data';
 
 const TOKEN_BACKEND = Data.authLocalStorage;
 
-export default class AuthHelper {
+export default class AuthHelperBackEnd {
 
     static checkAuthError(error) {
         if (error.response.status === 401) {
-            AuthHelper.removeToken();
+            AuthHelperBackEnd.removeToken();
             window.location.href = Data.routeSignInBackEnd;
         }
 
@@ -18,18 +18,11 @@ export default class AuthHelper {
 
     static getToken() {
         const auth = LocalStorageHelper.getItem(TOKEN_BACKEND, {});
-        if (!auth || !auth.accessToken) {
+        if (!auth || !auth.access_token) {
             return null;
         }
 
-        const now = new Date().getTime();
-        const expiresTime = auth.expiresTime;
-
-        if (now > expiresTime) {
-            return null;
-        }
-
-        const accessToken = auth.accessToken;
+        const accessToken = auth.access_token;
 
         return accessToken;
     };
@@ -53,7 +46,6 @@ export default class AuthHelper {
             return null;
         }
 
-        auth.expiresTime = new Date().getTime() + auth.expiresIn * 1000;
         return LocalStorageHelper.setItem(TOKEN_BACKEND, auth);
     };
 
