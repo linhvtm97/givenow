@@ -1,8 +1,27 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
+import AuthRequests from '../../../requests/backend/AuthRequests';
+import AuthHelper from '../../../helpers/AuthHelperBackEnd';
 
 export default class extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    logout = event => {
+        event.preventDefault();
+        AuthRequests.logout().then((response) => {
+            if (response.meta.status === 200) {
+                console.log(response.data);
+                this.props.history.push(Route.backEnd.categories.index.path);
+            } else {
+                this.state.messageError = response.meta.message;
+            }
+        });
+    }
+    
     render() {
         return (
             <div>
@@ -41,7 +60,7 @@ export default class extends Component {
                             <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                             <div className="modal-footer">
                                 <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <button className="btn btn-primary">Logout</button>
+                                <button className="btn btn-primary" onClick={this.logout}>Logout</button>
                             </div>
                         </div>
                     </div>

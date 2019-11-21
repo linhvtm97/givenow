@@ -16,9 +16,9 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('cause_id');
-            $table->foreign('cause_id')->references('id')->on('causes');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('city_id');
             $table->string('name');
             $table->string('status')->default(0);
             $table->string('avatar')->nullable();
@@ -29,6 +29,12 @@ class CreateEventsTable extends Migration
             $table->date('end_date');
             $table->string('location');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('cause_id')->references('id')->on('causes');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('city_id')->references('id')->on('cities');
         });
     }
 

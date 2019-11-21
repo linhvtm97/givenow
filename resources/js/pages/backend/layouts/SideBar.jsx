@@ -9,7 +9,6 @@ export default class extends Component {
         this.state = {
             pathMenuCurrent: '',
         };
-        this.getMenuCurrent();
     }
 
     componentDidMount() {
@@ -21,7 +20,7 @@ export default class extends Component {
         this.getMenuCurrent();
     }
 
-    getMenuCurrent() {
+    getMenuCurrent = () => {
         const pathname = window.location.pathname
         const pathArray = pathname.split('/');
         const pathMenuCurrent = pathArray[0] + '/' + pathArray[1] + '/' + pathArray[2];

@@ -8,6 +8,8 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('css/sign-in.css') }}" rel="stylesheet" type="text/css">
     </head>
-    <body id="app"></body>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <body>
+        <div id="app"></div>
+        <script src="{{ asset('js/app.js') }}"></script>
+    </body>
 </html>
