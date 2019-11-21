@@ -1,4 +1,5 @@
 import LocalStorageHelper from './LocalStorageHelper';
+import Route from '../constants/Route';
 import Data from '../constants/Data';
 
 const TOKEN_BACKEND = Data.authLocalStorage;
@@ -8,11 +9,11 @@ export default class AuthHelperBackEnd {
     static checkAuthError(error) {
         if (error.response.status === 401) {
             AuthHelperBackEnd.removeToken();
-            window.location.href = Data.routeSignInBackEnd;
+            window.location.href = Route.backEnd.auth.login.path;
         }
 
         if (error.response.status === 403) {
-            window.location.href = Data.routeHomeBackEnd;
+            window.location.href = Route.backEnd.home.index.path;
         }
     }
 

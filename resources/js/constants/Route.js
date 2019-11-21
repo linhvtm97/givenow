@@ -1,5 +1,10 @@
 export default Object.freeze({
     backEnd: {
+        auth: {
+            login: {
+                path: '/sign-in'
+            }
+        },
         home: {
             index: {
                 path: '/management'
@@ -21,12 +26,12 @@ export default Object.freeze({
                 path: '/management/causes/create'
             },
         },
-        charities: {
+        cities: {
             index: {
-                path: '/management/charities'
+                path: '/management/cities'
             },
             create: {
-                path: '/management/charities/create'
+                path: '/management/cities/create'
             },
         },
         events: {
@@ -37,12 +42,44 @@ export default Object.freeze({
                 path: '/management/events/create'
             },
         },
-        items: {
+        products: {
             index: {
-                path: '/management/items'
+                path: '/management/products'
             },
             create: {
-                path: '/management/items/create'
+                path: '/management/products/create'
+            },
+        },
+        users: {
+            index: {
+                path: '/management/users'
+            },
+            create: {
+                path: '/management/users/create'
+            },
+        },
+        charities: {
+            index: {
+                path: '/management/charities'
+            },
+            create: {
+                path: '/management/charities/create'
+            },
+        },
+        posts: {
+            index: {
+                path: '/management/posts'
+            },
+            create: {
+                path: '/management/posts/create'
+            },
+        },
+        orders: {
+            index: {
+                path: '/management/orders'
+            },
+            create: {
+                path: '/management/orders/create'
             },
         },
     },
