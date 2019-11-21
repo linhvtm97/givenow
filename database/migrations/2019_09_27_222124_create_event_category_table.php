@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlogsTable extends Migration
+class CreateEventCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateBlogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('event_category', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('event_id');
-            $table->string('title');
-            $table->string('image')->nullable();
-            $table->string('description')->nullable();
-            $table->text('text')->nullable();
+            $table->unsignedInteger('category_id');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('event_id')->references('id')->on('events');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
@@ -34,6 +32,8 @@ class CreateBlogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogs');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('events');
+        Schema::enableForeignKeyConstraints();
     }
 }

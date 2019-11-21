@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Modules\V1\Event\Repositories;
+namespace App\Modules\V1\Product\Repositories;
 
 use App\Modules\Repository as BaseRepository;
-use App\Models\V1\Event;
-use DB;
+use App\Models\V1\Product;
 /**
- * Class EventRepository
- * @package App\Modules\V1\Event\Repositories
+ * Class ProductRepository
+ * @package App\Modules\V1\Product\Repositories
  */
-class EventRepository extends BaseRepository
+class ProductRepository extends BaseRepository
 {
     /**
      * Specify Model class name
@@ -18,7 +17,7 @@ class EventRepository extends BaseRepository
      */
     public function model()
     {
-        return Event::class;
+        return Product::class;
     }
 
     /**
@@ -30,6 +29,6 @@ class EventRepository extends BaseRepository
      */
     public function getAll(array $data = null)
     {
-        return $this->model->with(['cause', 'user'])->querySearch()->paginate();
+        return $this->model->with(['category'])->querySearch()->paginate();
     }
 }

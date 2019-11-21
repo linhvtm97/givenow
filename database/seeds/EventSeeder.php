@@ -36,7 +36,7 @@ class EventSeeder extends Seeder
             'text' => $events['text'],
             'user_id' => $users[rand(1,10)],
             'cause_id' => $causes[rand(1,5)],
-            'avatar' => $avatars[rand(0,6)]
+            'image' => $avatars[rand(0,6)]
         ]);
     }
 }

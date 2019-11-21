@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\V1\User;
-use App\Models\V1\Role;
 
 class UserTableSeeder extends Seeder
 {
@@ -13,10 +12,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i<10; $i++) {
-            factory(App\Models\V1\User::class, 1)->create(['name' => Role::ADMIN_ROLE, 'username' => 'admin'.$i]);
-            factory(App\Models\V1\User::class, 1)->create(['name' => Role::DONOR_ROLE, 'username' => 'donor'.$i]);
-            factory(App\Models\V1\User::class, 1)->create(['name' => Role::CHARITY_ROLE, 'username' => 'charity'.$i]);
-        }
+        factory(App\Models\V1\User::class, 5)->create(['name' => 'admin', 'username' => 'admin'.rand(1,100), 'role' => 1]);
+        factory(App\Models\V1\User::class, 5)->create(['name' => 'normal user', 'username' => 'user'.rand(1,100), 'role' => 0]);
     }
 }

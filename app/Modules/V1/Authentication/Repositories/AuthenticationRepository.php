@@ -39,7 +39,6 @@ class AuthenticationRepository
         ];
         $data['password'] = bcrypt($data['password']);
         $user = User::create($data);
-        $user->roles()->sync(Role::where('id', $data['role_id'])->firstOrFail());
 
         return $credentials;
     }

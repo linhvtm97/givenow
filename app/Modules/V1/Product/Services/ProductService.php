@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Modules\V1\Item\Services;
+namespace App\Modules\V1\Product\Services;
 
-use App\Modules\V1\Item\Repositories\ItemRepository;
+use App\Modules\V1\Product\Repositories\ProductRepository;
 use App\Modules\Service as BaseService;
 use App\Shared\Traits\Updater;
 
-class ItemService extends BaseService
+class ProductService extends BaseService
 {
     use Updater;
 
     /**
-     * ItemService constructor.
-     * @param ItemRepository $ItemRepository
+     * ProductService constructor.
+     * @param ProductRepository $ProductRepository
      */
-    public function __construct(ItemRepository $ItemRepository)
+    public function __construct(ProductRepository $productRepository)
     {
-        parent::__construct($ItemRepository);
+        parent::__construct($productRepository);
     }
 
     /**

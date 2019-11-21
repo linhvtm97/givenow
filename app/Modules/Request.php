@@ -3,6 +3,7 @@
 namespace App\Modules;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Modules\V1\Order\Requests\StoreOrderRequest;
 
 class Request extends FormRequest
 {
@@ -10,8 +11,9 @@ class Request extends FormRequest
 
     // Request route names
     protected $namingRoute = [
+        'Order.store ' => StoreOrderRequest::class
     ];
-     
+
     /**
      * Determine if the user is authorized to make this request.
      *

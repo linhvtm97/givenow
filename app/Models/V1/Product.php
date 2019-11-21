@@ -4,9 +4,9 @@ namespace App\Models\V1;
 
 use App\Models\V1\MainModel;
 
-class Item extends MainModel
+class Product extends MainModel
 {
-    protected $table = 'items';
+    protected $table = 'products';
 
     protected $searchField = 'name';
 
@@ -16,7 +16,7 @@ class Item extends MainModel
      * @var array
      */
     protected $fillable = [
-        'name', 'category_id', 'image', 'description', 'text', 'price'
+        'name', 'category_id', 'image', 'description', 'text', 'price', 'image'
     ];
 
     /**

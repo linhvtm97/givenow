@@ -3,8 +3,7 @@
 namespace App\Modules\V1\Charity\Repositories;
 
 use App\Modules\Repository as BaseRepository;
-use App\Models\V1\User;
-use App\Models\V1\Role;
+use App\Models\V1\Charity;
 
 /**
  * Class CharityRepository
@@ -19,22 +18,6 @@ class CharityRepository extends BaseRepository
      */
     public function model()
     {
-        return User::class;
-    }
-
-    /**
-     * Get All object
-     *
-     * @param array|null $data data
-     *
-     * @return \Model\Eloquent\Builder
-     */
-    public function getAll(array $data = null)
-    {
-        return $this->model->join('role_user', 'role_user.user_id', 'users.id')
-            ->join('roles', 'roles.id', 'role_user.role_id')
-            ->where('roles.name', Role::CHARITY_ROLE)
-            ->select('users.*')
-            ->paginate();
+        return Charity::class;
     }
 }

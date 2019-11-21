@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Modules\V1\Item\Repositories;
+namespace App\Modules\V1\Post\Repositories;
 
 use App\Modules\Repository as BaseRepository;
-use App\Models\V1\Item;
+use App\Models\V1\Post;
+
 /**
- * Class ItemRepository
- * @package App\Modules\V1\Item\Repositories
+ * Class PostRepository
+ * @package App\Modules\V1\Post\Repositories
  */
-class ItemRepository extends BaseRepository
+class PostRepository extends BaseRepository
 {
     /**
      * Specify Model class name
@@ -17,7 +18,7 @@ class ItemRepository extends BaseRepository
      */
     public function model()
     {
-        return Item::class;
+        return Post::class;
     }
 
     /**
@@ -29,6 +30,6 @@ class ItemRepository extends BaseRepository
      */
     public function getAll(array $data = null)
     {
-        return $this->model->with(['category'])->querySearch()->paginate();
+        return $this->model->with('event')->querySearch()->paginate();
     }
 }

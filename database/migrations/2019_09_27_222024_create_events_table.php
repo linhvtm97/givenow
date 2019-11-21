@@ -17,11 +17,10 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('cause_id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('category_id');
             $table->unsignedInteger('city_id');
             $table->string('name');
             $table->string('status')->default(0);
-            $table->string('avatar')->nullable();
+            $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->text('text');
             $table->integer('goal_item');
@@ -33,7 +32,6 @@ class CreateEventsTable extends Migration
 
             $table->foreign('cause_id')->references('id')->on('causes');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('city_id')->references('id')->on('cities');
         });
     }

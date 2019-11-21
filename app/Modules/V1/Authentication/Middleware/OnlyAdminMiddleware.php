@@ -2,7 +2,7 @@
 
 namespace App\Modules\V1\Authentication\Middleware;
 
-use App\Models\V1\Role;
+use App\Models\V1\User;
 use App\Modules\V1\Authentication\Services\AuthenticationService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Closure;
@@ -23,8 +23,7 @@ class OnlyAdminMiddleware
     {
         $user = AuthenticationService::currentUser();
         if ($user) {
-            $roles = $user->roles->pluck('name')->toArray();
-            if (!in_array(Role::ADMIN_ROLE, $roles)) {
+            if ($user->role != User::ROLE_ADMIN) {
                 throw new AuthorizationException();
             }
         }

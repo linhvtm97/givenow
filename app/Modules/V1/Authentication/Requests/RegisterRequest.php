@@ -3,7 +3,7 @@
 namespace App\Modules\V1\Authentication\Requests;
 
 use App\Modules\Request;
-use App\Models\V1\Role;
+use App\Models\V1\User;
 
 class RegisterRequest extends Request
 {
@@ -14,7 +14,7 @@ class RegisterRequest extends Request
      */
     public function rules()
     {
-        return [                      
+        return [
             'name'            => 'required|string',
             'username'            => 'required|unique:users',
             'email'            => 'email|unique:users',
@@ -22,10 +22,10 @@ class RegisterRequest extends Request
             'address'            => 'required|string',
             'password'         => 'required|min:8',
             'password_confirm' => 'required|same:password',
-            'role_id'          => 'required|numeric|in:'.join(',', [Role::DONOR_ROLE => 2, Role::CHARITY_ROLE => 3])
+            'role'          => 'required|numeric|in:'.join(',', User::LIST_ROLE)
         ];
     }
-    
+
     /**
      * Add parameters to be validated
      *
