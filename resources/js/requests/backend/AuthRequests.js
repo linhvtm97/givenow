@@ -10,6 +10,7 @@ export default class {
 
     static logout() {
         const url = `${API_URL}/auth/logout`;
-        return Request.post(url, {}, AuthHelper.setHeaderToken());
+        const token = AuthHelper.getToken();
+        return Request.post(url, { token}, AuthHelper.setHeaderToken());
     };
 }

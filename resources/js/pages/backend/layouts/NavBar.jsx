@@ -13,16 +13,31 @@ export default class extends Component {
     logout = event => {
         event.preventDefault();
         AuthRequests.logout().then((response) => {
-            if (response.meta.status === 200) {
-                console.log(response.data);
-                this.props.history.push(Route.backEnd.categories.index.path);
-            } else {
-                this.state.messageError = response.meta.message;
-            }
+            AuthHelper.removeToken();
+            window.location.href = RouteConst.backEnd.auth.login.path;
         });
     }
     
     render() {
+        const modalLogoutElement = (
+            <div className="modal fade" id="logoutModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button className="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                        <div className="modal-footer">
+                            <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <button className="btn btn-primary" onClick={this.logout}>Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
         return (
             <div>
                 <nav className="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -48,23 +63,7 @@ export default class extends Component {
                         </li>
                     </ul>
                 </nav>
-                <div className="modal fade" id="logoutModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                                <button className="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                            <div className="modal-footer">
-                                <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <button className="btn btn-primary" onClick={this.logout}>Logout</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {modalLogoutElement}
             </div>
         );
     }
