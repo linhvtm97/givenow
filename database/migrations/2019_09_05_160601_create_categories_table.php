@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('name');
-            $table->string('avatar')->nullable();
+            $table->string('image');
             $table->string('description')->nullable();
-            $table->text('text')->nullable();
-            $table->float('price');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,7 +31,7 @@ class CreateItemsTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('categories');
         Schema::enableForeignKeyConstraints();
     }
 }
