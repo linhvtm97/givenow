@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDonorItemTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateDonorItemTable extends Migration
      */
     public function up()
     {
-        Schema::create('donor_item', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedInteger('item_id');
-            $table->foreign('item_id')->references('id')->on('items');
-            $table->integer('quantity');
+            $table->unsignedInteger('event_id');
             $table->string('status');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('event_id')->references('id')->on('events');
         });
     }
 
@@ -32,6 +33,6 @@ class CreateDonorItemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donor_item');
+        Schema::dropIfExists('orders');
     }
 }
