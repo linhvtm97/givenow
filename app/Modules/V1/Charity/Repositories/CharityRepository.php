@@ -20,4 +20,16 @@ class CharityRepository extends BaseRepository
     {
         return Charity::class;
     }
+
+    /**
+     * Get All object
+     *
+     * @param array|null $data data
+     *
+     * @return \Model\Eloquent\Builder
+     */
+    public function getAll(array $data = null)
+    {
+        return $this->model->querySearch()->paginate();
+    }
 }

@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\Models\V1\User;
 use App\Models\V1\City;
+use App\Models\V1\Charity;
 use App\Models\V1\Category;
 use App\Models\V1\Event;
 use App\Models\V1\Product;
@@ -41,6 +42,15 @@ $factory->define(Cause::class, function (Faker $faker) {
 $factory->define(City::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
+    ];
+});
+$factory->define(Charity::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'address' => $faker->address,
+        'phone_number' => $faker->phoneNumber,
+        'image' => $faker->imageUrl,
+        'description' => $faker->text
     ];
 });
 $factory->define(Category::class, function (Faker $faker) {

@@ -1,1 +1,122 @@
-@import '../vendor/fontawesome-free/css/all.min.css';
+@import "../vendor/fontawesome-free/css/all.min.css";
+
+.App {
+          text-align: center;
+}
+
+.App-logo {
+          height: 40vmin;
+}
+
+.App-header {
+          background-color: #282c34;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-size: calc(10px + 2vmin);
+          color: white;
+}
+
+.App-link {
+          color: #09d3ac;
+}
+.mg-0 {
+          margin-bottom: 0px !important;
+}
+.footer {
+          background-color: #333;
+}
+.text-white {
+          color: #9d9d9d;
+}
+li {
+          list-style: none;
+}
+.footer .container ul {
+          padding-left: 0px;
+}
+.footer .container ul i {
+          font-size: 25px !important;
+}
+.image-thumbnail {
+          height: 210px;
+          width: 100%;
+}
+.mg-10 {
+          margin-bottom: 10px !important;
+          margin-top: 10px;
+}
+.carousel-caption h3 {
+          font-size: 60px;
+          letter-spacing: 4px;
+          text-transform: uppercase;
+          text-shadow: 3px 8px 2px rgb(12, 12, 12);
+}
+.carousel-caption p {
+          letter-spacing: 5px;
+          font-size: 24px;
+          color: #fff;
+          text-shadow: 3px 5px 2px rgb(12, 12, 12);
+}
+.image-container {
+          height: 210px;
+          width: 100%;
+}
+.hard-button {
+          font-size: 28px !important;
+          margin-left: 10px !important;
+          margin-right: 10px !important;
+}
+.no-padding {
+          padding-right: 0px !important;
+          padding-left: 0px !important;
+          padding-top: 0px !important;
+          padding-bottom: 0px !important;
+}
+.overlay {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 100%;
+          width: 100%;
+          opacity: 0;
+          transition: 0.5s ease;
+          background-color: #fff;
+}
+.image-container:hover .overlay {
+          opacity: 0.8;
+}
+.block-center {
+          padding-right: 50px !important;
+          padding-left: 50px !important;
+          padding-top: 50px !important;
+          padding-bottom: 50px !important;
+}
+hr.style5 {
+          background-color: #fff;
+          border-top: 2px dashed #8c8b8b;
+}
+hr.style4 {
+          border: 2px solid grey;
+          border-radius: 5px;
+}
+.bg-blue {
+          background-color: #337ab7;
+          border: 1px solid;
+          border-color: #2e6da4;
+}
+.text-white {
+          color: white !important;
+}
+.checkout-container {
+          height: 100%;
+          width: 100%;
+}
+.event-container {
+          height: 350px;
+          width: 100%;
+}

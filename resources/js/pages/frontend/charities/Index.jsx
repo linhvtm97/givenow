@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import CharitiesRequests from '../../../requests/backend/CharitiesRequests';
+import SearchBar from '../layouts/SearchBar'
 
-class CharityPage extends Component {
+class Index extends Component {
     constructor(props) {
         super(props);
         this.state={
@@ -31,6 +32,7 @@ class CharityPage extends Component {
     }
     render() {
         let {charities,searchValue,filter}=this.state
+        console.log(charities);
 
         if(searchValue) {
             charities=charities.filter(event => {
@@ -147,4 +149,4 @@ class CharityPage extends Component {
     }
 }
 
-export default CharityPage;
+export default Index;
