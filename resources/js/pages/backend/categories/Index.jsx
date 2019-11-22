@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React,{Component} from 'react';
+import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import CategoriesRequests from '../../../requests/backend/CategoriesRequests';
 import Paginate from '../../components/Paginate.jsx';
@@ -7,7 +7,7 @@ import Paginate from '../../components/Paginate.jsx';
 export default class extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state={
             listRecords: [],
             messageError: '',
             idDelete: '',
@@ -18,31 +18,31 @@ export default class extends Component {
         this.getAllRecords();
     }
 
-    getAllRecords = () => {
+    getAllRecords=() => {
         CategoriesRequests.getAll().then((response) => {
-            if (response.meta.status === 200) {
-                this.setState({ listRecords: response.data });
+            if(response.meta.status===200) {
+                this.setState({listRecords: response.data});
             } else {
-                this.state.messageError = response.meta.message;
+                this.state.messageError=response.meta.message;
             }
         });
     }
 
-    deleteRecord = (event) => {
+    deleteRecord=(event) => {
         event.preventDefault();
         CategoriesRequests.deleteByID(this.state.idDelete).then((response) => {
             this.getAllRecords();
         });
     }
 
-    confirmDetele = (id) => (event) => {
+    confirmDetele=(id) => (event) => {
         event.preventDefault();
-        this.setState({ idDelete: id });
+        this.setState({idDelete: id});
     }
 
 
     render() {
-        const tableElement = (
+        const tableElement=(
             <table className="table table-bordered">
                 <thead>
                     <tr>
@@ -52,16 +52,22 @@ export default class extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.listRecords.map((item, index) => {
+                    {this.state.listRecords.map((item,index) => {
                         return (
                             <tr key={index}>
                                 <td>{item.name}</td>
                                 <td>{item.description}</td>
                                 <td className="text-center">
-                                    <button className="btn btn-danger btn-sm"
-                                        onClick={this.confirmDetele(item.id)} data-toggle="modal" data-target="#deleteModal">
-                                        <i className="fas fa-trash"></i>
-                                    </button>
+                                    <div className="row">
+                                        <button className="btn btn-danger btn-sm mr-2"
+                                            onClick={this.confirmDetele(item.id)} data-toggle="modal" data-target="#deleteModal">
+                                            <i className="fas fa-edit"></i>
+                                        </button>
+                                        <button className="btn btn-danger btn-sm"
+                                            onClick={this.confirmDetele(item.id)} data-toggle="modal" data-target="#deleteModal">
+                                            <i className="fas fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         );
@@ -70,11 +76,11 @@ export default class extends Component {
             </table>
         );
 
-        const paginateElement = (
+        const paginateElement=(
             <Paginate pageCount="10" page="3" />
         );
 
-        const modalDeleteElement = (
+        const modalDeleteElement=(
             <div className="modal fade show" id="deleteModal" tabIndex="-1" role="dialog" aria-labelledby="deleteRecord" aria-modal="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">

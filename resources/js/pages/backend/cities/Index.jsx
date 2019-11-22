@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React,{Component} from 'react';
+import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import CitiesRequests from '../../../requests/backend/CitiesRequests';
 
 export default class extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state={
             listCities: [],
             messageError: '',
         };
@@ -14,12 +14,13 @@ export default class extends Component {
 
     componentDidMount() {
         CitiesRequests.getAll().then((response) => {
-            if (response.meta.status === 200) {
+            if(response.meta.status===200) {
                 this.setState({listCities: response.data});
             } else {
-                this.state.messageError = response.meta.message;
+                this.state.messageError=response.meta.message;
             }
         });
+        console.log(this.state);
     }
 
     render() {
@@ -52,22 +53,14 @@ export default class extends Component {
                                     <table className="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Username</th>
                                                 <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Address</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {this.state.listCities.map((item, index) => {
+                                            {this.state.listCities.map((item,index) => {
                                                 return (
                                                     <tr key={index}>
-                                                        <td>{item.username}</td>
                                                         <td>{item.name}</td>
-                                                        <td>{item.email}</td>
-                                                        <td>{item.phone_number}</td>
-                                                        <td>{item.address}</td>
                                                     </tr>
                                                 );
                                             })}
