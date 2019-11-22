@@ -83,4 +83,51 @@ export default Object.freeze({
             },
         },
     },
+    frontEnd: {
+        auth: {
+            login: {
+                path: '/login'
+            },
+            register: {
+                path: '/register'
+            }
+        },
+        home: {
+            index: {
+                path: '/'
+            }
+        },
+        events: {
+            index: {
+                path: '/events'
+            },
+            show: {
+                path: '/events/:id'
+            }
+        },
+        charities: {
+            index: {
+                path: '/charities'
+            }
+        },
+        cart: {
+            show: {
+                path: '/cart'
+            },
+            pay: {
+                path: '/cart/payment'
+            }
+        },
+        products: {
+            index: {
+                path: '/shop/event/:id'
+            }
+        },
+        aboutUs: {
+            path: '/about'
+        },
+        contactUs: {
+            path: '/contact-us'
+        }
+    }
 });

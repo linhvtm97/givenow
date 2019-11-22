@@ -1,14 +1,23 @@
-import React, { Component } from 'react';
-import { Switch, withRouter } from 'react-router-dom';
+import React,{Component} from 'react';
+import Footer from './layouts/Footer.jsx';
+import Route from './Route.jsx';
+import Header from './layouts/Header.jsx';
 
-class App extends Component {
+
+export default class extends Component {
     render() {
         return (
             <div>
-                FrontEnd
+                <Header />
+                <div id="wrapper" className="container">
+                    <div id="content-wrapper">
+                        <div className="container-fluid">
+                            <Route />
+                        </div>
+                    </div>
+                </div>
+                <Footer />
             </div>
         );
     }
 }
-
-export default withRouter(App);
