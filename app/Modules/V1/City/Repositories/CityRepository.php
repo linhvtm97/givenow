@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Modules\V1\Charity\Repositories;
+namespace App\Modules\V1\City\Repositories;
 
 use App\Modules\Repository as BaseRepository;
-use App\Models\V1\Charity;
+use App\Models\V1\City;
 
 /**
- * Class CharityRepository
- * @package App\Modules\V1\Charity\Repositories
+ * Class CityRepository
+ * @package App\Modules\V1\City\Repositories
  */
-class CharityRepository extends BaseRepository
+class CityRepository extends BaseRepository
 {
     /**
      * Specify Model class name
@@ -18,7 +18,7 @@ class CharityRepository extends BaseRepository
      */
     public function model()
     {
-        return Charity::class;
+        return City::class;
     }
 
     /**

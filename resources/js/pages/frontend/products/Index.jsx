@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import ProductsRequests from '../../../requests/backend/ProductsRequests';
+import EventsRequests from '../../../requests/backend/EventsRequests';
 
 class Index extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class Index extends Component {
     }
 
     componentDidMount() {
+
         ProductsRequests.getAll().then((response) => {
             if(response.meta.status===200) {
                 this.setState({products: response.data});
@@ -18,6 +20,8 @@ class Index extends Component {
                 this.state.messageError=response.meta.message;
             }
         });
+        console.log(this.state);
+
         let {match}=this.props;
         let id=match.params.id
         EventsRequests.showByID(id).then((response) => {
@@ -30,6 +34,7 @@ class Index extends Component {
     }
     render() {
         let {products,event}=this.state
+
         return (
             <div>
                 <div className="container">

@@ -9,7 +9,7 @@ export default class extends Component {
         return (
             <div>
                 <Header />
-                <div id="wrapper" className="container">
+                <div id="wrapper">
                     <div id="content-wrapper">
                         <div className="container-fluid">
                             <Route />

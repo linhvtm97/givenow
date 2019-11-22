@@ -40,6 +40,7 @@ class Index extends React.Component {
     }
     render() {
         let {causes,events,searchValue,filter}=this.state
+        console.log(events);
 
         if(searchValue) {
             events=events.filter(event => {
@@ -117,15 +118,21 @@ class Index extends React.Component {
                                 events.map((item,index) => {
                                     return (
                                         <div className="col-xs-12 col-sm-12 col-12 col-md-6 col-lg-6 mg-10" key={index}>
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-                                                    <img src={item.avatar} className="image-thumbnail" alt="Item"></img>
-                                                    <a href={`events/${item.id}`}> <h4>{item.name}</h4>
-                                                    </a>
-                                                    <i className="fa fa-map-marker">{item.location}</i>
-                                                    <p>Start date: {item.start_date}</p>
-                                                    <div className="text-center">
-                                                        <a class="btn btn-danger" href={`shop/event/${item.id}`} role="button">Shop now</a>
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    <div className="event-container">
+                                                        <div>
+                                                            <img src={item.image} className="img-thumbnail" alt="Item"></img>
+                                                        </div>
+                                                        <a href={`events/${item.id}`}> <h4>{item.name}</h4>
+                                                        </a>
+                                                        <p>
+                                                            <i className="fa fa-map-marker"></i>{item.location}
+                                                        </p>
+                                                        <p>Start date: {item.start_date}</p>
+                                                        <div className="text-center">
+                                                            <a className="btn btn-danger" href={`shop/event/${item.id}`} role="button">Shop now</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import EventsRequests from '../../../requests/backend/EventsRequests'
 
 class Show extends Component {
     constructor(props) {

@@ -35,7 +35,7 @@ class RouteBackEnd extends Component {
                 <Route exact path={RouteConst.frontEnd.events.index.path} component={EventIndex} />
                 <Route exact path={RouteConst.frontEnd.events.show.path} component={EventShow} />
 
-                <Route exact path={RouteConst.backEnd.charities.index.path} component={CharitiesIndex} />
+                <Route exact path={RouteConst.frontEnd.charities.index.path} component={CharitiesIndex} />
 
                 <Route exact path={RouteConst.frontEnd.cart.show.path} component={CartShow} />
                 <Route exact path={RouteConst.frontEnd.cart.pay.path} component={CartPayment} />
