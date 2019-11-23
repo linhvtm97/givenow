@@ -17,6 +17,12 @@ export default Object.freeze({
             create: {
                 path: '/management/categories/create'
             },
+            show: {
+                path: '/management/categories/:id'
+            },
+            edit: {
+                path: '/management/categories/:id/edit'
+            },
         },
         causes: {
             index: {
@@ -24,6 +30,12 @@ export default Object.freeze({
             },
             create: {
                 path: '/management/causes/create'
+            },
+            show: {
+                path: '/management/causes/:id'
+            },
+            edit: {
+                path: '/management/causes/:id/edit'
             },
         },
         cities: {
@@ -33,6 +45,12 @@ export default Object.freeze({
             create: {
                 path: '/management/cities/create'
             },
+            show: {
+                path: '/management/cities/:id'
+            },
+            edit: {
+                path: '/management/cities/:id/edit'
+            },
         },
         events: {
             index: {
@@ -40,6 +58,12 @@ export default Object.freeze({
             },
             create: {
                 path: '/management/events/create'
+            },
+            show: {
+                path: '/management/events/:id'
+            },
+            edit: {
+                path: '/management/events/:id/edit'
             },
         },
         products: {
@@ -49,6 +73,12 @@ export default Object.freeze({
             create: {
                 path: '/management/products/create'
             },
+            show: {
+                path: '/management/products/:id'
+            },
+            edit: {
+                path: '/management/products/:id/edit'
+            },
         },
         users: {
             index: {
@@ -56,6 +86,12 @@ export default Object.freeze({
             },
             create: {
                 path: '/management/users/create'
+            },
+            show: {
+                path: '/management/users/:id'
+            },
+            edit: {
+                path: '/management/users/:id/edit'
             },
         },
         charities: {
@@ -65,6 +101,12 @@ export default Object.freeze({
             create: {
                 path: '/management/charities/create'
             },
+            show: {
+                path: '/management/charities/:id'
+            },
+            edit: {
+                path: '/management/charities/:id/edit'
+            },
         },
         posts: {
             index: {
@@ -73,6 +115,12 @@ export default Object.freeze({
             create: {
                 path: '/management/posts/create'
             },
+            show: {
+                path: '/management/posts/:id'
+            },
+            edit: {
+                path: '/management/posts/:id/edit'
+            },
         },
         orders: {
             index: {
@@ -80,6 +128,12 @@ export default Object.freeze({
             },
             create: {
                 path: '/management/orders/create'
+            },
+            show: {
+                path: '/management/orders/:id'
+            },
+            edit: {
+                path: '/management/orders/:id/edit'
             },
         },
     },
