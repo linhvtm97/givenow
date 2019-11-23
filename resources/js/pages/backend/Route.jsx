@@ -5,6 +5,8 @@ import HomeIndex from './home/Index.jsx';
 // Categories
 import CategoriesIndex from './categories/Index.jsx';
 import CategoriesCreate from './categories/Create.jsx';
+import CategoriesShow from './categories/Show.jsx';
+import CategoriesEdit from './categories/Edit.jsx';
 // Cause
 import CausesIndex from './causes/Index.jsx';
 import CausesCreate from './causes/Create.jsx';
@@ -41,6 +43,8 @@ class RouteBackEnd extends Component {
                 
                 <Route exact path={RouteConst.backEnd.categories.index.path} component={CategoriesIndex} />
                 <Route exact path={RouteConst.backEnd.categories.create.path} component={CategoriesCreate} />
+                <Route exact path={RouteConst.backEnd.categories.show.path} component={CategoriesShow} />
+                <Route exact path={RouteConst.backEnd.categories.edit.path} component={CategoriesEdit} />
 
                 <Route exact path={RouteConst.backEnd.causes.index.path} component={CausesIndex} />
                 <Route exact path={RouteConst.backEnd.causes.create.path} component={CausesCreate} />

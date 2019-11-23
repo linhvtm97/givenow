@@ -33,7 +33,7 @@ class CreateEventCategoryTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('event_category');
         Schema::enableForeignKeyConstraints();
     }
 }
