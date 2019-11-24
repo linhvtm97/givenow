@@ -56,7 +56,6 @@ export default class extends Component {
                         return (
                             <tr key={index}>
                                 <td>{item.name}</td>
-                                <td>{item.description}</td>
                                 <td className="text-center">
                                     <Link className="btn btn-info btn-sm mr-2"
                                         to={`${RouteConst.backEnd.cities.index.path}/${item.id}`}>

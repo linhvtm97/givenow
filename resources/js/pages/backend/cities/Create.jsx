@@ -31,7 +31,7 @@ export default class extends Component {
         formData.append('name',form.name);
 
         CitiesRequests.create(formData).then((response) => {
-            if(response.meta.status===201) {
+            if(response.meta.status===200) {
                 console.log(response.data.id);
                 if(response.data.id) {
                     this.props.history.push(`${RouteConst.backEnd.cities.index.path}/${response.data.id}`);
