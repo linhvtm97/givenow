@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
-import CitiesRequests from '../../../requests/backend/CitiesRequests';
+import CategoriesRequests from '../../../requests/backend/CategoriesRequests';
 
 export default class extends Component {
     constructor(props) {
@@ -18,20 +18,18 @@ export default class extends Component {
     }
 
     getAllRecords=() => {
-        CitiesRequests.getAll().then((response) => {
+        CategoriesRequests.getAll().then((response) => {
             if(response.meta.status===200) {
                 this.setState({listRecords: response.data});
             } else {
                 this.state.messageError=response.meta.message;
             }
         });
-        console.log(this.state);
-
     }
 
     deleteRecord=(event) => {
         event.preventDefault();
-        CitiesRequests.deleteByID(this.state.idDelete).then((response) => {
+        CategoriesRequests.deleteByID(this.state.idDelete).then((response) => {
             this.getAllRecords();
         });
     }
@@ -48,6 +46,7 @@ export default class extends Component {
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Description</th>
                         <th className="text-center" width="150">Action</th>
                     </tr>
                 </thead>
@@ -58,11 +57,11 @@ export default class extends Component {
                                 <td>{item.name}</td>
                                 <td className="text-center">
                                     <Link className="btn btn-info btn-sm mr-2"
-                                        to={`${RouteConst.backEnd.cities.index.path}/${item.id}`}>
+                                        to={`${RouteConst.backEnd.categories.index.path}/${item.id}`}>
                                         <i className="fas fa-eye"></i>
                                     </Link>
                                     <Link className="btn btn-warning btn-sm mr-2"
-                                        to={`${RouteConst.backEnd.cities.index.path}/${item.id}/edit`}>
+                                        to={`${RouteConst.backEnd.categories.index.path}/${item.id}/edit`}>
                                         <i className="fas fa-edit"></i>
                                     </Link>
                                     <button className="btn btn-danger btn-sm"
@@ -97,12 +96,12 @@ export default class extends Component {
             </div>
         );
 
-        const breadcrumbElement=(
+        const breadcrumbElement = (
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
                 </li>
-                <li className="breadcrumb-item active">cities</li>
+                <li className="breadcrumb-item active">Categories</li>
             </ol>
         );
 
@@ -114,11 +113,11 @@ export default class extends Component {
                     <div className="card-header">
                         <div className="float-left">
                             <p className="mb-0 mt-1">
-                                <i className="fas fa-table"></i> List cities
+                                <i className="fas fa-table"></i> List categories
                             </p>
                         </div>
                         <div className="float-right">
-                            <Link to={RouteConst.backEnd.cities.create.path}>
+                            <Link to={RouteConst.backEnd.categories.create.path}>
                                 <button className="btn btn-success">Create</button>
                             </Link>
                         </div>

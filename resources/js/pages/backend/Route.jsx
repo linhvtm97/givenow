@@ -1,5 +1,5 @@
-import React,{Component} from 'react';
-import {Switch,withRouter,Route} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Switch, withRouter, Route } from 'react-router-dom';
 
 import HomeIndex from './home/Index.jsx';
 // Categories
@@ -12,8 +12,6 @@ import CausesIndex from './causes/Index.jsx';
 import CausesCreate from './causes/Create.jsx';
 // Charities
 import CitiesIndex from './cities/Index.jsx';
-import CitiesShow from './cities/Show.jsx';
-import CitiesEdit from './cities/Edit.jsx';
 import CitiesCreate from './cities/Create.jsx';
 // Events
 import EventsIndex from './events/Index.jsx';
@@ -42,7 +40,7 @@ class RouteBackEnd extends Component {
         return (
             <Switch>
                 <Route exact path={RouteConst.backEnd.home.index.path} component={HomeIndex} />
-
+                
                 <Route exact path={RouteConst.backEnd.categories.index.path} component={CategoriesIndex} />
                 <Route exact path={RouteConst.backEnd.categories.create.path} component={CategoriesCreate} />
                 <Route exact path={RouteConst.backEnd.categories.show.path} component={CategoriesShow} />
@@ -52,16 +50,14 @@ class RouteBackEnd extends Component {
                 <Route exact path={RouteConst.backEnd.causes.create.path} component={CausesCreate} />
 
                 <Route exact path={RouteConst.backEnd.cities.index.path} component={CitiesIndex} />
-                <Route exact path={RouteConst.backEnd.cities.show.path} component={CitiesShow} />
                 <Route exact path={RouteConst.backEnd.cities.create.path} component={CitiesCreate} />
-                <Route exact path={RouteConst.backEnd.cities.edit.path} component={CitiesEdit} />
-
+                
                 <Route exact path={RouteConst.backEnd.events.index.path} component={EventsIndex} />
                 <Route exact path={RouteConst.backEnd.events.create.path} component={EventsCreate} />
-
+                
                 <Route exact path={RouteConst.backEnd.products.index.path} component={ProductsIndex} />
                 <Route exact path={RouteConst.backEnd.products.create.path} component={ProductsCreate} />
-
+                
                 <Route exact path={RouteConst.backEnd.users.index.path} component={UsersIndex} />
                 <Route exact path={RouteConst.backEnd.users.create.path} component={UsersCreate} />
 
@@ -73,7 +69,7 @@ class RouteBackEnd extends Component {
 
                 <Route exact path={RouteConst.backEnd.posts.index.path} component={PostsIndex} />
                 <Route exact path={RouteConst.backEnd.posts.create.path} component={PostsCreate} />
-
+                
                 <Route component={NotFound} />
             </Switch>
         );

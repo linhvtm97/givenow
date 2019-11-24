@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
-import CitiesRequests from '../../../requests/backend/CitiesRequests';
+import CategoriesRequests from '../../../requests/backend/CategoriesRequests';
 
 export default class extends Component {
     constructor(props) {
@@ -9,6 +9,7 @@ export default class extends Component {
         this.state={
             form: {
                 name: '',
+                description: '',
             },
             formData: {},
             messageError: '',
@@ -23,20 +24,35 @@ export default class extends Component {
 
     onChangeFile=(e) => {
         e.preventDefault();
+
+        let reader=new FileReader();
+        let fileTmp=e.target.files[0];
+
+        if(fileTmp) {
+            reader.readAsDataURL(fileTmp);
+
+            reader.onloadend=() => {
+                let formData=new FormData();
+                formData.append('image',fileTmp);
+                console.log(formData)
+                this.setState({formData})
+            };
+        }
     };
 
     submitForm=event => {
         event.preventDefault();
         let {formData,form}=this.state;
         formData.append('name',form.name);
+        formData.append('description',form.description);
 
         CitiesRequests.create(formData).then((response) => {
             if(response.meta.status===200) {
                 console.log(response.data.id);
                 if(response.data.id) {
-                    this.props.history.push(`${RouteConst.backEnd.cities.index.path}/${response.data.id}`);
+                    this.props.history.push(`${RouteConst.backEnd.categories.index.path}/${response.data.id}`);
                 } else {
-                    this.props.history.push(RouteConst.backEnd.cities.index.path);
+                    this.props.history.push(RouteConst.backEnd.categories.index.path);
                 }
             } else {
                 this.state.messageError=response.meta.message;
@@ -51,7 +67,7 @@ export default class extends Component {
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
                 </li>
                 <li className="breadcrumb-item">
-                    <Link to={RouteConst.backEnd.cities.index.path}>Cities</Link>
+                    <Link to={RouteConst.backEnd.categories.index.path}>Categories</Link>
                 </li>
                 <li className="breadcrumb-item active">Create</li>
             </ol>
@@ -64,9 +80,19 @@ export default class extends Component {
                     <input type="text" className="form-control" id="name"
                         name="name" onChange={this.handleOnChange} />
                 </div>
+                <div className="form-group">
+                    <label htmlFor="image">Image</label>
+                    <input type="file" className="form-control" id="image"
+                        name="image" onChange={this.onChangeFile} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Description</label>
+                    <input type="text" className="form-control" id="description"
+                        name="description" onChange={this.handleOnChange} />
+                </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>
-                <Link to={RouteConst.backEnd.cities.index.path}>
+                <Link to={RouteConst.backEnd.categories.index.path}>
                     <button type="button" className="btn btn-secondary ml-2">Cancel</button>
                 </Link>
             </div>
@@ -78,7 +104,7 @@ export default class extends Component {
 
                 <div className="card mb-3">
                     <div className="card-header">
-                        <i className="fas fa-table"></i> Create city
+                        <i className="fas fa-table"></i> Create category
                     </div>
                     <div className="card-body">
                         <div className="row">
