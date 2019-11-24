@@ -22,7 +22,7 @@ export default class extends Component {
             if (response.meta.status === 200) {
                 this.setState({ info: response.data });
             } else {
-                this.props.history.push(RouteConst.backEnd.categories.index.path);
+                this.props.history.push(RouteConst.backEnd.causes.index.path);
             }
         });
     }
@@ -34,7 +34,7 @@ export default class extends Component {
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
                 </li>
                 <li className="breadcrumb-item">
-                    <Link to={RouteConst.backEnd.categories.index.path}>Categories</Link>
+                    <Link to={RouteConst.backEnd.causes.index.path}>Causes</Link>
                 </li>
                 <li className="breadcrumb-item active">Show</li>
             </ol>
@@ -42,9 +42,9 @@ export default class extends Component {
 
         const linkElement = (
             <div>
-                <Link to={`${RouteConst.backEnd.categories.index.path}/${this.state.info.id}/edit`}
+                <Link to={`${RouteConst.backEnd.causes.index.path}/${this.state.info.id}/edit`}
                     className="btn btn-primary">Edit</Link>
-                <Link to={RouteConst.backEnd.categories.index.path}
+                <Link to={RouteConst.backEnd.causes.index.path}
                     className="btn btn-secondary ml-2">Go back</Link>
             </div>
         );
@@ -91,7 +91,7 @@ export default class extends Component {
 
                 <div className="card mb-3">
                     <div className="card-header">
-                        <i className="fas fa-table"></i> Info category
+                        <i className="fas fa-table"></i> Info cause
                     </div>
                     <div className="card-body">
                         {infoElement}

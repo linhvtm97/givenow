@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
-import CategoriesRequests from '../../../requests/backend/CategoriesRequests';
+import ProductsRequests from '../../../requests/backend/ProductsRequests';
 
 export default class extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: this.props.match.params.id,
+            info: {},
             form: {
                 name: '',
                 description: '',
@@ -16,10 +18,29 @@ export default class extends Component {
         };
     }
 
+    componentDidMount() {
+        this.getInfo(this.state.id);
+    }
+
+    getInfo = (id) => {
+        ProductsRequests.showByID(id).then((response) => {
+            console.log(response)
+            if (response.meta.status === 200) {
+                const form = {
+                    name: response.data.name,
+                    description: response.data.description,
+                }
+                this.setState({ form });
+            } else {
+                this.props.history.push(RouteConst.backEnd.products.index.path);
+            }
+        });
+    }
+
     handleOnChange = event => {
         let { form } = this.state;
-        form = { ...form, ...{ [event.target.name]: event.target.value}}
-        this.setState({ form})
+        form = { ...form, ...{ [event.target.name]: event.target.value } }
+        this.setState({ form })
     }
 
     onChangeFile = (e) => {
@@ -34,8 +55,7 @@ export default class extends Component {
             reader.onloadend = () => {
                 let formData = new FormData();
                 formData.append('image', fileTmp);
-                console.log(formData)
-                this.setState({ formData })
+                this.setState({ formData });
             };
         }
     };
@@ -43,16 +63,25 @@ export default class extends Component {
     submitForm = event => {
         event.preventDefault();
         let { formData, form } = this.state;
-        formData.append('name', form.name);
-        formData.append('description', form.description);
 
-        CategoriesRequests.create(formData).then((response) => {
-            if (response.meta.status === 201) {
-                console.log(response.data.id);
+        let formSubmit;
+
+        if (formData instanceof FormData) {
+            formData.append('name', form.name);
+            formData.append('description', form.description);
+
+            formSubmit = formData;
+        } else {
+            formSubmit = form;
+        }
+        
+
+        ProductsRequests.update(this.state.id, formSubmit).then((response) => {
+            if (response.meta.status === 200) {
                 if (response.data.id) {
-                    this.props.history.push(`${RouteConst.backEnd.categories.index.path}/${response.data.id}`);
+                    this.props.history.push(`${RouteConst.backEnd.products.index.path}/${response.data.id}`);
                 } else {
-                    this.props.history.push(RouteConst.backEnd.categories.index.path);
+                    this.props.history.push(RouteConst.backEnd.products.index.path);
                 }
             } else {
                 this.state.messageError = response.meta.message;
@@ -67,9 +96,9 @@ export default class extends Component {
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
                 </li>
                 <li className="breadcrumb-item">
-                    <Link to={RouteConst.backEnd.categories.index.path}>Categories</Link>
+                    <Link to={RouteConst.backEnd.products.index.path}>Products</Link>
                 </li>
-                <li className="breadcrumb-item active">Create</li>
+                <li className="breadcrumb-item active">Edit</li>
             </ol>
         );
 
@@ -78,7 +107,7 @@ export default class extends Component {
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
                     <input type="text" className="form-control" id="name"
-                        name="name" onChange={this.handleOnChange} />
+                        name="name" onChange={this.handleOnChange} value={this.state.form.name} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="image">Image</label>
@@ -88,11 +117,11 @@ export default class extends Component {
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
                     <input type="text" className="form-control" id="description"
-                        name="description" onChange={this.handleOnChange} />
+                        name="description" onChange={this.handleOnChange} value={this.state.form.description} />
                 </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>
-                <Link to={RouteConst.backEnd.categories.index.path}>
+                <Link to={`${RouteConst.backEnd.products.index.path}/${this.state.id}`}>
                     <button type="button" className="btn btn-secondary ml-2">Cancel</button>
                 </Link>
             </div>
@@ -104,7 +133,7 @@ export default class extends Component {
 
                 <div className="card mb-3">
                     <div className="card-header">
-                        <i className="fas fa-table"></i> Create category
+                        <i className="fas fa-table"></i> Edit product
                     </div>
                     <div className="card-body">
                         <div className="row">

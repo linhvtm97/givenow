@@ -58,11 +58,11 @@ export default class extends Component {
                                 <td>{item.description}</td>
                                 <td className="text-center">
                                     <Link className="btn btn-info btn-sm mr-2"
-                                        to={`${RouteConst.backEnd.categories.index.path}/${item.id}`}>
+                                        to={`${RouteConst.backEnd.causes.index.path}/${item.id}`}>
                                         <i className="fas fa-eye"></i>
                                     </Link>
                                     <Link className="btn btn-warning btn-sm mr-2"
-                                        to={`${RouteConst.backEnd.categories.index.path}/${item.id}/edit`}>
+                                        to={`${RouteConst.backEnd.causes.index.path}/${item.id}/edit`}>
                                         <i className="fas fa-edit"></i>
                                     </Link>
                                     <button className="btn btn-danger btn-sm"
@@ -102,7 +102,7 @@ export default class extends Component {
                 <li className="breadcrumb-item">
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
                 </li>
-                <li className="breadcrumb-item active">Categories</li>
+                <li className="breadcrumb-item active">causes</li>
             </ol>
         );
 
@@ -114,11 +114,11 @@ export default class extends Component {
                     <div className="card-header">
                         <div className="float-left">
                             <p className="mb-0 mt-1">
-                                <i className="fas fa-table"></i> List categories
+                                <i className="fas fa-table"></i> List causes
                             </p>
                         </div>
                         <div className="float-right">
-                            <Link to={RouteConst.backEnd.categories.create.path}>
+                            <Link to={RouteConst.backEnd.causes.create.path}>
                                 <button className="btn btn-success">Create</button>
                             </Link>
                         </div>

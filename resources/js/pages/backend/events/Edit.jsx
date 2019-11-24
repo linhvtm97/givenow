@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
-import CategoriesRequests from '../../../requests/backend/CategoriesRequests';
+import EventsRequests from '../../../requests/backend/EventsRequests';
 
 export default class extends Component {
     constructor(props) {
@@ -23,7 +23,7 @@ export default class extends Component {
     }
 
     getInfo = (id) => {
-        CategoriesRequests.showByID(id).then((response) => {
+        EventsRequests.showByID(id).then((response) => {
             console.log(response)
             if (response.meta.status === 200) {
                 const form = {
@@ -32,7 +32,7 @@ export default class extends Component {
                 }
                 this.setState({ form });
             } else {
-                this.props.history.push(RouteConst.backEnd.categories.index.path);
+                this.props.history.push(RouteConst.backEnd.events.index.path);
             }
         });
     }
@@ -76,12 +76,12 @@ export default class extends Component {
         }
         
 
-        CategoriesRequests.update(this.state.id, formSubmit).then((response) => {
+        EventsRequests.update(this.state.id, formSubmit).then((response) => {
             if (response.meta.status === 200) {
                 if (response.data.id) {
-                    this.props.history.push(`${RouteConst.backEnd.categories.index.path}/${response.data.id}`);
+                    this.props.history.push(`${RouteConst.backEnd.events.index.path}/${response.data.id}`);
                 } else {
-                    this.props.history.push(RouteConst.backEnd.categories.index.path);
+                    this.props.history.push(RouteConst.backEnd.events.index.path);
                 }
             } else {
                 this.state.messageError = response.meta.message;
@@ -96,7 +96,7 @@ export default class extends Component {
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
                 </li>
                 <li className="breadcrumb-item">
-                    <Link to={RouteConst.backEnd.categories.index.path}>Categories</Link>
+                    <Link to={RouteConst.backEnd.events.index.path}>Events</Link>
                 </li>
                 <li className="breadcrumb-item active">Edit</li>
             </ol>
@@ -121,7 +121,7 @@ export default class extends Component {
                 </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>
-                <Link to={`${RouteConst.backEnd.categories.index.path}/${this.state.id}`}>
+                <Link to={`${RouteConst.backEnd.events.index.path}/${this.state.id}`}>
                     <button type="button" className="btn btn-secondary ml-2">Cancel</button>
                 </Link>
             </div>
@@ -133,7 +133,7 @@ export default class extends Component {
 
                 <div className="card mb-3">
                     <div className="card-header">
-                        <i className="fas fa-table"></i> Edit category
+                        <i className="fas fa-table"></i> Edit event
                     </div>
                     <div className="card-body">
                         <div className="row">

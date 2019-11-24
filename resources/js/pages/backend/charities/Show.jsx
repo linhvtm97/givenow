@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
-import CategoriesRequests from '../../../requests/backend/CategoriesRequests';
+import CharitiesRequests from '../../../requests/backend/CharitiesRequests';
 
 export default class extends Component {
     constructor(props) {
@@ -17,12 +17,12 @@ export default class extends Component {
     }
 
     getInfo = (id) => {
-        CategoriesRequests.showByID(id).then((response) => {
+        CharitiesRequests.showByID(id).then((response) => {
             console.log(response)
             if (response.meta.status === 200) {
                 this.setState({ info: response.data });
             } else {
-                this.props.history.push(RouteConst.backEnd.categories.index.path);
+                this.props.history.push(RouteConst.backEnd.charities.index.path);
             }
         });
     }
@@ -34,7 +34,7 @@ export default class extends Component {
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
                 </li>
                 <li className="breadcrumb-item">
-                    <Link to={RouteConst.backEnd.categories.index.path}>Categories</Link>
+                    <Link to={RouteConst.backEnd.charities.index.path}>Charities</Link>
                 </li>
                 <li className="breadcrumb-item active">Show</li>
             </ol>
@@ -42,9 +42,9 @@ export default class extends Component {
 
         const linkElement = (
             <div>
-                <Link to={`${RouteConst.backEnd.categories.index.path}/${this.state.info.id}/edit`}
+                <Link to={`${RouteConst.backEnd.charities.index.path}/${this.state.info.id}/edit`}
                     className="btn btn-primary">Edit</Link>
-                <Link to={RouteConst.backEnd.categories.index.path}
+                <Link to={RouteConst.backEnd.charities.index.path}
                     className="btn btn-secondary ml-2">Go back</Link>
             </div>
         );
@@ -91,7 +91,7 @@ export default class extends Component {
 
                 <div className="card mb-3">
                     <div className="card-header">
-                        <i className="fas fa-table"></i> Info category
+                        <i className="fas fa-table"></i> Info charity
                     </div>
                     <div className="card-body">
                         {infoElement}

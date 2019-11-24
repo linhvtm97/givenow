@@ -19,7 +19,7 @@ export default class extends Component {
     handleOnChange = event => {
         let { form } = this.state;
         form = { ...form, ...{ [event.target.name]: event.target.value}}
-        this.setState({ form})
+        this.setState({ form })
     }
 
     onChangeFile = (e) => {
@@ -50,9 +50,9 @@ export default class extends Component {
             if (response.meta.status === 201) {
                 console.log(response.data.id);
                 if (response.data.id) {
-                    this.props.history.push(`${RouteConst.backEnd.categories.index.path}/${response.data.id}`);
+                    this.props.history.push(`${RouteConst.backEnd.causes.index.path}/${response.data.id}`);
                 } else {
-                    this.props.history.push(RouteConst.backEnd.categories.index.path);
+                    this.props.history.push(RouteConst.backEnd.causes.index.path);
                 }
             } else {
                 this.state.messageError = response.meta.message;
@@ -67,7 +67,7 @@ export default class extends Component {
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
                 </li>
                 <li className="breadcrumb-item">
-                    <Link to={RouteConst.backEnd.categories.index.path}>Categories</Link>
+                    <Link to={RouteConst.backEnd.causes.index.path}>Causes</Link>
                 </li>
                 <li className="breadcrumb-item active">Create</li>
             </ol>
@@ -92,7 +92,7 @@ export default class extends Component {
                 </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>
-                <Link to={RouteConst.backEnd.categories.index.path}>
+                <Link to={RouteConst.backEnd.causes.index.path}>
                     <button type="button" className="btn btn-secondary ml-2">Cancel</button>
                 </Link>
             </div>
@@ -104,7 +104,7 @@ export default class extends Component {
 
                 <div className="card mb-3">
                     <div className="card-header">
-                        <i className="fas fa-table"></i> Create category
+                        <i className="fas fa-table"></i> Create cause
                     </div>
                     <div className="card-body">
                         <div className="row">

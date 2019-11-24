@@ -1,42 +1,120 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React,{Component} from 'react';
+import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import ProductsRequests from '../../../requests/backend/ProductsRequests';
 
 export default class extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            listItems: [],
+        this.state={
+            listRecords: [],
             messageError: '',
+            idDelete: '',
         };
     }
 
     componentDidMount() {
+        this.getAllRecords();
+    }
+
+    getAllRecords=() => {
         ProductsRequests.getAll().then((response) => {
-            if (response.meta.status === 200) {
-                this.setState({listItems: response.data});
+            if(response.meta.status===200) {
+                this.setState({listRecords: response.data});
             } else {
-                this.state.messageError = response.meta.message;
+                this.state.messageError=response.meta.message;
             }
         });
     }
 
+    deleteRecord=(event) => {
+        event.preventDefault();
+        ProductsRequests.deleteByID(this.state.idDelete).then((response) => {
+            this.getAllRecords();
+        });
+    }
+
+    confirmDetele=(id) => (event) => {
+        event.preventDefault();
+        this.setState({idDelete: id});
+    }
+
+
     render() {
+        const tableElement=(
+            <table className="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th className="text-center" width="150">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.listRecords.map((item,index) => {
+                        return (
+                            <tr key={index}>
+                                <td>{item.name}</td>
+                                <td>{item.description}</td>
+                                <td className="text-center">
+                                    <Link className="btn btn-info btn-sm mr-2"
+                                        to={`${RouteConst.backEnd.products.index.path}/${item.id}`}>
+                                        <i className="fas fa-eye"></i>
+                                    </Link>
+                                    <Link className="btn btn-warning btn-sm mr-2"
+                                        to={`${RouteConst.backEnd.products.index.path}/${item.id}/edit`}>
+                                        <i className="fas fa-edit"></i>
+                                    </Link>
+                                    <button className="btn btn-danger btn-sm"
+                                        onClick={this.confirmDetele(item.id)} data-toggle="modal" data-target="#deleteModal">
+                                        <i className="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        );
+
+        const modalDeleteElement=(
+            <div className="modal fade show" id="deleteModal" tabIndex="-1" role="dialog" aria-labelledby="deleteRecord" aria-modal="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="deleteRecord">Ready to Leave?</h5>
+                            <button className="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                        <div className="modal-footer">
+                            <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <button className="btn btn-primary" onClick={this.deleteRecord} data-dismiss="modal">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const breadcrumbElement = (
+            <ol className="breadcrumb">
+                <li className="breadcrumb-item">
+                    <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
+                </li>
+                <li className="breadcrumb-item active">Products</li>
+            </ol>
+        );
+
         return (
             <div>
-                <ol className="breadcrumb">
-                    <li className="breadcrumb-item">
-                        <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
-                    </li>
-                    <li className="breadcrumb-item active">Items</li>
-                </ol>
+                {breadcrumbElement}
 
                 <div className="card mb-3">
                     <div className="card-header">
                         <div className="float-left">
                             <p className="mb-0 mt-1">
-                                <i className="fas fa-table"></i> List Items
+                                <i className="fas fa-table"></i> List products
                             </p>
                         </div>
                         <div className="float-right">
@@ -49,39 +127,13 @@ export default class extends Component {
                         <div className="row">
                             <div className="col-sm-12">
                                 <div className="table-responsive">
-                                    <table className="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {this.state.listItems.map((item, index) => {
-                                                return (
-                                                    <tr key={index}>
-                                                        <td>{item.name}</td>
-                                                        <td>{item.category && item.category.name}</td>
-                                                        <td>{item.price}</td>
-                                                    </tr>
-                                                );
-                                            })}
-                                        </tbody>
-                                    </table>
+                                    {tableElement}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="card-footer small text-muted">
-                        <ul className="pagination justify-content-center mb-0">
-                            <li className="page-item"><a className="page-link" href="">Previous</a></li>
-                            <li className="page-item"><a className="page-link" href="">1</a></li>
-                            <li className="page-item"><a className="page-link" href="">2</a></li>
-                            <li className="page-item"><a className="page-link" href="">Next</a></li>
-                        </ul>
-                    </div>
                 </div>
+                {modalDeleteElement}
             </div>
         );
     }
