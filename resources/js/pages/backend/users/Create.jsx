@@ -19,7 +19,7 @@ export default class extends Component {
     handleOnChange = event => {
         let { form } = this.state;
         form = { ...form, ...{ [event.target.name]: event.target.value}}
-        this.setState({ form})
+        this.setState({ form })
     }
 
     onChangeFile = (e) => {
