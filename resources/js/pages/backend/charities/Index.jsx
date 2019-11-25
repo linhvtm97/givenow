@@ -97,7 +97,7 @@ export default class extends Component {
             </div>
         );
 
-        const breadcrumbElement = (
+        const breadcrumbElement=(
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>

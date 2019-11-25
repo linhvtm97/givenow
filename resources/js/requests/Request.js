@@ -6,8 +6,8 @@ function getHeader(header) {
 }
 
 export default class Request {
-    static get(url, header = {}) {
-        return axios.get(url, getHeader(header))
+    static get(url,header={}) {
+        return axios.get(url,getHeader(header))
             .then((response) => {
                 return response.data;
             })
@@ -17,8 +17,8 @@ export default class Request {
             });
     };
 
-    static post(url, data, header = {}) {
-        return axios.post(url, data, getHeader(header))
+    static post(url,data,header={}) {
+        return axios.post(url,data,getHeader(header))
             .then((response) => {
                 return response.data;
             })
@@ -28,8 +28,9 @@ export default class Request {
             });
     };
 
-    static put(url, formData, header = {}) {
-        return axios.put(url, formData, getHeader(header))
+    static put(url,formData,header={}) {
+        formData.append('_method','PUT');
+        return axios.post(url,formData,getHeader(header))
             .then((response) => {
                 return response.data;
             })
@@ -39,8 +40,8 @@ export default class Request {
             });
     }
 
-    static delete(url, header = {}) {
-        return axios.delete(url, getHeader(header))
+    static delete(url,header={}) {
+        return axios.delete(url,getHeader(header))
             .then((response) => {
                 return response.data;
             })

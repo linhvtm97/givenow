@@ -82,12 +82,11 @@ export default class extends Component {
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="deleteRecord">Ready to Leave?</h5>
+                            <h5 className="modal-title" id="deleteRecord">Are you sure to delete?</h5>
                             <button className="close" type="button" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                         <div className="modal-footer">
                             <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                             <button className="btn btn-primary" onClick={this.deleteRecord} data-dismiss="modal">Delete</button>
@@ -97,7 +96,7 @@ export default class extends Component {
             </div>
         );
 
-        const breadcrumbElement = (
+        const breadcrumbElement=(
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
