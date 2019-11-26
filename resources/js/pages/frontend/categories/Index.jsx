@@ -58,7 +58,7 @@ class Index extends React.Component {
                                         {
                                             item.products.map((product,index) => {
                                                 return (
-                                                    <div key={index} className="col-sm-3 col-4 col-md-4 col-xs-12">
+                                                    <div key={index} className="col-sm-3 col-3 col-md-3 col-xs-12">
                                                         <img src={product.image} className="image-thumbnail"></img>
                                                         <h4 className="text-center">{product.name}</h4>
                                                     </div>
