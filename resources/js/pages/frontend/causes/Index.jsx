@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import CausesRequest from '../../../requests/backend/CausesRequests';
+import Route from '../../../constants/Route';
 
 class Cause extends Component {
     constructor(props) {
@@ -34,7 +35,8 @@ class Cause extends Component {
                                             <div className="overlay">
                                                 <div className="block-center text-center">
                                                     <h2>{item.name}</h2>
-                                                    <button type="button" className="btn btn-primary">Read more</button>
+                                                    <p>{item.id}</p>
+                                                    <a href={`${Route.frontEnd.causes.index.path}/${item.id}`} type="button" className="btn btn-primary">Read more</a>
                                                 </div>
                                             </div>
                                         </div>

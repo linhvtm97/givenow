@@ -5,6 +5,7 @@ import HomeIndex from './home/Index.jsx';
 // Events
 import EventIndex from './events/Index.jsx';
 import EventShow from './events/Show.jsx';
+import EventCreate from './events/Create';
 // Charities
 import CharitiesIndex from './charities/Index.jsx';
 // Authentication
@@ -13,6 +14,8 @@ import Register from './auth/Register';
 // Carts
 import CartPayment from './carts/Payment';
 import CartShow from './carts/Show';
+// Causes
+import CausesShow from './causes/Show';
 // Products
 import ProductsIndex from './products/Index.jsx';
 // About us
@@ -34,8 +37,10 @@ class RouteBackEnd extends Component {
 
                 <Route exact path={RouteConst.frontEnd.events.index.path} component={EventIndex} />
                 <Route exact path={RouteConst.frontEnd.events.show.path} component={EventShow} />
+                <Route exact path={RouteConst.frontEnd.events.create.path} component={EventCreate} />
 
                 <Route exact path={RouteConst.frontEnd.charities.index.path} component={CharitiesIndex} />
+                <Route exact path={RouteConst.frontEnd.causes.show.path} component={CausesShow} />
 
                 <Route exact path={RouteConst.frontEnd.cart.show.path} component={CartShow} />
                 <Route exact path={RouteConst.frontEnd.cart.pay.path} component={CartPayment} />
