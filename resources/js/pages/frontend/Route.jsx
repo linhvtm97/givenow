@@ -8,6 +8,8 @@ import EventShow from './events/Show.jsx';
 import EventCreate from './events/Create';
 // Charities
 import CharitiesIndex from './charities/Index.jsx';
+// Categories
+import CategoriesIndex from './categories/Index';
 // Authentication
 import Login from './auth/Login';
 import Register from './auth/Register';
@@ -40,6 +42,7 @@ class RouteBackEnd extends Component {
                 <Route exact path={RouteConst.frontEnd.events.create.path} component={EventCreate} />
 
                 <Route exact path={RouteConst.frontEnd.charities.index.path} component={CharitiesIndex} />
+                <Route exact path={RouteConst.frontEnd.categories.index.path} component={CategoriesIndex} />
                 <Route exact path={RouteConst.frontEnd.causes.show.path} component={CausesShow} />
 
                 <Route exact path={RouteConst.frontEnd.cart.show.path} component={CartShow} />

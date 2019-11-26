@@ -17,4 +17,9 @@ class Category extends MainModel
     protected $fillable = [
         'name', 'image', 'description'
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

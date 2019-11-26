@@ -17,4 +17,29 @@ class CategoryService extends BaseService
     {
         parent::__construct($CategoryRepository);
     }
+
+    /**
+     * Get All object
+     *
+     * @param array|null $data data
+     *
+     * @return \Model\Eloquent\Builder
+     */
+    public function getAll(array $data = null)
+    {
+        return $this->repository->with('products')->paginate();
+    }
+
+    /**
+     * Get object by uid
+     *
+     * @param string $uid uid of object
+     * @param mixed  $data Data
+     *
+     * @return mixed
+     */
+    public function find(string $uid)
+    {
+        return $this->repository->with('products')->find($uid);
+    }
 }
