@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\V1\City;
+use Illuminate\Support\Str;
 
 class CitySeeder extends Seeder
 {
@@ -74,11 +75,12 @@ class CitySeeder extends Seeder
             'CAMAU' => 'Cà Mau',
             'DIENBIEN' => 'Điện Biên',
             'DAKNONG' => 'Đắk Nông',
-            'HAUGIANG' => 'Hậu Giang',
+            'HAUGIANG' => 'Hậu giang',
         );
+
         foreach($cities as $city) {
             factory(App\Models\V1\City::class, 1)->create(
-                ['name' => $city]
+                ['name' => transliterator_transliterate('Any-Latin; Latin-ASCII', $city)]
             );
         }
     }

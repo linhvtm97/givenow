@@ -44,32 +44,46 @@ export default class extends Component {
         ];
 
         return (
-            <ul className="sidebar navbar-nav">
-                <li className="nav-item">
-                    <a className="nav-link">Static menu</a>
-                </li>
-                {listStaticMenus.map((menu, i) => {
-                    return (
-                        <li className={`nav-item ${this.state.pathMenuCurrent === menu.link ? 'active' : '' }`} key={i}>
-                            <Link to={menu.link} className="nav-link">
-                                <i className={menu.icon}></i> <span>{menu.label}</span>
-                            </Link>
-                        </li>
-                    )
-                })}
-                <li className="nav-item">
-                    <a className="nav-link">Dynamic menu</a>
-                </li>
+            <div className="sidebar navbar-nav">
+
+                <div href="#static-menu" data-toggle="collapse" aria-expanded="true" 
+                    className="nav-item list-group-item list-group-item-action flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-start align-items-center">
+                        <span className="menu-collapsed">Static menu</span>
+                        <i className="fas fa-caret-down fa-fw mr-3"></i>
+                    </div>
+                </div>
+                <div id='static-menu' className="collapse sidebar-submenu show">
+                    {listStaticMenus.map((menu, i) => {
+                        return (
+                            <div className={`nav-item ${this.state.pathMenuCurrent === menu.link ? 'active' : '' }`} key={i}>
+                                <Link to={menu.link} className="nav-link">
+                                    <i className={menu.icon}></i> <span>{menu.label}</span>
+                                </Link>
+                            </div>
+                        )
+                    })}
+                </div>
+
+                <div href="#dynamic-menu" data-toggle="collapse" aria-expanded="true"
+                    className="nav-item list-group-item list-group-item-action flex-column align-items-start">
+                    <div className="d-flex w-100 justify-content-start align-items-center">
+                        <span className="menu-collapsed">Dynamic menu</span>
+                        <i className="fas fa-caret-down fa-fw mr-3"></i>
+                    </div>
+                </div>
+                <div id='dynamic-menu' className="collapse sidebar-submenu show">
                 {listDynamicMenus.map((menu, i) => {
                     return (
-                        <li className={`nav-item ${this.state.pathMenuCurrent === menu.link ? 'active' : ''}`} key={i}>
+                        <div className={`nav-item ${this.state.pathMenuCurrent === menu.link ? 'active' : ''}`} key={i}>
                             <Link to={menu.link} className="nav-link">
                                 <i className={menu.icon}></i> <span>{menu.label}</span>
                             </Link>
-                        </li>
+                        </div>
                     )
                 })}
-            </ul>
+                </div>
+            </div>
         );
     }
 }
