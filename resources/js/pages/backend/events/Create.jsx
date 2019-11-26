@@ -1,67 +1,98 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React,{Component} from 'react';
+import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import EventsRequests from '../../../requests/backend/EventsRequests';
+import CausesRequests from '../../../requests/backend/CausesRequests';
+import CitiesRequests from '../../../requests/backend/CitiesRequests'
 
 export default class extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state={
             form: {
                 name: '',
                 description: '',
+                text: '',
+                status: '',
+                start_date: '',
+                end_date: '',
+                location: '',
+                goal_item: '',
+                cause_id: ''
             },
             formData: {},
             messageError: '',
+            causes: [],
+            cities: []
         };
     }
-
-    handleOnChange = event => {
-        let { form } = this.state;
-        form = { ...form, ...{ [event.target.name]: event.target.value}}
-        this.setState({ form })
+    componentDidMount() {
+        CausesRequests.getAll().then((response) => {
+            this.setState({causes: response.data})
+        });
+        CitiesRequests.getAll().then((response) => {
+            this.setState({cities: response.data})
+        });
     }
 
-    onChangeFile = (e) => {
+    handleOnChange=event => {
+        let {form}=this.state;
+        form={...form,...{[event.target.name]: event.target.value}}
+        this.setState({form})
+    }
+
+    onChangeFile=(e) => {
         e.preventDefault();
 
-        let reader = new FileReader();
-        let fileTmp = e.target.files[0];
+        let reader=new FileReader();
+        let fileTmp=e.target.files[0];
 
-        if (fileTmp) {
+        if(fileTmp) {
             reader.readAsDataURL(fileTmp);
 
-            reader.onloadend = () => {
-                let formData = new FormData();
-                formData.append('image', fileTmp);
+            reader.onloadend=() => {
+                let formData=new FormData();
+                formData.append('image',fileTmp);
                 console.log(formData)
-                this.setState({ formData })
+                this.setState({formData})
             };
         }
     };
 
-    submitForm = event => {
+    submitForm=event => {
         event.preventDefault();
-        let { formData, form } = this.state;
-        formData.append('name', form.name);
-        formData.append('description', form.description);
+        let {formData,form}=this.state;
+        formData.append('name',form.name);
+        formData.append('description',form.description);
+        formData.append('text',form.description);
+        formData.append('status',form.status);
+        formData.append('location',form.location);
+        formData.append('start_date',form.start_date);
+        formData.append('end_date',form.end_date);
+        formData.append('goal_item',form.goal_item);
+        formData.append('cause_id',form.cause_id);
+        formData.append('city_id',form.city_id);
+        formData.append('user_id',1);
+
+
 
         EventsRequests.create(formData).then((response) => {
-            if (response.meta.status === 201) {
+            if(response.meta.status===201) {
                 console.log(response.data.id);
-                if (response.data.id) {
+                if(response.data.id) {
                     this.props.history.push(`${RouteConst.backEnd.events.index.path}/${response.data.id}`);
                 } else {
                     this.props.history.push(RouteConst.backEnd.events.index.path);
                 }
             } else {
-                this.state.messageError = response.meta.message;
+                this.state.messageError=response.meta.message;
             }
         });
     }
 
     render() {
-        const breadcrumbElement = (
+        let {causes,cities}=this.state
+        const breadcrumbElement=(
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
@@ -73,7 +104,7 @@ export default class extends Component {
             </ol>
         );
 
-        const formElement = (
+        const formElement=(
             <div>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
@@ -81,14 +112,70 @@ export default class extends Component {
                         name="name" onChange={this.handleOnChange} />
                 </div>
                 <div className="form-group">
+                    <label htmlFor="description">Status</label>
+                    <select name="status" id="status" class="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.status}>
+                        <option value='0'>PUBLIC</option>)
+                        <option value='1'>PRIVATE</option>)
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Cause</label>
+                    <select name="cause_id" id="cause_id" class="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.cause_id}>
+                        {
+                            causes.map((item,key) => {
+                                return (
+                                    <option value={item.id}>{item.name}</option>)
+                            })
+                        }
+
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">City</label>
+                    <select name="city_id" id="city_id" class="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.city_id}>
+                        {
+                            cities.map((item,key) => {
+                                return (
+                                    <option value={item.id}>{item.name}</option>)
+                            })
+                        }
+
+                    </select>
+                </div>
+                <div className="form-group">
                     <label htmlFor="image">Image</label>
                     <input type="file" className="form-control" id="image"
                         name="image" onChange={this.onChangeFile} />
                 </div>
                 <div className="form-group">
+                    <label htmlFor="description">Location Detail</label>
+                    <input type="text" className="form-control" id="location"
+                        name="location" onChange={this.handleOnChange} value={this.state.form.location} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Goal Item</label>
+                    <input type="text" className="form-control" id="goal_item"
+                        name="goal_item" onChange={this.handleOnChange} value={this.state.form.goal_item} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Start date</label>
+                    <input type="text" className="form-control" id="start_date"
+                        name="start_date" onChange={this.handleOnChange} value={this.state.form.start_date} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">End date</label>
+                    <input type="text" className="form-control" id="end_date"
+                        name="end_date" onChange={this.handleOnChange} value={this.state.form.end_date} />
+                </div>
+                <div className="form-group">
                     <label htmlFor="description">Description</label>
                     <input type="text" className="form-control" id="description"
                         name="description" onChange={this.handleOnChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Content</label>
+                    <input type="text" className="form-control" id="text"
+                        name="text" onChange={this.handleOnChange} />
                 </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>
