@@ -12,7 +12,20 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\V1\User::class, 5)->create(['name' => 'admin', 'username' => 'admin'.rand(1,100), 'role' => 1]);
-        factory(App\Models\V1\User::class, 5)->create(['name' => 'normal user', 'username' => 'user'.rand(1,100), 'role' => 0]);
+        for ($i = 0; $i < 5; $i++) {
+            factory(App\Models\V1\User::class)->create([
+                'name' => 'Admin' . ($i > 0 ? ' ' . $i : ''), 
+                'username' => 'admin' . ($i > 0 ? $i : ''), 
+                'role' => 1
+            ]);
+        }
+
+        for ($i = 0; $i < 5; $i++) {
+            factory(App\Models\V1\User::class)->create([
+                'name' => 'Normal user ' . ($i > 0 ? ' ' . $i : ''), 
+                'username' => 'user' . ($i > 0 ? $i : ''), 
+                'role' => 0
+            ]);
+        }
     }
 }
