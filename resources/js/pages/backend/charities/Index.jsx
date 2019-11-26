@@ -46,6 +46,10 @@ export default class extends Component {
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Email</th>
+                        <th>Website</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
                         <th>Description</th>
                         <th className="text-center" width="150">Action</th>
                     </tr>
@@ -55,6 +59,10 @@ export default class extends Component {
                         return (
                             <tr key={index}>
                                 <td>{item.name}</td>
+                                <td>{item.email}</td>
+                                <td>{item.website}</td>
+                                <td>{item.phone_number}</td>
+                                <td>{item.address}</td>
                                 <td>{item.description}</td>
                                 <td className="text-center">
                                     <Link className="btn btn-info btn-sm mr-2"
@@ -82,12 +90,11 @@ export default class extends Component {
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="deleteRecord">Ready to Leave?</h5>
+                            <h5 className="modal-title" id="deleteRecord">Are you sure to delete?</h5>
                             <button className="close" type="button" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div className="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                         <div className="modal-footer">
                             <button className="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                             <button className="btn btn-primary" onClick={this.deleteRecord} data-dismiss="modal">Delete</button>
