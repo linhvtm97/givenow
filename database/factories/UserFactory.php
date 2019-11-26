@@ -24,14 +24,13 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'username' => $faker->unique()->username,
         'password' => bcrypt('12345678'),
         'address' => $faker->address,
-        'phone_number' => $faker->phoneNumber,
+        'phone_number' => '09' . rand(10000000, 99999999),
         'image' => $faker->imageUrl,
     ];
 });
+
 $factory->define(Cause::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
@@ -39,20 +38,23 @@ $factory->define(Cause::class, function (Faker $faker) {
         'description' => $faker->text
     ];
 });
+
 $factory->define(City::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
     ];
 });
+
 $factory->define(Charity::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'address' => $faker->address,
-        'phone_number' => $faker->phoneNumber,
+        'phone_number' => '09' . rand(10000000, 99999999),
         'image' => $faker->imageUrl,
         'description' => $faker->text
     ];
 });
+
 $factory->define(Category::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
@@ -60,6 +62,7 @@ $factory->define(Category::class, function (Faker $faker) {
         'description' => $faker->text
     ];
 });
+
 $factory->define(Product::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
@@ -70,6 +73,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'image' => $faker->imageUrl,
     ];
 });
+
 $factory->define(Event::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
