@@ -157,6 +157,9 @@ export default Object.freeze({
             },
             show: {
                 path: '/events/:id'
+            },
+            create: {
+                path: '/start-an-event'
             }
         },
         charities: {
@@ -170,6 +173,14 @@ export default Object.freeze({
             },
             pay: {
                 path: '/cart/payment'
+            }
+        },
+        causes: {
+            index: {
+                path: '/causes'
+            },
+            show: {
+                path: '/causes/:id'
             }
         },
         products: {

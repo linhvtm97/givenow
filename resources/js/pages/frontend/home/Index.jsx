@@ -1,18 +1,21 @@
 import React from 'react';
 import Cause from '../causes/Index';
-import Banner from '../layouts/Banner'
+import Banner from '../layouts/Banner';
+import RouteConst from '../../../constants/Route';
 
 class Index extends React.Component {
     render() {
         return (
             <div>
-                <Banner />
+                <div className="row">
+                    <Banner />
+                </div>
                 <div className='container'>
                     <div className="row mg-10 text-center">
                         <br></br>
-                        <a class="btn btn-primary hard-button" href='/events' role="button">Start an event</a>
+                        <a class="btn btn-primary hard-button" href={RouteConst.frontEnd.events.create.path} role="button">Start an event</a>
                         <span>Or</span>
-                        <a class="btn btn-danger hard-button" href='/events' role="button">Donate a cause</a>
+                        <a class="btn btn-danger hard-button" href={RouteConst.frontEnd.events.index.path} role="button">Donate a cause</a>
                     </div>
                     <hr></hr>
                     <div className="container text-center">
@@ -29,7 +32,7 @@ class Index extends React.Component {
                                     <h4>Ready to learn more: </h4>
                                 </div>
                                 <div className="col-4 col-md-4">
-                                    <button type="button" class="btn btn-info">Contact us</button>
+                                    <a href={RouteConst.frontEnd.contactUs.path} type="button" class="btn btn-info">Contact us</a>
                                 </div>
                             </div>
                         </div>
@@ -62,9 +65,9 @@ class Index extends React.Component {
                             <h1>Ready to raise for your cause?</h1>
                             <div className="row mg-10 text-center">
                                 <br></br>
-                                <a class="btn btn-primary hard-button" href='/events' role="button">Start an event</a>
+                                <a class="btn btn-primary hard-button" href={RouteConst.frontEnd.events.create.path} role="button">Start an event</a>
                                 <span>Or</span>
-                                <a class="btn btn-danger hard-button" href='/events' role="button">Donate a cause</a>
+                                <a class="btn btn-danger hard-button" href={RouteConst.frontEnd.events.index.path} role="button">Donate a cause</a>
                             </div>
                         </div>
                     </div>
