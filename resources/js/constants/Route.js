@@ -167,6 +167,11 @@ export default Object.freeze({
                 path: '/charities'
             }
         },
+        categories: {
+            index: {
+                path: '/categories'
+            }
+        },
         cart: {
             show: {
                 path: '/cart'
