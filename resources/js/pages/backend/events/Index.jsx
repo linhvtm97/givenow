@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import EventsRequests from '../../../requests/backend/EventsRequests';
 
+const PUBLIC_STATUS='PUBLIC';
+const PRIVATE_STATUS='PRIVATE';
 export default class extends Component {
     constructor(props) {
         super(props);
@@ -12,7 +14,6 @@ export default class extends Component {
             idDelete: '',
         };
     }
-
     componentDidMount() {
         this.getAllRecords();
     }
@@ -46,6 +47,9 @@ export default class extends Component {
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Status</th>
+                        <th>Goal items</th>
+                        <th>Location</th>
                         <th>Description</th>
                         <th className="text-center" width="150">Action</th>
                     </tr>
@@ -55,6 +59,9 @@ export default class extends Component {
                         return (
                             <tr key={index}>
                                 <td>{item.name}</td>
+                                <td>{item.status==0? PUBLIC_STATUS:PRIVATE_STATUS}</td>
+                                <td>{item.goal_item}</td>
+                                <td>{item.location}</td>
                                 <td>{item.description}</td>
                                 <td className="text-center">
                                     <Link className="btn btn-info btn-sm mr-2"
@@ -97,7 +104,7 @@ export default class extends Component {
             </div>
         );
 
-        const breadcrumbElement = (
+        const breadcrumbElement=(
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>

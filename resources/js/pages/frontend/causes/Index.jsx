@@ -23,8 +23,8 @@ class Cause extends Component {
         let {causes}=this.state
         return (
             <div className="container">
-                <div class="panel panel-default">
-                    <div class="panel-body">
+                <div className="panel panel-default">
+                    <div className="panel-body">
                         {
                             causes.map((item,index) => {
                                 return (
@@ -35,7 +35,6 @@ class Cause extends Component {
                                             <div className="overlay">
                                                 <div className="block-center text-center">
                                                     <h2>{item.name}</h2>
-                                                    <p>{item.id}</p>
                                                     <a href={`${Route.frontEnd.causes.index.path}/${item.id}`} type="button" className="btn btn-primary">Read more</a>
                                                 </div>
                                             </div>
