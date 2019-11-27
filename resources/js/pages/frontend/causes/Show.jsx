@@ -48,9 +48,9 @@ class Show extends Component {
                     <h3><i>Ready to raise for your cause?</i></h3>
                     <div className="row mg-10 text-center">
                         <br></br>
-                        <a class="btn btn-primary hard-button" href={RouteConst.frontEnd.events.create.path} role="button">Start an event</a>
+                        <a className="btn btn-primary hard-button" href={RouteConst.frontEnd.events.create.path} role="button">Start an event</a>
                         <span>Or</span>
-                        <a class="btn btn-danger hard-button" href={RouteConst.frontEnd.events.index.path} role="button">Donate a cause</a>
+                        <a className="btn btn-danger hard-button" href={RouteConst.frontEnd.events.index.path} role="button">Donate a cause</a>
                     </div>
                 </div>
             </div>

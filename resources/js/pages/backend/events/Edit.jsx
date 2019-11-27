@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import EventsRequests from '../../../requests/backend/EventsRequests';
+import CausesRequests from '../../../requests/backend/CausesRequests';
+import CitiesRequests from '../../../requests/backend/CitiesRequests'
 
 export default class extends Component {
     constructor(props) {
@@ -12,19 +14,31 @@ export default class extends Component {
             form: {
                 name: '',
                 description: '',
+                text: '',
                 status: '',
                 start_date: '',
                 end_date: '',
                 location: '',
                 goal_item: '',
+                cause_id: '',
+                city_id: '',
+                user_id: ''
             },
             formData: {},
             messageError: '',
+            causes: [],
+            cities: []
         };
     }
 
     componentDidMount() {
         this.getInfo(this.state.id);
+        CausesRequests.getAll().then((response) => {
+            this.setState({causes: response.data})
+        });
+        CitiesRequests.getAll().then((response) => {
+            this.setState({cities: response.data})
+        });
     }
 
     getInfo=(id) => {
@@ -38,7 +52,11 @@ export default class extends Component {
                     end_date: response.data.end_date,
                     location: response.data.location,
                     goal_item: response.data.goal_item,
-                    status: response.data.status
+                    status: response.data.status,
+                    text: response.data.text,
+                    cause_id: response.data.cause_id,
+                    city_id: response.data.city_id,
+                    user_id: response.data.user_id
                 }
                 this.setState({form});
             } else {
@@ -79,6 +97,14 @@ export default class extends Component {
         if(formData instanceof FormData) {
             formData.append('name',form.name);
             formData.append('description',form.description);
+            formData.append('start_date',form.start_date);
+            formData.append('end_date',form.end_date);
+            formData.append('location',form.location);
+            formData.append('goal_item',form.goal_item);
+            formData.append('status',form.status);
+            formData.append('text',form.text);
+            formData.append('cause_id',form.cause_id);
+            formData.append('city_id',form.city_id);
 
             formSubmit=formData;
         } else {
@@ -100,6 +126,7 @@ export default class extends Component {
     }
 
     render() {
+        let {causes,cities}=this.state
         const breadcrumbElement=(
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -120,6 +147,30 @@ export default class extends Component {
                         name="name" onChange={this.handleOnChange} value={this.state.form.name} />
                 </div>
                 <div className="form-group">
+                    <label htmlFor="description">Cause</label>
+                    <select name="cause_id" id="cause_id" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.cause_id}>
+                        {
+                            causes.map((item,key) => {
+                                return (
+                                    <option key={key} value={item.id}>{item.name}</option>)
+                            })
+                        }
+
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">City</label>
+                    <select name="city_id" id="city_id" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.city_id}>
+                        {
+                            cities.map((item,key) => {
+                                return (
+                                    <option key={key} value={item.id}>{item.name}</option>)
+                            })
+                        }
+
+                    </select>
+                </div>
+                <div className="form-group">
                     <label htmlFor="image">Image</label>
                     <input type="file" className="form-control" id="image"
                         name="image" onChange={this.onChangeFile} />
@@ -136,18 +187,23 @@ export default class extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Start date</label>
-                    <input type="text" className="form-control" id="start_date"
+                    <input type="date" className="form-control" id="start_date"
                         name="start_date" onChange={this.handleOnChange} value={this.state.form.start_date} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">End date</label>
-                    <input type="text" className="form-control" id="end_date"
+                    <input type="date" className="form-control" id="end_date"
                         name="end_date" onChange={this.handleOnChange} value={this.state.form.end_date} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
                     <input type="text" className="form-control" id="description"
                         name="description" onChange={this.handleOnChange} value={this.state.form.description} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Content</label>
+                    <input type="text" className="form-control" id="text"
+                        name="text" onChange={this.handleOnChange} />
                 </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>

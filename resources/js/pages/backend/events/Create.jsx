@@ -4,6 +4,7 @@ import RouteConst from '../../../constants/Route';
 import EventsRequests from '../../../requests/backend/EventsRequests';
 import CausesRequests from '../../../requests/backend/CausesRequests';
 import CitiesRequests from '../../../requests/backend/CitiesRequests'
+import LocalStorageHelper from '../../../helpers/LocalStorageHelper';
 
 export default class extends Component {
     constructor(props) {
@@ -18,7 +19,9 @@ export default class extends Component {
                 end_date: '',
                 location: '',
                 goal_item: '',
-                cause_id: ''
+                cause_id: '',
+                city_id: '',
+                user_id: ''
             },
             formData: {},
             messageError: '',
@@ -27,6 +30,7 @@ export default class extends Component {
         };
     }
     componentDidMount() {
+
         CausesRequests.getAll().then((response) => {
             this.setState({causes: response.data})
         });
@@ -72,9 +76,7 @@ export default class extends Component {
         formData.append('goal_item',form.goal_item);
         formData.append('cause_id',form.cause_id);
         formData.append('city_id',form.city_id);
-        formData.append('user_id',1);
-
-
+        formData.append('user_id',LocalStorageHelper.getItem('authToken').user.id);
 
         EventsRequests.create(formData).then((response) => {
             if(response.meta.status===201) {
@@ -113,18 +115,18 @@ export default class extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Status</label>
-                    <select name="status" id="status" class="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.status}>
+                    <select name="status" id="status" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.status}>
                         <option value='0'>PUBLIC</option>)
                         <option value='1'>PRIVATE</option>)
                     </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Cause</label>
-                    <select name="cause_id" id="cause_id" class="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.cause_id}>
+                    <select name="cause_id" id="cause_id" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.cause_id}>
                         {
                             causes.map((item,key) => {
                                 return (
-                                    <option value={item.id}>{item.name}</option>)
+                                    <option key={key} value={item.id}>{item.name}</option>)
                             })
                         }
 
@@ -132,11 +134,11 @@ export default class extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">City</label>
-                    <select name="city_id" id="city_id" class="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.city_id}>
+                    <select name="city_id" id="city_id" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.city_id}>
                         {
                             cities.map((item,key) => {
                                 return (
-                                    <option value={item.id}>{item.name}</option>)
+                                    <option key={key} value={item.id}>{item.name}</option>)
                             })
                         }
 
@@ -159,12 +161,12 @@ export default class extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Start date</label>
-                    <input type="text" className="form-control" id="start_date"
+                    <input type="date" className="form-control" id="start_date"
                         name="start_date" onChange={this.handleOnChange} value={this.state.form.start_date} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">End date</label>
-                    <input type="text" className="form-control" id="end_date"
+                    <input type="date" className="form-control" id="end_date"
                         name="end_date" onChange={this.handleOnChange} value={this.state.form.end_date} />
                 </div>
                 <div className="form-group">

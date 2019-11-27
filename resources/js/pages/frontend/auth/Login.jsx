@@ -39,9 +39,10 @@ class Login extends React.Component {
 
         event.preventDefault();
         AuthRequests.login(this.state.formData).then((response) => {
+            console.log(response)
             if(response.meta.status===200) {
                 AuthHelper.setToken(response.data);
-                window.location.href=Route.backEnd.home.index.path;
+                window.location.href=Route.frontEnd.home.index.path;
             } else {
                 const meta={
                     message: response.meta.message,
@@ -79,13 +80,13 @@ class Login extends React.Component {
 
                                 <div className="form-label-group">
                                     <label htmlFor="username">Username</label>
-                                    <input type="text" id="username" className="form-control" name="username"
+                                    <input type="text" className="form-control" name="username"
                                         placeholder="Username" required onChange={this.handleOnChange} />
                                 </div>
 
                                 <div className="form-label-group">
                                     <label htmlFor="password">Password</label>
-                                    <input type="password" id="password" className="form-control" name="password"
+                                    <input type="password" className="form-control" name="password"
                                         placeholder="Password" required onChange={this.handleOnChange} />
                                 </div>
                                 <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

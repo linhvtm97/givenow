@@ -13,7 +13,17 @@ class Index extends React.Component {
             causes: []
         }
     }
-
+    handleOnChange=(e) => {
+        let target=e.target;
+        let name=target.name;
+        let value=
+            target.type==="checkbox"
+                ? target.checked
+                :target.value;
+        this.setState({
+            [name]: value
+        });
+    };
 
     componentDidMount() {
         EventsRequests.getAll().then((response) => {
@@ -40,7 +50,6 @@ class Index extends React.Component {
     }
     render() {
         let {causes,events,searchValue,filter}=this.state
-        console.log(events);
 
         if(searchValue) {
             events=events.filter(event => {
@@ -62,7 +71,7 @@ class Index extends React.Component {
                 <hr className="style4">
                 </hr>
                 <div className="container text-center">
-                    <div class="caption bg-blue">
+                    <div className="caption bg-blue">
                         <h2 className="text-white">Explore all events</h2>
                     </div>
                     <hr className="style4">
@@ -75,7 +84,7 @@ class Index extends React.Component {
                             <hr>
                             </hr>
                             <div className="text-center">
-                                <input type="search" name="" id="input" className="form-control" value="" required="required" title="" />
+                                <input type="search" name="searchValue" id="input" className="form-control" value={this.state.searchValue} required="required" title="" onChange={this.handleOnChange} />
                                 <button type="button" className="btn btn-primary mg-10">Search</button>
                             </div>
                             <h3>Causes</h3>
@@ -84,9 +93,9 @@ class Index extends React.Component {
                                 {
                                     causes.map((item,index) => {
                                         return (
-                                            <div>
-                                                <label key={index}>
-                                                    <input type="checkbox" value="" />
+                                            <div key={index}>
+                                                <label>
+                                                    <input type="checkbox" value={item.id} onChange={this.handleOnChange} />
                                                     {item.name}
                                                 </label>
                                                 <br></br>
@@ -121,15 +130,17 @@ class Index extends React.Component {
                                             <div className="panel panel-default">
                                                 <div className="panel-body">
                                                     <div className="event-container">
-                                                        <div>
-                                                            <img src={item.image} className="img-thumbnail" alt="Item"></img>
+                                                        <div className="image-container">
+                                                            <img src={item.image} className="image-thumbnail" alt="Item"></img>
                                                         </div>
-                                                        <a href={`events/${item.id}`}> <h4>{item.name}</h4>
-                                                        </a>
-                                                        <p>
-                                                            <i className="fa fa-map-marker"></i>{item.location}
-                                                        </p>
-                                                        <p>Start date: {item.start_date}</p>
+                                                        <div className="event-content-thumbnail">
+                                                            <a href={`events/${item.id}`}><h4>{item.name}</h4>
+                                                            </a>
+                                                            <p>
+                                                                <i className="fa fa-map-marker"></i>{item.location}
+                                                            </p>
+                                                        </div>
+                                                        <p>End date: {item.end_date}</p>
                                                         <div className="text-center">
                                                             <a className="btn btn-danger" href={`shop/event/${item.id}`} role="button">Shop now</a>
                                                         </div>

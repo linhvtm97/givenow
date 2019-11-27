@@ -63,7 +63,7 @@ class Show extends Component {
                                 {event.current_items==null? 0:event.current_items}
                             </div>
                         </div>
-                        <h5><i class="fa fa-clock-o" aria-hidden="true"></i> 16 Days remaining</h5>
+                        <h5><i class="fa fa-clock-o" aria-hidden="true"></i>{event.end_date-event.start_date}</h5>
 
                         <p>Last chance to give!</p>
                         <div className="text-center">
