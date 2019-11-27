@@ -27,20 +27,18 @@ class Login extends React.Component {
         };
     }
 
-    OnChange=event => {
+    handleOnChange=event => {
         let {formData}=this.state;
         formData={...formData,...{[event.target.name]: event.target.value}}
         this.setState({formData})
-
     }
 
     onSubmit=event => {
-        console.log($this.state);
-
         event.preventDefault();
         AuthRequests.login(this.state.formData).then((response) => {
             console.log(response)
             if(response.meta.status===200) {
+                console.log('local storage')
                 AuthHelper.setToken(response.data);
                 window.location.href=Route.frontEnd.home.index.path;
             } else {
@@ -60,7 +58,7 @@ class Login extends React.Component {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-body">
-                            <form className="form-signin" onSubmit={this.submitForm}>
+                            <form className="form-signin" onSubmit={this.onSubmit}>
                                 <div className="text-center mb-4">
                                     <img className="mb-4" src="http://lophoctiengnhat.edu.vn/images/2016/04/01/0-cach-phat-am-am-g-tieng-nhat.png"
                                         alt="" width="150" height="150" />

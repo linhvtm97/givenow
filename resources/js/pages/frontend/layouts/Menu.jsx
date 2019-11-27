@@ -2,6 +2,7 @@ import React from "react";
 import {Route,Link} from "react-router-dom";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
+import LocalStorageHelper from "../../../helpers/LocalStorageHelper";
 
 const menus=[
     {
@@ -46,7 +47,7 @@ const MenuLink=({label,to,activeOnlyWhenExact}) => {
 };
 class Menu extends React.Component {
     onClick=(e) => {
-        localStorage.removeItem('user')
+        LocalStorageHelper.removeItem('authToken')
     }
     render() {
         return (
@@ -65,7 +66,7 @@ class Menu extends React.Component {
                             menus
                         )}
                     </ul>
-                    <div className={(localStorage.getItem('user')!=null? 'hidden':'')}>
+                    <div className={(LocalStorageHelper.getItem('authToken')!=null? 'hidden':'')}>
                         <ul className="nav navbar-nav navbar-right">
                             <li>
                                 <a
@@ -77,7 +78,7 @@ class Menu extends React.Component {
                                                                       </a>
                                 <Register />
                             </li>
-                            <li className={(localStorage.getItem('user')!=null? ' d-none':'')}>
+                            <li className={(LocalStorageHelper.getItem('authToken')!=null? ' d-none':'')}>
                                 <a
                                     href="#login"
                                     data-toggle="modal"
@@ -89,14 +90,14 @@ class Menu extends React.Component {
                             </li>
                         </ul>
                     </div>
-                    <div className={(localStorage.getItem('user')==null? 'hidden':'')}>
+                    <div className={(LocalStorageHelper.getItem('authToken')==null? 'hidden':'')}>
                         <ul className="nav navbar-nav navbar-right">
-                            <li className={(localStorage.getItem('user')!=null? ' d-none':'')}>
+                            <li className={(LocalStorageHelper.getItem('user')!=null? ' d-none':'')}>
                                 <a
                                     href="/"
                                     data-toggle="dropdown"
                                 >
-                                    <span className="glyphicon glyphicon-user "></span>{localStorage.getItem('user')}
+                                    <span className="glyphicon glyphicon-user "></span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.name:'Admin'}
                                 </a>
                                 <ul className="dropdown-menu">
                                     <li><a href="/me">Profile</a></li>
