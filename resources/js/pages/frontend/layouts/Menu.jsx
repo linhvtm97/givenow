@@ -92,6 +92,7 @@ class Menu extends React.Component {
                     </div>
                     <div className={(LocalStorageHelper.getItem('authToken')==null? 'hidden':'')}>
                         <ul className="nav navbar-nav navbar-right">
+                            <li> <a href="/cart/payment"> <i className="fa fa-shopping-cart"></i>Cart</a></li>
                             <li className={(LocalStorageHelper.getItem('user')!=null? ' d-none':'')}>
                                 <a
                                     href="/"
@@ -99,9 +100,10 @@ class Menu extends React.Component {
                                 >
                                     <span className="glyphicon glyphicon-user "></span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.name:'Admin'}
                                 </a>
+
                                 <ul className="dropdown-menu">
                                     <li><a href="/me">Profile</a></li>
-                                    <li><a href="/checkout">Cart</a></li>
+                                    {/* <li><a href="/cart/payment">Cart</a></li> */}
                                 </ul>
                             </li>
                             <li>
