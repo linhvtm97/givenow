@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import ProductsRequests from '../../../requests/backend/ProductsRequests';
 import EventsRequests from '../../../requests/backend/EventsRequests';
+import { connect } from 'react-redux';
+import { addToCart, getCart } from '../../../redux/actions/cartActions';
 
 class Index extends Component {
     constructor(props) {
@@ -12,28 +14,46 @@ class Index extends Component {
     }
 
     componentDidMount() {
-
+        this.props.getCart();
         ProductsRequests.getAll().then((response) => {
-            if(response.meta.status===200) {
+            if(response.meta.status === 200) {
                 this.setState({products: response.data});
             } else {
                 this.state.messageError=response.meta.message;
             }
         });
-        console.log(this.state);
 
-        let {match}=this.props;
-        let id=match.params.id
+        let { match } = this.props;
+        let id = match.params.id
+
         EventsRequests.showByID(id).then((response) => {
-            if(response.meta.status===200) {
+            if (response.meta.status === 200) {
                 this.setState({event: response.data});
             } else {
-                this.state.messageError=response.meta.message;
+                this.state.messageError = response.meta.message;
             }
         });
     }
+
+    orderProduct = (product) => (e) => {
+        this.props.addToCart(product, e.target.value);
+        this.props.getCart();
+    }
+
+    getQuantity = (id) => {
+        const { addedProducts } = this.props;
+
+        for (let i = 0; i < addedProducts.length; i++) {
+            if (addedProducts[i].id === id) {
+                return addedProducts[i].quantity;
+            }
+        }
+
+        return 0;
+    }
+
     render() {
-        let {products,event}=this.state
+        let {products, event}=this.state;
 
         return (
             <div>
@@ -62,6 +82,7 @@ class Index extends Component {
                 <div className="container">
                     {
                         products.map((product,index) => {
+                            product.quantity = this.getQuantity(product.id)
                             return (
                                 <div className="container" key={index}>
                                     <div className=" col-sm-3 col-md-3 col-xs-3 col-lg-3">
@@ -80,11 +101,10 @@ class Index extends Component {
                                         <div className="row">
                                             <div className="col-sm-2 col-md-2 col-xs-2 col-lg-2"></div>
                                             <div className="col-sm-4 col-md-4 col-xs-4 col-lg-4">
-                                                <input type="text" name="" id="input" className="form-control" value="1" required="required" pattern="" title="" />
+                                                <input type="number" className="form-control" value={product.quantity} required
+                                                    onChange={this.orderProduct(product)}/>
                                             </div>
-                                            <div className="col-sm-6 col-md-6 col-xs-6 col-lg-6">
-                                                <button type="button" className="btn btn-lg btn-warning">Add to card</button>
-                                            </div>                    </div>
+                                        </div>
                                     </div>
                                 </div>
                             )
@@ -98,4 +118,21 @@ class Index extends Component {
 }
 
 
-export default Index;
+const mapStateToProps = (state) => {
+    return {
+        addedProducts: state.cart.addedProducts
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getCart: () => {
+            dispatch(getCart()) 
+        },
+        addToCart: (product, quantity) => { 
+            dispatch(addToCart(product, quantity)) 
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

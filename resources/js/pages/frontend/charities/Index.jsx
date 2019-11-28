@@ -54,7 +54,7 @@ class Index extends Component {
             <div>
                 <hr className="style4"></hr>
                 <div className="container text-center">
-                    <div class="caption bg-blue">
+                    <div className="caption bg-blue">
                         <h2 className="text-white">Explore our charities</h2>
                     </div>
                     <hr className="style4">
@@ -63,7 +63,7 @@ class Index extends Component {
                 <div className="container">
                     <div className="row">
                         <h2 className="text-center">Charities are choosing GiveNow Free Giving Platform</h2>
-                        <div class="container no-mg">
+                        <div className="container no-mg">
                             <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                                 <hr className="style5"></hr>
                             </div>

@@ -162,9 +162,9 @@ export default class extends Component {
 
                         <div className="container text-center">
                             {/* <label onClick={this.onClick}>{this.state.title}</label> */}
-                            <input class="btn btn-light" type="button" onClick={this.onClick} id="title" name="title" value={this.state.title} />
+                            <input className="btn btn-light" type="button" onClick={this.onClick} id="title" name="title" value={this.state.title} />
                             <div className={this.state.isClicked? "":"hidden"}>
-                                <input type="text" class="form-control-plaintext" id="title" name="title" value={this.state.title}
+                                <input type="text" className="form-control-plaintext" id="title" name="title" value={this.state.title}
                                     onChange={this.onChange}></input>
                                 <button onClick={this.onClick}>Done</button>
                             </div>

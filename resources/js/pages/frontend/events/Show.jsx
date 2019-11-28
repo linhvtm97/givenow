@@ -63,11 +63,11 @@ class Show extends Component {
                                 {event.current_items==null? 0:event.current_items}
                             </div>
                         </div>
-                        <h5><i class="fa fa-clock-o" aria-hidden="true"></i>{event.end_date-event.start_date}</h5>
+                        <h5><i className="fa fa-clock-o" aria-hidden="true"></i>{event.end_date-event.start_date}</h5>
 
                         <p>Last chance to give!</p>
                         <div className="text-center">
-                            <a class="btn btn-danger" href={`/shop/event/${event.id}`} role="button">Shop now</a>
+                            <a className="btn btn-danger" href={`/shop/event/${event.id}`} role="button">Shop now</a>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@ class Show extends Component {
                     <h4><i className="fa fa-users"></i>1000 people contributed</h4>
                     <h3>Make a difference & raise some goods for</h3>
                     <a href="/"><h5>The New York Foundling</h5></a>
-                    <a class="btn btn-danger" href={`/shop/event/${event.id}`} role="button">Shop now</a>
+                    <a className="btn btn-danger" href={`/shop/event/${event.id}`} role="button">Shop now</a>
                 </div>
             </div>
         );
