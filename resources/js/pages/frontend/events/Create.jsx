@@ -6,6 +6,7 @@ import moment from 'moment';
 import CharitiesRequests from '../../../requests/backend/CharitiesRequests';
 import CausesRequests from '../../../requests/backend/CausesRequests';
 import CitiesRequests from '../../../requests/backend/CitiesRequests';
+import LocalStorageHelper from '../../../helpers/LocalStorageHelper'
 
 export default class extends Component {
     constructor(props) {
@@ -93,14 +94,16 @@ export default class extends Component {
         formData.append('text',form.text);
         formData.append('start_date',form.start_date);
         formData.append('end_date',form.end_date);
+        formData.append('user_id',LocalStorageHelper.getItem('authToken').user.id);
 
         EventsRequests.create(formData).then((response) => {
             if(response.meta.status===201) {
                 console.log(response.data.id);
                 if(response.data.id) {
-                    this.props.history.push(`${RouteConst.backEnd.events.index.path}/${response.data.id}`);
+                    this.props.history.push(RouteConst.frontEnd.events.index.path);
+                    // this.props.history.push(`${RouteConst.frontEnd.events.index.path}/${response.data.id}`);
                 } else {
-                    this.props.history.push(RouteConst.backEnd.events.index.path);
+                    this.props.history.push(RouteConst.frontEnd.events.index.path);
                 }
             } else {
                 this.state.messageError=response.meta.message;
@@ -286,20 +289,6 @@ export default class extends Component {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-
-                        <div className="container text-center">
-
-                        </div>
-                        <div className="container mg-10">
-
-                            <div className="container mg-10">
-
-                            </div>
-                            <div className="container">
-
                             </div>
                         </div>
                     </div>
