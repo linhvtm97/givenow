@@ -95,16 +95,59 @@ class Menu extends React.Component {
                             <li> <a href="/cart/payment"> <i className="fa fa-shopping-cart"></i>Cart</a></li>
                             <li className={(LocalStorageHelper.getItem('user')!=null? ' d-none':'')}>
                                 <a
-                                    href="/"
-                                    data-toggle="dropdown"
+                                    href='#user'
+                                    data-toggle="modal"
                                 >
                                     <span className="glyphicon glyphicon-user "></span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.name:'Admin'}
                                 </a>
+                                <div className="modal fade" id="user">
+                                    <div className="modal-dialog">
+                                        <div className="modal-content w-50">
+                                            <div className="modal-header">
+                                                <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 className="modal-title text-center">User Information</h4>
+                                            </div>
+                                            <div className="modal-body">
+                                                <div className="row">
+                                                    <div className="col-sm-2">
+                                                    </div>
+                                                    <div className="col-sm-2">
+                                                        <span>Name:</span>
+                                                    </div>
+                                                    <div className="col-sm-6">
 
-                                <ul className="dropdown-menu">
-                                    <li><a href="/me">Profile</a></li>
-                                    {/* <li><a href="/cart/payment">Cart</a></li> */}
-                                </ul>
+                                                        <span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.name:'Admin'}</span>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-sm-2">
+                                                    </div>
+                                                    <div className="col-sm-2">
+                                                        <span>Email:</span>
+                                                    </div>
+                                                    <div className="col-sm-6">
+
+                                                        <span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.email:'Admin'}</span>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-sm-2">
+                                                    </div>
+                                                    <div className="col-sm-2">
+                                                        <span>Address:</span>
+                                                    </div>
+                                                    <div className="col-sm-6">
+
+                                                        <span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.address:'Admin'}</span>
+                                                    </div>
+                                                </div>
+                                                <div className="text-right">
+                                                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                             <li>
                                 <a
