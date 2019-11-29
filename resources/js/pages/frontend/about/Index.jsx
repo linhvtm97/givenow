@@ -6,13 +6,13 @@ class Index extends React.Component {
             <div>
                 <hr className="style4"></hr>
                 <div className="container text-center">
-                    <div class="caption bg-blue">
+                    <div className="caption bg-blue">
                         <h2 className="text-white">Who we are ?</h2>
                     </div>
                     <hr className="style4"></hr>
                 </div>
 
-                <div class="container no-mg">
+                <div className="container no-mg">
                     <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                         <hr className="style5"></hr>
                     </div>
@@ -33,7 +33,7 @@ We decided the best way to tackle this outdated system was to use the e-commerce
 
                 </div>
                 <div className="container">
-                    <div class="container no-mg">
+                    <div className="container no-mg">
                         <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                             <hr className="style5"></hr>
                         </div>
@@ -97,7 +97,7 @@ We decided the best way to tackle this outdated system was to use the e-commerce
                     <hr className="style5"></hr>
                     <div className="container text-center mg-10">
                         <h4><i>If you want to get more information, Do not hesitage to contact us!</i></h4>
-                        <a class="btn btn-info hard-button" href='/contact-us' role="button">Contact us</a>
+                        <a className="btn btn-info hard-button" href='/contact-us' role="button">Contact us</a>
                     </div>
                 </div>
             </div>
