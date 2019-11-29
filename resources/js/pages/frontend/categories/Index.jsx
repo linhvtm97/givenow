@@ -33,7 +33,7 @@ class Index extends React.Component {
         let {categories,products}=this.state
         return (
             <div className="container">
-                <img src="/images/goodslogo.jpg"></img>
+                <img src="/images/goodslogo.jpg" className="img-thumbnail"></img>
                 <h4><i>Support charities across the nation by donating top-needed items from their wishlists. All donations are delivered directly at the end of each drive.</i></h4>
                 <div className="container">
                     {

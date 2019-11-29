@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
-import { connect } from 'react-redux';
-import { getCart } from '../../../redux/actions/cartActions';
+import {connect} from 'react-redux';
+import {getCart} from '../../../redux/actions/cartActions';
 
 class PaymentPage extends Component {
     constructor(props) {
@@ -12,9 +12,9 @@ class PaymentPage extends Component {
     }
 
     render() {
-        const { addedProducts } = this.props;
+        const {addedProducts}=this.props;
         console.log(addedProducts);
-        
+
         return (
             <div>
                 <hr className="style4">
@@ -33,14 +33,15 @@ class PaymentPage extends Component {
                             <span className="badge badge-secondary badge-pill">3</span>
                         </h4>
                         <ul className="list-group mb-3">
-                            {addedProducts && addedProducts.map((item, index) => {
+                            {addedProducts&&addedProducts.map((item,index) => {
                                 return (
                                     <li className="list-group-item d-flex justify-content-between lh-condensed" key={index}>
                                         <div>
-                                            <h6 className="my-0">{item.name}</h6>
+                                            <h6 className="my-0">{item.name} ({item.price}$)</h6>
                                             <small className="text-muted">{item.description}</small>
+                                            <h6>Quantity: {item.quantity}</h6>
                                         </div>
-                                        <span className="text-muted">${item.price * item.quantity}</span>
+                                        <span className="text-muted">${item.price*item.quantity}</span>
                                     </li>
                                 )
                             })}
@@ -56,14 +57,14 @@ class PaymentPage extends Component {
                         <form className="needs-validation" novalidate="">
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <label for="firstName">First name</label>
+                                    <label htmlFor="firstName">First name</label>
                                     <input type="text" className="form-control" id="firstName" placeholder="" value="" required="" />
                                     <div className="invalid-feedback">
                                         Valid first name is required.
                                 </div>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label for="lastName">Last name</label>
+                                    <label htmlFor="lastName">Last name</label>
                                     <input type="text" className="form-control" id="lastName" placeholder="" value="" required="" />
                                     <div className="invalid-feedback">
                                         Valid last name is required.
@@ -72,12 +73,12 @@ class PaymentPage extends Component {
                             </div>
 
                             <div className="mb-3">
-                                <label for="username">Username</label>
+                                <label htmlFor="username">Username</label>
                                 <div className="input-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text">@</span>
                                     </div>
-                                    <input type="text" className="form-control" id="username" placeholder="Username" required="" />
+                                    <input type="text" className="form-control" id="username" placeholder="Username" required="" value="" />
                                     <div className="invalid-feedback">
                                         Your username is required.
                                 </div>
@@ -85,96 +86,55 @@ class PaymentPage extends Component {
                             </div>
 
                             <div className="mb-3">
-                                <label for="email">Email <span className="text-muted">(Optional)</span></label>
-                                <input type="email" className="form-control" id="email" placeholder="you@example.com" />
+                                <label htmlFor="email">Email <span className="text-muted">(Optional)</span></label>
+                                <input type="email" className="form-control" id="email" placeholder="you@example.com" value="" />
                                 <div className="invalid-feedback">
                                     Please enter a valid email address for shipping updates.
                             </div>
                             </div>
 
                             <div className="mb-3">
-                                <label for="address">Address</label>
-                                <input type="text" className="form-control" id="address" placeholder="1234 Main St" required="" />
+                                <label htmlFor="address">Address</label>
+                                <input type="text" className="form-control" id="address" placeholder="1234 Main St" required="" value="" />
                                 <div className="invalid-feedback">
                                     Please enter your shipping address.
                             </div>
                             </div>
 
                             <div className="mb-3">
-                                <label for="address2">Address 2 <span className="text-muted">(Optional)</span></label>
-                                <input type="text" className="form-control" id="address2" placeholder="Apartment or suite" />
+                                <label htmlFor="address2">Address 2 <span className="text-muted">(Optional)</span></label>
+                                <input type="text" className="form-control" id="address2" placeholder="Apartment or suite" value="" />
                             </div>
 
-                            <div className="row mg-10">
-                                <div className="col-md-5 mb-3">
-                                    <label for="country">Country</label>
-                                    <select className="custom-select d-block w-100 " id="country" required="" >
-                                        <option value="">Choose...</option>
-                                        <option>Viet Name</option>
-                                    </select>
-                                    <div className="invalid-feedback">
-                                        Please select a valid country.
-                                </div>
-                                </div>
-                                <div className="col-md-4 mb-3">
-                                    <label for="state">State</label>
-                                    <select className="custom-select d-block w-100" id="state" required="">
-                                        <option value="">Choose...</option>
-                                        <option>Ha Noi</option>
-                                        <option>Da Nang</option>
-                                        <option>Ho Chi Minh</option>
-                                    </select>
-                                    <div className="invalid-feedback">
-                                        Please provide a valid state.
-                                </div>
-                                </div>
-                                <div className="col-md-3 mb-3">
-                                    <label for="zip">Zip</label>
-                                    <input type="text" className="form-control" id="zip" placeholder="" required="" />
-                                    <div className="invalid-feedback">
-                                        Zip code required.
-                                </div>
-                                </div>
-                            </div>
-                            <hr className="mb-4" />
-                            <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="same-address" />
-                                <label className="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-                            </div>
-                            <div className="custom-control custom-checkbox">
-                                <input type="checkbox" className="custom-control-input" id="save-info" />
-                                <label className="custom-control-label" for="save-info">Save this information for next time</label>
-                            </div>
-                            <hr className="mb-4" />
-
+                            <hr></hr>
                             <h4 className="mb-3">Payment</h4>
 
                             <div className="d-block my-3">
                                 <div className="custom-control custom-radio">
-                                    <input id="credit" name="paymentMethod" type="radio" className="custom-control-input" checked="" required="" />
-                                    <label className="custom-control-label" for="credit">Credit card</label>
+                                    <input id="credit" name="paymentMethod" type="radio" className="custom-control-input" checked="" required="" value="" />
+                                    <label className="custom-control-label" htmlFor="credit">Credit card</label>
                                 </div>
                                 <div className="custom-control custom-radio">
-                                    <input id="debit" name="paymentMethod" type="radio" className="custom-control-input" required="" />
-                                    <label className="custom-control-label" for="debit">Debit card</label>
+                                    <input id="debit" name="paymentMethod" type="radio" className="custom-control-input" required="" value="" />
+                                    <label className="custom-control-label" htmlFor="debit">Debit card</label>
                                 </div>
                                 <div className="custom-control custom-radio">
-                                    <input id="paypal" name="paymentMethod" type="radio" className="custom-control-input" required="" />
-                                    <label className="custom-control-label" for="paypal">Paypal</label>
+                                    <input id="paypal" name="paymentMethod" type="radio" className="custom-control-input" required="" value="" />
+                                    <label className="custom-control-label" htmlFor="paypal">Paypal</label>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <label for="cc-name">Name on card</label>
-                                    <input type="text" className="form-control" id="cc-name" placeholder="" required="" />
+                                    <label htmlFor="cc-name">Name on card</label>
+                                    <input type="text" className="form-control" id="cc-name" placeholder="" required="" value="" />
                                     <small className="text-muted">Full name as displayed on card</small>
                                     <div className="invalid-feedback">
                                         Name on card is required
                                 </div>
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label for="cc-number">Credit card number</label>
-                                    <input type="text" className="form-control" id="cc-number" placeholder="" required="" />
+                                    <label htmlFor="cc-number">Credit card number</label>
+                                    <input type="text" className="form-control" id="cc-number" placeholder="" required="" value="" />
                                     <div className="invalid-feedback">
                                         Credit card number is required
                                 </div>
@@ -182,15 +142,15 @@ class PaymentPage extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-md-3 mb-3">
-                                    <label for="cc-expiration">Expiration</label>
-                                    <input type="text" className="form-control" id="cc-expiration" placeholder="" required="" />
+                                    <label htmlFor="cc-expiration">Expiration</label>
+                                    <input type="text" className="form-control" id="cc-expiration" placeholder="" required="" value="" />
                                     <div className="invalid-feedback">
                                         Expiration date required
                                 </div>
                                 </div>
                                 <div className="col-md-3 mb-3">
-                                    <label for="cc-expiration">CVV</label>
-                                    <input type="text" className="form-control" id="cc-cvv" placeholder="" required="" />
+                                    <label htmlFor="cc-expiration">CVV</label>
+                                    <input type="text" className="form-control" id="cc-cvv" placeholder="" required="" value="" />
                                     <div className="invalid-feedback">
                                         Security code required
                                 </div>
@@ -206,13 +166,13 @@ class PaymentPage extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps=(state) => {
     return {
         addedProducts: state.cart.addedProducts
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps=(dispatch) => {
     return {
         getCart: () => {
             dispatch(getCart())
@@ -220,4 +180,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaymentPage)
+export default connect(mapStateToProps,mapDispatchToProps)(PaymentPage)

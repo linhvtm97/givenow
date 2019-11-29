@@ -17,7 +17,7 @@ class Event extends MainModel
      */
     protected $fillable = [
         'name', 'cause_id', 'user_id', 'image', 'description', 'text', 'goal_item', 'start_date',
-        'end_date', 'location', 'status', 'city_id'
+        'end_date', 'location', 'status', 'city_id', 'charity_id'
     ];
 
     /**

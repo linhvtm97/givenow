@@ -39,7 +39,7 @@ class Show extends Component {
                             <a href={RouteConst.frontEnd.categories.index.path} className="btn btn-primary">Explore products</a>
                         </div>
                         <div className="col-sm-6">
-                            <img src={cause.image} className="image-content-thumbnail"></img>
+                            <img src={cause.image} className="img-thumbnail"></img>
                         </div>
                     </div>
                 </div>
