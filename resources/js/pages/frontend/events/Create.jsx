@@ -113,28 +113,6 @@ export default class extends Component {
 
     render() {
         let {charities,causes,cities}=this.state
-        const formElement=(
-            <div>
-                <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" className="form-control" id="name" name="name" onChange={this.handleOnChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="image">Image</label>
-                    <input type="file" className="form-control" id="image" name="image" onChange={this.onChangeFile} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    <input type="text" className="form-control" id="description" name="description"
-                        onChange={this.handleOnChange} />
-                </div>
-                <button type="button" className="btn btn-primary" onClick={this.submitForm}>Submit</button>
-                <Link to={RouteConst.frontEnd.events.index.path}>
-                    <button type="button" className="btn btn-secondary ml-2">Cancel</button>
-                </Link>
-            </div>
-        );
-
         return (
             <div>
                 <div className="card mb-3">
@@ -174,24 +152,24 @@ export default class extends Component {
                                                 <div className="form-group col-sm-6">
                                                     <label htmlFor="description">Start date</label>
                                                     <input type="date" className="form-control" id="start_date"
-                                                        name="start_date" onChange={this.handleOnChange} value={this.state.form.start_date} />
+                                                        name="start_date" onChange={this.handleOnChange} value={this.state.form.start_date} required />
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label htmlFor="description">End date</label>
-                                                    <input type="date" className="form-control" id="end_date"
-                                                        name="end_date" onChange={this.handleOnChange} value={this.state.form.end_date} />
+                                                    <input type="date" className="form-control" id="end_date" min={this.state.form.start_date}
+                                                        name="end_date" onChange={this.handleOnChange} value={this.state.form.end_date} required />
                                                 </div>
                                             </div>
                                             <div className="col-sm-12">
                                                 <div className="col-sm-6">
                                                     <label htmlFor="description">Goal item</label>
-                                                    <input type="text" className="form-control" id="goal_item"
-                                                        name="goal_item" onChange={this.handleOnChange} value={this.state.form.goal_item} />
+                                                    <input type="number" min="0" className="form-control" id="goal_item"
+                                                        name="goal_item" onChange={this.handleOnChange} value={this.state.form.goal_item} required />
                                                 </div>
                                                 <div className="col-sm-6 ">
                                                     <div className="form-group">
                                                         <label htmlFor="description">Choose city</label>
-                                                        <select name="city_id" id="city_id" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.city_id}>
+                                                        <select name="city_id" id="city_id" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.city_id} required>
                                                             {
                                                                 cities.map((item,key) => {
                                                                     return (
@@ -208,14 +186,14 @@ export default class extends Component {
                                                 <div className="col-sm-12">
                                                     <label htmlFor="description">Title</label>
                                                     <input type="text" className="form-control" id="name"
-                                                        name="name" onChange={this.handleOnChange} value={this.state.form.name} />
+                                                        name="name" onChange={this.handleOnChange} value={this.state.form.name} required />
                                                 </div>
                                             </div>
                                             <div className="col-sm-12">
                                                 <div className="col-sm-12">
                                                     <label htmlFor="description">Address Details</label>
                                                     <textarea className="form-control" id="location"
-                                                        name="location" onChange={this.handleOnChange} value={this.state.form.location} />
+                                                        name="location" onChange={this.handleOnChange} value={this.state.form.location} required />
                                                 </div>
                                             </div>
                                             <div className="col-sm-12">
@@ -224,7 +202,7 @@ export default class extends Component {
                                                     <div className="form-group">
                                                         <label htmlFor="description">Choose charity</label>
                                                         <select name="charity_id" id="charity_id" className="form-control" required="required"
-                                                            onChange={this.handleOnChange} value={this.state.form.charity_id} >
+                                                            onChange={this.handleOnChange} value={this.state.form.charity_id}>
                                                             {
                                                                 charities.map((item,index) => {
                                                                     return (
@@ -256,7 +234,7 @@ export default class extends Component {
                                                 <div className="col-sm-12">
                                                     <div className="form-group">
                                                         <label htmlFor="image">Image</label>
-                                                        <input type="file" className="form-control" id="image" name="image" onChange={this.onChangeFile} />
+                                                        <input type="file" className="form-control" id="image" name="image" onChange={this.onChangeFile} required />
                                                     </div>
                                                 </div>
                                             </div>

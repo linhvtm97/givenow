@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {getCart} from '../../../redux/actions/cartActions';
+import LocalStorageHelper from '../../../helpers/LocalStorageHelper';
+import Login from '../../frontend/auth/Login';
 
 class PaymentPage extends Component {
     constructor(props) {
@@ -52,114 +54,130 @@ class PaymentPage extends Component {
                         </ul>
 
                     </div>
-                    <div className="col-md-8 order-md-1">
-                        <h4 className="mb-3">Billing address</h4>
-                        <form className="needs-validation" novalidate="">
-                            <div className="row">
-                                <div className="col-md-6 mb-3">
-                                    <label htmlFor="firstName">First name</label>
-                                    <input type="text" className="form-control" id="firstName" placeholder="" value="" required="" />
-                                    <div className="invalid-feedback">
-                                        Valid first name is required.
+                    {!(LocalStorageHelper.getItem('authToken'))&&<div className={(LocalStorageHelper.getItem('authToken')!=null? ' d-none':'')}>
+                        <a
+                            href="#login"
+                            type="button"
+                            className="btn btn-primary"
+                            data-toggle="modal"
+                        >
+                            <span className="glyphicon glyphicon-log-in "></span>
+                            Checkout
+                            </a>
+                        <Login />
+                    </div>}
+                    <div>
+                        {(LocalStorageHelper.getItem('authToken'))&&<div className="col-md-8 order-md-1">
+                            <h4 className="mb-3">Billing address</h4>
+                            <form className="needs-validation" novalidate="">
+                                <div className="row">
+                                    <div className="col-md-6 mb-3">
+                                        <label htmlFor="firstName">First name</label>
+                                        <input type="text" className="form-control" id="firstName" placeholder="" value="" required="" />
+                                        <div className="invalid-feedback">
+                                            Valid first name is required.
                                 </div>
-                                </div>
-                                <div className="col-md-6 mb-3">
-                                    <label htmlFor="lastName">Last name</label>
-                                    <input type="text" className="form-control" id="lastName" placeholder="" value="" required="" />
-                                    <div className="invalid-feedback">
-                                        Valid last name is required.
-                                        </div>
-                                </div>
-                            </div>
-
-                            <div className="mb-3">
-                                <label htmlFor="username">Username</label>
-                                <div className="input-group">
-                                    <div className="input-group-prepend">
-                                        <span className="input-group-text">@</span>
                                     </div>
-                                    <input type="text" className="form-control" id="username" placeholder="Username" required="" value="" />
-                                    <div className="invalid-feedback">
-                                        Your username is required.
+                                    <div className="col-md-6 mb-3">
+                                        <label htmlFor="lastName">Last name</label>
+                                        <input type="text" className="form-control" id="lastName" placeholder="" value="" required="" />
+                                        <div className="invalid-feedback">
+                                            Valid last name is required.
+                                        </div>
+                                    </div>
                                 </div>
-                                </div>
-                            </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="email">Email <span className="text-muted">(Optional)</span></label>
-                                <input type="email" className="form-control" id="email" placeholder="you@example.com" value="" />
-                                <div className="invalid-feedback">
-                                    Please enter a valid email address for shipping updates.
-                            </div>
-                            </div>
+                                <div className="mb-3">
+                                    <label htmlFor="username">Username</label>
+                                    <div className="input-group">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text">@</span>
+                                        </div>
+                                        <input type="text" className="form-control" id="username" placeholder="Username" required="" value="" />
+                                        <div className="invalid-feedback">
+                                            Your username is required.
+                                </div>
+                                    </div>
+                                </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="address">Address</label>
-                                <input type="text" className="form-control" id="address" placeholder="1234 Main St" required="" value="" />
-                                <div className="invalid-feedback">
-                                    Please enter your shipping address.
+                                <div className="mb-3">
+                                    <label htmlFor="email">Email <span className="text-muted">(Optional)</span></label>
+                                    <input type="email" className="form-control" id="email" placeholder="you@example.com" value="" />
+                                    <div className="invalid-feedback">
+                                        Please enter a valid email address for shipping updates.
                             </div>
-                            </div>
+                                </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="address2">Address 2 <span className="text-muted">(Optional)</span></label>
-                                <input type="text" className="form-control" id="address2" placeholder="Apartment or suite" value="" />
+                                <div className="mb-3">
+                                    <label htmlFor="address">Address</label>
+                                    <input type="text" className="form-control" id="address" placeholder="1234 Main St" required="" value="" />
+                                    <div className="invalid-feedback">
+                                        Please enter your shipping address.
                             </div>
+                                </div>
 
-                            <hr></hr>
-                            <h4 className="mb-3">Payment</h4>
+                                <div className="mb-3">
+                                    <label htmlFor="address2">Address 2 <span className="text-muted">(Optional)</span></label>
+                                    <input type="text" className="form-control" id="address2" placeholder="Apartment or suite" value="" />
+                                </div>
 
-                            <div className="d-block my-3">
-                                <div className="custom-control custom-radio">
-                                    <input id="credit" name="paymentMethod" type="radio" className="custom-control-input" checked="" required="" value="" />
-                                    <label className="custom-control-label" htmlFor="credit">Credit card</label>
+                                <hr></hr>
+                                <h4 className="mb-3">Payment</h4>
+
+                                <div className="d-block my-3">
+                                    <div className="custom-control custom-radio">
+                                        <input id="credit" name="paymentMethod" type="radio" className="custom-control-input" checked="" required="" value="" />
+                                        <label className="custom-control-label" htmlFor="credit">Credit card</label>
+                                    </div>
+                                    <div className="custom-control custom-radio">
+                                        <input id="debit" name="paymentMethod" type="radio" className="custom-control-input" required="" value="" />
+                                        <label className="custom-control-label" htmlFor="debit">Debit card</label>
+                                    </div>
+                                    <div className="custom-control custom-radio">
+                                        <input id="paypal" name="paymentMethod" type="radio" className="custom-control-input" required="" value="" />
+                                        <label className="custom-control-label" htmlFor="paypal">Paypal</label>
+                                    </div>
                                 </div>
-                                <div className="custom-control custom-radio">
-                                    <input id="debit" name="paymentMethod" type="radio" className="custom-control-input" required="" value="" />
-                                    <label className="custom-control-label" htmlFor="debit">Debit card</label>
+                                <div className="row">
+                                    <div className="col-md-6 mb-3">
+                                        <label htmlFor="cc-name">Name on card</label>
+                                        <input type="text" className="form-control" id="cc-name" placeholder="" required="" value="" />
+                                        <small className="text-muted">Full name as displayed on card</small>
+                                        <div className="invalid-feedback">
+                                            Name on card is required
                                 </div>
-                                <div className="custom-control custom-radio">
-                                    <input id="paypal" name="paymentMethod" type="radio" className="custom-control-input" required="" value="" />
-                                    <label className="custom-control-label" htmlFor="paypal">Paypal</label>
+                                    </div>
+                                    <div className="col-md-6 mb-3">
+                                        <label htmlFor="cc-number">Credit card number</label>
+                                        <input type="text" className="form-control" id="cc-number" placeholder="" required="" value="" />
+                                        <div className="invalid-feedback">
+                                            Credit card number is required
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-6 mb-3">
-                                    <label htmlFor="cc-name">Name on card</label>
-                                    <input type="text" className="form-control" id="cc-name" placeholder="" required="" value="" />
-                                    <small className="text-muted">Full name as displayed on card</small>
-                                    <div className="invalid-feedback">
-                                        Name on card is required
+                                    </div>
                                 </div>
+                                <div className="row">
+                                    <div className="col-md-3 mb-3">
+                                        <label htmlFor="cc-expiration">Expiration</label>
+                                        <input type="text" className="form-control" id="cc-expiration" placeholder="" required="" value="" />
+                                        <div className="invalid-feedback">
+                                            Expiration date required
                                 </div>
-                                <div className="col-md-6 mb-3">
-                                    <label htmlFor="cc-number">Credit card number</label>
-                                    <input type="text" className="form-control" id="cc-number" placeholder="" required="" value="" />
-                                    <div className="invalid-feedback">
-                                        Credit card number is required
+                                    </div>
+                                    <div className="col-md-3 mb-3">
+                                        <label htmlFor="cc-expiration">CVV</label>
+                                        <input type="text" className="form-control" id="cc-cvv" placeholder="" required="" value="" />
+                                        <div className="invalid-feedback">
+                                            Security code required
                                 </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-3 mb-3">
-                                    <label htmlFor="cc-expiration">Expiration</label>
-                                    <input type="text" className="form-control" id="cc-expiration" placeholder="" required="" value="" />
-                                    <div className="invalid-feedback">
-                                        Expiration date required
-                                </div>
-                                </div>
-                                <div className="col-md-3 mb-3">
-                                    <label htmlFor="cc-expiration">CVV</label>
-                                    <input type="text" className="form-control" id="cc-cvv" placeholder="" required="" value="" />
-                                    <div className="invalid-feedback">
-                                        Security code required
-                                </div>
-                                </div>
-                            </div>
-                            <hr className="mb-4" />
-                            <button className="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-                        </form>
+                                <hr className="mb-4" />
+                                <button className="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                            </form>
+                        </div>
+                        }
                     </div>
+
                 </div>
             </div>
         );
