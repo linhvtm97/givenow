@@ -62,7 +62,10 @@ class Index extends React.Component {
                     return 0
                 }
                 if(filter==='1') {
-                    if(a.start_date<b.start_date) return filter; else return -filter;
+                    if(a.end_date<b.end_date) return 1; else return -1;
+                }
+                if(filter==='2') {
+                    if(a.name>b.name) return 1; else return -1;
                 }
             })
         }
@@ -104,22 +107,18 @@ class Index extends React.Component {
                                     })
                                 }
                             </div>
-                            <h3>Sort by</h3>
-                            <hr></hr>
-                            <div className="checkbox">
-                                <label>
-                                    <input type="checkbox" value="" />
-                                    Ending soon
-          </label>
-                                <br></br>
-                                <label>
-                                    <input type="checkbox" value="" />
-                                    Recently added
-          </label>
-                                <br></br>
-                            </div>
                             <div className="text-center">
                                 <button type="button" className="btn btn-primary mg-10">Search</button>
+                            </div>
+                            <h3>Sort by</h3>
+                            <hr></hr>
+                            <div className="">
+                                <select name="filter" className="form-control" value={this.state.filter} onChange={this.handleOnChange}>
+                                    <option value="0">Sort all</option>
+                                    <option value="1">Ending soon</option>
+                                    <option value="2">Title</option>
+                                    {/* <option value="2">High rating events</option> */}
+                                </select>
                             </div>
                         </div>
                         <div className="col-xs-9 col-sm-8 col-8 col-md-9 col-lg-9 mg-10">

@@ -126,7 +126,6 @@ class Index extends Component {
                                     </div>
                                     <div className="col-sm-3 col-md-3 col-xs-3 col-lg-3">
                                         <div className="row">
-
                                             <div className="col-sm-4 col-md-4 col-xs-4 col-lg-4">
                                                 <input type="number" min="0" className="form-control" value={product.quantity} required
                                                     onChange={this.orderProduct(product)} />

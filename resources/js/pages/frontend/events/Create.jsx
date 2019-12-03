@@ -156,7 +156,7 @@ export default class extends Component {
                                                 </div>
                                                 <div className="form-group col-sm-6">
                                                     <label htmlFor="description">End date</label>
-                                                    <input type="date" className="form-control" id="end_date"
+                                                    <input type="date" className="form-control" id="end_date" min={this.state.form.start_date}
                                                         name="end_date" onChange={this.handleOnChange} value={this.state.form.end_date} required />
                                                 </div>
                                             </div>

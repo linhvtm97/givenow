@@ -46,10 +46,20 @@ const MenuLink=({label,to,activeOnlyWhenExact}) => {
     );
 };
 class Menu extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            cartNotification: ''
+        }
+    }
+    componentDidMount() {
+        this.setState({cartNotification: LocalStorageHelper.getItem('addedProducts').length})
+    }
     onClick=(e) => {
         LocalStorageHelper.removeItem('authToken')
     }
     render() {
+        let {cartNotification}=this.state
         return (
             <nav className="navbar navbar-inverse mg-0">
                 <div className="container-fluid">
@@ -92,7 +102,8 @@ class Menu extends React.Component {
                     </div>
                     <div className={(LocalStorageHelper.getItem('authToken')==null? 'hidden':'')}>
                         <ul className="nav navbar-nav navbar-right">
-                            <li> <a href="/cart/payment"> <i className="fa fa-shopping-cart"></i>Cart</a></li>
+                            <li> <a href="/cart/payment"> <i className="fa fa-shopping-cart"></i>Cart <span className="badge badge-danger">{cartNotification}</span></a>
+                            </li>
                             <li className={(LocalStorageHelper.getItem('user')!=null? ' d-none':'')}>
                                 <a
                                     href='#user'
@@ -151,7 +162,7 @@ class Menu extends React.Component {
                             </li>
                             <li>
                                 <a
-                                    href="/"
+                                    href="#"
                                     onClick={this.onClick}
                                 >
                                     <span className="glyphicon glyphicon-log-out "></span>Logout
