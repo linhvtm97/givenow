@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-        <title>Give now LOGIN</title>
+        <title>Give now Authenticate</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('css/sign-in.css') }}" rel="stylesheet" type="text/css">
     </head>
