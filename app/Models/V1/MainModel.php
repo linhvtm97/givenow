@@ -162,7 +162,7 @@ class MainModel extends EloquentModel
 
         $searchValue = $this->searchValue;
         $searchField = $this->searchField;
-        
+
         if (!empty($searchValue)) {
             return $query->where(function ($query) use ($searchValue, $searchField) {
                 $query->where($searchField, 'LIKE', "%$searchValue%");
