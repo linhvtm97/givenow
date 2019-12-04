@@ -138,5 +138,4 @@ class Menu extends React.Component {
         return result;
     };
 }
-
 export default Menu;
