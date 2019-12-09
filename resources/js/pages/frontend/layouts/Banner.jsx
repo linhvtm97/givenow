@@ -35,7 +35,7 @@ class Banner extends Component {
                 <div className="carousel-inner">
                     <div className="item active">
                         <img
-                            src="/images/banner1.jpg"
+                            src="/images/Bg1.png"
                             alt="Chania"
                         />
                         {/* <div className="carousel-caption">
@@ -46,7 +46,7 @@ class Banner extends Component {
 
                     <div className="item">
                         <img
-                            src="/images/banner2.jpg"
+                            src="/images/Bg2.png"
                             alt="Chicago"
                         />
                         {/* <div className="carousel-caption">
@@ -57,7 +57,7 @@ class Banner extends Component {
 
                     <div className="item">
                         <img
-                            src="/images/banner3.jpg"
+                            src="/images/Bg4.png"
                             alt="Chicago"
                         />
                         {/* <div className="carousel-caption">
@@ -68,7 +68,7 @@ class Banner extends Component {
 
                     <div className="item">
                         <img
-                            src="/images/banner4.jpg"
+                            src="/images/Bg3.png"
                             alt="Chicago"
                         />
                         {/* <div className="carousel-caption">
@@ -79,7 +79,7 @@ class Banner extends Component {
 
                     <div className="item">
                         <img
-                            src="/images/banner5.jpg"
+                            src="/images/Bg5.png"
                             alt="Chicago"
                         />
                         {/* <div className="carousel-caption">
