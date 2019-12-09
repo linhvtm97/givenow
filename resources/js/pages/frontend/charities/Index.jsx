@@ -132,12 +132,12 @@ class Index extends Component {
                         {
                             charities.map((item,index) => {
                                 return (
-                                    <div className="col-xs-4 col-sm-4 col-4 col-md-4 col-lg-4" key={index}>
+                                    <div className="col-xs-6 col-sm-6 col-6 col-md-6 col-lg-6" key={index}>
                                         <div className="container">
                                             <a href="/">
-                                                <h3>{item.name}</h3>
+                                                <h4>{item.name}</h4>
                                             </a>
-                                            <h5>{item.phone_number}</h5>
+                                            <h6>{item.phone_number}</h6>
                                             <i className="fa fa-map-marker">{item.address}</i>
                                         </div>
                                     </div>

@@ -27,21 +27,21 @@ class Login extends React.Component {
         };
     }
 
-    handleOnChange = event => {
-        let {formData} = this.state;
-        formData = {...formData,...{[event.target.name]: event.target.value}}
+    handleOnChange=event => {
+        let {formData}=this.state;
+        formData={...formData,...{[event.target.name]: event.target.value}}
         this.setState({formData})
     }
 
-    onSubmit = event => {
+    onSubmit=event => {
         event.preventDefault();
         AuthRequests.login(this.state.formData).then((response) => {
             console.log(response)
-            if (response.meta.status===200) {
+            if(response.meta.status===200) {
                 AuthHelper.setToken(response.data);
                 window.location.href=Route.frontEnd.home.index.path;
             } else {
-                const meta = {
+                const meta={
                     message: response.meta.message,
                     errors: Object.values(response.data)
                 };

@@ -26,7 +26,7 @@ class Register extends React.Component {
 
     onSumbit=event => {
         event.preventDefault();
-        AuthRequests.login(this.state.formData).then((response) => {
+        AuthRequests.register(this.state.formData).then((response) => {
             if(response.meta.status===200) {
                 AuthHelper.setToken(response.data);
                 window.location.href=Route.backEnd.home.index.path;

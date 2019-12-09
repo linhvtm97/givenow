@@ -59,7 +59,7 @@ We decided the best way to tackle this outdated system was to use the e-commerce
                                     the drive starter and there is absolutely no commitment. In addition, we offer free
                                 marketing tools, unbeatable customer service, corporate event reporting and more.</p>
                                 <div className="thumbnail">
-                                    <img src="/images/bg2.jpg"></img>
+                                    <img src="/images/aboutus0.png"></img>
                                 </div>
                             </div>
                             <div className="col-lg-6">
@@ -68,7 +68,7 @@ We decided the best way to tackle this outdated system was to use the e-commerce
                                     completely transparent with our free, innovative giving platform. Make a strong impact
                                 in local communities activities by getting new, needed goods to charities.</p>
                                 <div className="thumbnail">
-                                    <img src="/images/bg2.jpg"></img>
+                                    <img src="/images/aboutus1.jpg"></img>
                                 </div>
                             </div>
                             <div className="col-lg-6">
@@ -78,20 +78,21 @@ We decided the best way to tackle this outdated system was to use the e-commerce
                                     charitable accounts and payroll deduction. Also, YGG events can be uploaded onto
                                 existing workplace giving platforms.</p>
                                 <div className="thumbnail">
-                                    <img src="/images/bg2.jpg"></img>
+                                    <img src="/images/aboutus2.jpg"></img>
                                 </div>
                             </div>
                             <div className="col-lg-6">
-                                <h2 className="font-weight-light">Secure and transparent giving</h2>
-                                <p className="font-italic text-muted mb-4">Unlike a cash donation, there is never any
-                                    question about how a donor's contribution will be used. All purchased items are
-                                    delivered to the selected charity at the close of the event. By approaching our system
-                                in many different ways, your love will spread moodly. Don't be shy to share.</p>
-                                <div className="thumbnail">
-                                    <img src="/images/bg2.jpg"></img>
+                                <div className="row">
+                                    <h2 className="font-weight-light">Secure and transparent giving for every single things</h2>
+                                    <p className="font-italic text-muted mb-4">Unlike a cash donation, there is never any
+                                        question about how a donor's contribution will be used. All purchased items are
+                                        delivered to the selected charity at the close of the event. By approaching our system
+                                in many different ways, your love will spread moodly.</p>
+                                    <div className="thumbnail">
+                                        <img src="/images/aboutus4.jpg"></img>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <hr className="style5"></hr>

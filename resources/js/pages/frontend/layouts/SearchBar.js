@@ -4,7 +4,7 @@ import React,{Component} from 'react';
 class SearchBar extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state={
             q: '',
             location: '',
             filter: ''
@@ -37,7 +37,7 @@ class SearchBar extends Component {
                         <select name="filter" className="form-control" value={this.state.filter} onChange={this.onChange}>
                             <option value="0">Sort all</option>
                             <option value="1">Recently events</option>
-                            <option value="2">High rating events</option>
+                            {/* <option value="2">High rating events</option> */}
                         </select>
                     </div>
                     <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2">
