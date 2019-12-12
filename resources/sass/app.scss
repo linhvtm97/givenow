@@ -141,10 +141,39 @@ hr.style4 {
           height: 120px;
           width: 100%;
 }
+.carousel-inner {
+          height: auto !important;
+}
 .w-50 {
           width: 40rem;
           margin: auto;
 }
+.form-control::placeholder {
+          font-size: 1.5rem;
+          color: #aaa;
+          font-style: italic;
+}
+.header_bar {
+          width: auto;
+          height: 100px;
+          margin-bottom: 50px;
+          margin-top: 50px;
+}
+.header {
+          background-color: #333;
+}
+.body {
+          font-family: "Titillium Web", sans-serif;
+}
+
+.navbar-nav > li > a {
+          font-size: 20px;
+}
+.charity-image {
+          width: 320px;
+          height: 250px;
+}
+
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 

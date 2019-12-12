@@ -73,7 +73,7 @@ export default class extends Component {
                     <label htmlFor="password">Password</label>
                 </div>
                 <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                <p className="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
+                <p className="mt-5 mb-3 text-muted text-center">© 2019-2020</p>
             </form>
         );
     }

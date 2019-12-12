@@ -4,6 +4,7 @@ namespace App\Modules\V1\Order\Repositories;
 
 use App\Modules\Repository as BaseRepository;
 use App\Models\V1\Order;
+use App\Models\V1\OrderProduct;
 use App\Modules\V1\Authentication\Services\AuthenticationService;
 
 /**

@@ -1,7 +1,7 @@
-import { ADD_TO_CART, GET_CART } from './cartActionTypes'
+import {ADD_TO_CART,GET_CART} from './cartActionTypes'
 
 //add cart action
-export const addToCart = (product, quantity) => {
+export const addToCart=(product,quantity) => {
     return {
         product,
         quantity,
@@ -9,7 +9,7 @@ export const addToCart = (product, quantity) => {
     }
 }
 
-export const getCart = () => {
+export const getCart=() => {
     return {
         type: GET_CART,
     }

@@ -1,14 +1,14 @@
-import { ADD_TO_CART, GET_CART } from '../actions/cartActionTypes';
+import {ADD_TO_CART,GET_CART} from '../actions/cartActionTypes';
 import LocalStorageHelper from '../../helpers/LocalStorageHelper';
 
-const initState = {
+const initState={
     addedProducts: [],
 }
 
-const cartReducer = (state = initState, action) => {
-    if (action.type === ADD_TO_CART) {
-        let { product, quantity } = action;
-        product = {
+const cartReducer=(state=initState,action) => {
+    if(action.type===ADD_TO_CART) {
+        let {product,quantity}=action;
+        product={
             id: product.id,
             name: product.name,
             price: product.price,
@@ -17,27 +17,27 @@ const cartReducer = (state = initState, action) => {
             category: product.category,
         }
 
-        let existed_item = state.addedProducts.find(product => action.product.id === product.id);
+        let existed_item=state.addedProducts.find(product => action.product.id===product.id);
 
-        if (existed_item) {
-            existed_item.quantity = quantity;
+        if(existed_item) {
+            existed_item.quantity=quantity;
         } else {
-            product.quantity = quantity;
+            product.quantity=quantity;
             state.addedProducts.push(product);
         }
 
-        LocalStorageHelper.setItem('addedProducts', state.addedProducts);
+        LocalStorageHelper.setItem('addedProducts',state.addedProducts);
         return state;
     }
 
-    if (action.type === GET_CART) {
-        let addedProducts = LocalStorageHelper.getItem('addedProducts', []);
-        return { ...state, addedProducts }
+    if(action.type===GET_CART) {
+        let addedProducts=LocalStorageHelper.getItem('addedProducts',[]);
+        return {...state,addedProducts}
     }
 
     return state;
 
-    
+
 }
 
 export default cartReducer;

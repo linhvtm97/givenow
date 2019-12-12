@@ -11,7 +11,7 @@ class Request extends FormRequest
 
     // Request route names
     protected $namingRoute = [
-        'Order.store ' => StoreOrderRequest::class
+        'Order.store' => StoreOrderRequest::class
     ];
 
     /**

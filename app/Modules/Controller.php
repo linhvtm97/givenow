@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 class Controller extends BaseController
 {
     use ApiResponser;
-    
+
     /**
      * Define service for controller
      *
@@ -106,7 +106,7 @@ class Controller extends BaseController
     public function destroy(int $uid)
     {
         $this->service->destroy($uid);
-        
+
         return $this->setStatus(JsonResponse::HTTP_NO_CONTENT)
         ->setMeta(__('messages.request_success'))
         ->jsonOut();

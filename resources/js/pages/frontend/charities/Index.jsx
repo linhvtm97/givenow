@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import CharitiesRequests from '../../../requests/backend/CharitiesRequests';
 import SearchBar from '../layouts/SearchBar'
+import RouteConst from '../../../constants/Route';
 
 class Index extends Component {
     constructor(props) {
@@ -48,18 +49,14 @@ class Index extends Component {
                     if(a.start_date<b.start_date) return filter;
                     else return -filter;
                 }
+                if(filter==='2') {
+                    if(a.name>b.name) return 1; else return -1;
+                }
             })
         }
         return (
             <div>
                 <hr className="style4"></hr>
-                <div className="container text-center">
-                    <div className="caption bg-blue">
-                        <h2 className="text-white">Explore our charities</h2>
-                    </div>
-                    <hr className="style4">
-                    </hr>
-                </div>
                 <div className="container">
                     <div className="row">
                         <h2 className="text-center">Charities are choosing GiveNow Free Giving Platform</h2>
@@ -121,9 +118,15 @@ class Index extends Component {
                                 </div>
                             </div>
                         </div>
-                        <hr className="style4"></hr>
                     </div>
                     <div className="container">
+                    </div>
+                    <div className="container text-center">
+                        <div className="caption bg-blue">
+                            <h2 className="text-white">Explore our charities</h2>
+                        </div>
+                        <hr className="style4">
+                        </hr>
                     </div>
                     <div className="container mg-10">
                         <div className="container">
@@ -132,11 +135,13 @@ class Index extends Component {
                         {
                             charities.map((item,index) => {
                                 return (
-                                    <div className="col-xs-6 col-sm-6 col-6 col-md-6 col-lg-6" key={index}>
-                                        <div className="container">
-                                            <a href="/">
-                                                <h4>{item.name}</h4>
-                                            </a>
+                                    <div className="col-xs-4 col-sm-4 col-4 col-md-4 col-lg-4" key={index}>
+                                        <div className="thumbnail">
+                                            <div className="charity-image">
+                                                <img src={item.image} className="charity-image"></img>
+                                            </div>
+                                            <h4>{item.name}</h4>
+
                                             <h6>{item.phone_number}</h6>
                                             <i className="fa fa-map-marker">{item.address}</i>
                                         </div>
@@ -144,8 +149,20 @@ class Index extends Component {
                                 )
                             })
                         }
-                    </div>        </div>
-            </div>);
+                    </div>
+                </div>
+                <div className="container">
+                    <hr></hr>
+                    <h1>Ready to raise for your cause?</h1>
+                    <div className="row mg-10 text-center">
+                        <br></br>
+                        <a className="btn btn-primary hard-button" href={RouteConst.frontEnd.events.create.path} role="button">Start an event</a>
+                        <span>Or</span>
+                        <a className="btn btn-danger hard-button" href={RouteConst.frontEnd.events.index.path} role="button">Donate a cause</a>
+                    </div>
+                </div>
+            </div>
+        );
     }
 }
 
