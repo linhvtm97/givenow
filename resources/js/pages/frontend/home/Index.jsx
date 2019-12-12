@@ -7,17 +7,17 @@ import {Route,Link} from "react-router-dom";
 
 const menus=[
     {
-        name: "Home >>",
+        name: "Home",
         to: "/",
         exact: true
     },
     {
-        name: "Live Event >>",
+        name: "Live Event",
         to: "/events",
         exact: true
     },
     {
-        name: "Charities >>",
+        name: "Charities",
         to: "/charities",
         exact: true
     },
@@ -54,7 +54,7 @@ class Index extends React.Component {
                 </div>
                 <div className="header row">
                     <div id="logo" className="row">
-                        <div className="col-sm-2">
+                        <div className="col-sm-4">
 
                         </div>
                         <div className="col-sm-2 mg-10">
@@ -64,29 +64,31 @@ class Index extends React.Component {
                         <div className="col-sm-1">
 
                         </div>
-                        <div className="col-sm-7">
+                        <div className="col-sm-4">
                             <div className="header_bar">
                                 <p>
                                     <a id="header_donate_btn" className="btn btn-primary btn-lg" href="/events"><i className="fa fa-heart"></i> Donate</a>
                                 </p>
                                 <p>
                                     <a id="header_shop_btn" className="btn btn-primary btn-lg" href="/categories"><i className="fa fa-shopping-cart"></i> Shop</a></p>
-                                <div className="row">
+                                <p>
+                                    <a id="header_shop_btn" className="btn btn-primary btn-lg" href="/charities"><i className="fa fa-user"></i> Our parner</a></p>
+                                {/* <div className="row">
                                     <div className="col-sm-8">
                                         <input type="search" placeholder="Search now ..." aria-describedby="button-addon1" className="form-control border-0 bg-light" />
                                     </div>
                                     <div className="col-sm-4">
                                         <button id="button-addon1" type="submit" className="btn btn-link text-primary"><i className="fa fa-search"></i></button>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
 
                     </div>
                 </div>
                 <div className="container">
-                    <nav className="navbar navbar-dark bg-light mg-10" role="navigation">
-                        <ul className="nav navbar-nav">
+                    <nav className="navbar navbar-dark bg-black mg-10" role="navigation">
+                        <ul className="nav navbar-nav navbar-default">
                             {this.showMenus(
                                 menus
                             )}
@@ -99,7 +101,10 @@ class Index extends React.Component {
                         <span>Or</span>
                         <a className="btn btn-danger hard-button" href={RouteConst.frontEnd.events.index.path} role="button">Donate a cause</a>
                     </div> */}
-
+                    <div className="row text-center text-intro">
+                        <h1>What are we doing?</h1>
+                        <hr></hr>
+                    </div>
                     <div className="container">
                         <div className="module">
                             <div className="row">

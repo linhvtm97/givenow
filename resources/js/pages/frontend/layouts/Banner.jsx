@@ -38,10 +38,10 @@ class Banner extends Component {
                             src="/images/Bg1.png"
                             alt="Chania"
                         />
-                        {/* <div className="carousel-caption">
-                <h3>Share things, Share moment</h3>
-                <p>The more you give, the more you receive</p>
-              </div> */}
+                        <div className="carousel-caption">
+                            <h3>Share things, Share moment</h3>
+                            <p>The more you give, the more you receive</p>
+                        </div>
                     </div>
 
                     <div className="item">
@@ -49,10 +49,10 @@ class Banner extends Component {
                             src="/images/Bg2.png"
                             alt="Chicago"
                         />
-                        {/* <div className="carousel-caption">
-                <h3>Listen to your heart</h3>
-                <p>Give love everyday, receive love in a whole life!</p>
-              </div> */}
+                        <div className="carousel-caption">
+                            <h3>Listen to your heart</h3>
+                            <p>Give love everyday, receive love in a whole life!</p>
+                        </div>
                     </div>
 
                     <div className="item">
@@ -60,10 +60,10 @@ class Banner extends Component {
                             src="/images/Bg4.png"
                             alt="Chicago"
                         />
-                        {/* <div className="carousel-caption">
-                <h3>Listen to your heart</h3>
-                <p>Give love everyday, receive love in a whole life!</p>
-              </div> */}
+                        <div className="carousel-caption">
+                            <h3>Listen to your heart</h3>
+                            <p>Give love everyday, receive love in a whole life!</p>
+                        </div>
                     </div>
 
                     <div className="item">
@@ -71,10 +71,10 @@ class Banner extends Component {
                             src="/images/Bg3.png"
                             alt="Chicago"
                         />
-                        {/* <div className="carousel-caption">
-                <h3>Listen to your heart</h3>
-                <p>Give love everyday, receive love in a whole life!</p>
-              </div> */}
+                        <div className="carousel-caption">
+                            <h3>Listen to your heart</h3>
+                            <p>Give love everyday, receive love in a whole life!</p>
+                        </div>
                     </div>
 
                     <div className="item">
@@ -82,10 +82,10 @@ class Banner extends Component {
                             src="/images/Bg5.png"
                             alt="Chicago"
                         />
-                        {/* <div className="carousel-caption">
-                <h3>Listen to your heart</h3>
-                <p>Give love everyday, receive love in a whole life!</p>
-              </div> */}
+                        <div className="carousel-caption">
+                            <h3>Listen to your heart</h3>
+                            <p>Give love everyday, receive love in a whole life!</p>
+                        </div>
                     </div>
                 </div>
 

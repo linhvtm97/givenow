@@ -53,7 +53,7 @@ class Menu extends React.Component {
         }
     }
     componentDidMount() {
-        this.setState({cartNotification: LocalStorageHelper.getItem('addedProducts').length})
+        this.setState({cartNotification: LocalStorageHelper.getItem('addedProducts')!==null? LocalStorageHelper.getItem('addedProducts').length:0})
     }
     onClick=(e) => {
         LocalStorageHelper.removeItem('authToken')
@@ -102,8 +102,8 @@ class Menu extends React.Component {
                     </div>
                     <div className={(LocalStorageHelper.getItem('authToken')==null? 'hidden':'')}>
                         <ul className="nav navbar-nav navbar-right">
-                            <li> <a href="/cart/payment"> <i className="fa fa-shopping-cart"></i>Cart <span className="badge badge-danger">{cartNotification}</span></a>
-                            </li>
+                            {/* <li> <a href="/cart/payment"> <i className="fa fa-shopping-cart"></i>Cart <span className="badge badge-danger">{cartNotification}</span></a>
+                            </li> */}
                             <li className={(LocalStorageHelper.getItem('user')!=null? ' d-none':'')}>
                                 <a
                                     href='#user'

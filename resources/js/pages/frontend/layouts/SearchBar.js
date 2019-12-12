@@ -37,6 +37,7 @@ class SearchBar extends Component {
                         <select name="filter" className="form-control" value={this.state.filter} onChange={this.onChange}>
                             <option value="0">Sort all</option>
                             <option value="1">Recently added</option>
+                            <option value="2">Title</option>
                             {/* <option value="2">High rating events</option> */}
                         </select>
                     </div>

@@ -3,6 +3,7 @@ import ProductsRequests from '../../../requests/backend/ProductsRequests';
 import EventsRequests from '../../../requests/backend/EventsRequests';
 import {connect} from 'react-redux';
 import {addToCart,getCart} from '../../../redux/actions/cartActions';
+import LocalStorageHelper from "../../../helpers/LocalStorageHelper";
 
 class Index extends Component {
     constructor(props) {
@@ -11,10 +12,15 @@ class Index extends Component {
             products: [],
             event: {},
             filter: '',
+            cartNotification: ''
         }
     }
 
     componentDidMount() {
+        this.setState({
+            cartNotification: LocalStorageHelper.getItem('addedProducts')!==null?
+                LocalStorageHelper.getItem('addedProducts').length:0
+        })
         this.props.getCart();
         ProductsRequests.getAll().then((response) => {
             if(response.meta.status===200) {
@@ -36,7 +42,18 @@ class Index extends Component {
         });
     }
 
+    onChangeCart=(e) => {
+        this.setState({
+            cartNotification: LocalStorageHelper.getItem('addedProducts')!==null?
+                LocalStorageHelper.getItem('addedProducts').length:0
+        })
+    }
+
     handleOnChange=(e) => {
+        this.setState({
+            cartNotification: LocalStorageHelper.getItem('addedProducts')!==null?
+                LocalStorageHelper.getItem('addedProducts').length:0
+        })
         let target=e.target;
         let name=target.name;
         let value=
@@ -52,25 +69,16 @@ class Index extends Component {
         this.props.addToCart(product,e.target.value);
         this.props.getCart();
     }
-    orderProduct=(product) => (e) => {
-        this.props.addToCart(product,e.target.value);
-        this.props.getCart();
-    }
 
     getQuantity=(id) => {
         const {addedProducts}=this.props;
 
-        for(let i=0;i<addedProducts.length;i++) {
-            if(addedProducts[i].id===id) {
-                return addedProducts[i].quantity;
-            }
-        }
-
-        return 0;
+        for(let i=0;i<addedProducts.length;i++) {if(addedProducts[i].id===id) {return addedProducts[i].quantity;} } return 0;
     }
-
     render() {
         let {products,event,filter}=this.state;
+        let {cartNotification}=this.state
+        const {addedProducts}=this.props;
         if(filter) {
             products=products.sort((a,b) => {
                 if(filter==='0') {
@@ -85,6 +93,7 @@ class Index extends Component {
             })
         }
         return (
+
             <div>
                 <div className="container">
                     <div className="col-sm-6 col-md-6 col-xs-6 col-lg-6">
@@ -97,7 +106,8 @@ class Index extends Component {
                         <a className="btn btn-info" href={`/events/${event.id}`} role="button">View details</a>
                     </div>
                 </div>
-                <hr></hr>
+                <hr>
+                </hr>
                 <div className="container">
                     <div className=" col-sm-3 col-md-3 col-xs-3 col-lg-3 ">
                         <select name="filter" className="form-control" value={this.state.filter} onChange={this.handleOnChange}>
@@ -106,9 +116,52 @@ class Index extends Component {
                             <option value="2">Price</option>
                         </select>
                     </div>
+                    <div className="text-right">
+                        <a href="/cart/payment" role="button" className="btn btn-primary hard-button" data-toggle="modal" href='#cart_modal'><i
+                            className="fa fa-shopping-cart"></i>Cart <span
+                                className="badge badge-danger">{cartNotification}</span></a>
+                        <div className="modal fade" id="cart_modal">
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <button type="button" className="close" data-dismiss="modal"
+                                            aria-hidden="true">&times;</button>
+                                        <h4 className="modal-title text-left">Cart</h4>
+                                    </div>
+                                    <div className="modal-body">
+                                        <ul className="list-group mb-3">
+                                            {addedProducts&&addedProducts.map((item,index) => {
+                                                return (
+                                                    <li className="list-group-item d-flex justify-content-between lh-condensed text-left" key={index}>
+                                                        <div>
+                                                            <h6 className="my-0">{item.name} ({item.price}$)</h6>
+                                                            <small className="text-muted">{item.description}</small>
+                                                            <h6>Quantity: {item.quantity}</h6>
+                                                        </div>
+                                                        <span className="text-muted text-red">${item.price*item.quantity}</span>
+                                                    </li>
+                                                )
+                                            })}
+                                            <li className="list-group-item d-flex justify-content-between">
+                                                <span>Total (USD)</span>
+                                                <strong>$20</strong>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                        <a href="/cart/payment" role="button" className="btn btn-danger">Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <hr></hr>
-                <div className="container">
+
+                <hr>
+                </hr>
+                <div>
                     {
                         products.map((product,index) => {
                             product.quantity=this.getQuantity(product.id)
@@ -124,14 +177,12 @@ class Index extends Component {
                                         <h4 className="text-left text-red">Price: {product.price}$</h4>
                                         <h4>{product.description}</h4>
                                     </div>
-                                    <div className="col-sm-3 col-md-3 col-xs-3 col-lg-3">
-                                        <div className="row">
-                                            <div className="col-sm-4 col-md-4 col-xs-4 col-lg-4">
-                                                <input type="number" min="0" className="form-control" value={product.quantity} required
-                                                    onChange={this.orderProduct(product)} />
-                                                <h3 className="text-right">{product.price*product.quantity}$</h3>
-                                            </div>
-                                        </div>
+                                    <div className="col-sm-1 col-md-1 col-xs-1 col-lg-1">
+                                    </div>
+                                    <div className="col-sm-2 col-md-2 col-xs-2 col-lg-2">
+                                        <input type="number" min="1" className="form-control" value={product.quantity} required
+                                            onChange={this.orderProduct(product)} />
+                                        <h3 className="text-right">{product.price*product.quantity}$</h3>
                                     </div>
                                 </div>
                             )

@@ -4,7 +4,7 @@ namespace App\Models\V1;
 
 use App\Models\V1\MainModel;
 
-class Order extends MainModel
+class OrderProduct extends MainModel
 {
     protected $table = 'order_product';
 
