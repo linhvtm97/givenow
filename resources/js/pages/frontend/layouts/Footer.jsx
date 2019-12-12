@@ -50,11 +50,12 @@ class Footer extends React.Component {
                     </div>
                     <div className="col-md-3 col-sm-6">
                         {/* newsletter */}
-                        <h3 className="text-white font-weight-bold mb-3">Newsletter</h3>
-                        <p className="text-white  mb-3">Free Delivery on your first order!</p>
+                        <h3 className="text-white font-weight-bold mb-3">Send feedback</h3>
+                        <p className="text-white  mb-3">Free to contact us!</p>
                         <form action="#" method="post">
                             <div className="form-group">
                                 <input type="email" className="form-control" placeholder="Email" name="email" required />
+                                <input type="text" className="form-control" placeholder="Message" name="message" required />
                                 <button
                                     type="submit"
                                     className="btn btn-primary"

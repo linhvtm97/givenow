@@ -151,8 +151,22 @@ class Menu extends React.Component {
 
                                                         <span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.address:'Admin'}</span>
                                                     </div>
+
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-sm-2">
+                                                    </div>
+                                                    <div className="col-sm-2">
+                                                        <span>Phone number:</span>
+                                                    </div>
+                                                    <div className="col-sm-6">
+
+                                                        <span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.phone_number:'Admin'}</span>
+                                                    </div>
+
                                                 </div>
                                                 <div className="text-right">
+                                                    <button type="button" className="btn btn-default" data-dismiss="modal">Edit</button>
                                                     <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
                                                 </div>
                                             </div>

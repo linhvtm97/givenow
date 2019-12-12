@@ -1,6 +1,7 @@
 import React from 'react'
 import CategoriesRequests from '../../../requests/backend/CategoriesRequests';
 import ProductsRequests from '../../../requests/backend/ProductsRequests';
+import RouteConst from '../../../constants/Route';
 import {log} from 'util';
 
 class Index extends React.Component {
@@ -70,6 +71,12 @@ class Index extends React.Component {
                             )
                         })
                     }
+                </div>
+                <div className="row mg-10 text-center">
+                    <br></br>
+                    <a className="btn btn-primary hard-button" href={RouteConst.frontEnd.events.create.path} role="button">Start an event</a>
+                    <span>Or</span>
+                    <a className="btn btn-danger hard-button" href={RouteConst.frontEnd.events.index.path} role="button">Donate a cause</a>
                 </div>
             </div>
         );

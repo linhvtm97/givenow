@@ -9,6 +9,7 @@
         <script src="//code.jquery.com/jquery.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700" rel="stylesheet">
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
         {{-- <link href="{{ asset('css/frontend.css') }}" rel="stylesheet" type="text/css"> --}}
