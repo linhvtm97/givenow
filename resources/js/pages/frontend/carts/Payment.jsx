@@ -1,8 +1,10 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {getCart} from '../../../redux/actions/cartActions';
+import {removeItem} from '../../../redux/actions/cartActions';
 import LocalStorageHelper from '../../../helpers/LocalStorageHelper';
 import Login from '../../frontend/auth/Login';
+import RouteConst from '../../../constants/Route';
 
 class PaymentPage extends Component {
     constructor(props) {
@@ -13,9 +15,17 @@ class PaymentPage extends Component {
         this.props.getCart();
     }
 
+    onRemoveItem=(product) => (e) => {
+        this.props.removeItem(product);
+        window.location.href=RouteConst.frontEnd.cart.pay.path;
+    }
+
     render() {
         const {addedProducts}=this.props;
-        console.log(addedProducts);
+        let total=0;
+        for(let index=0;index<addedProducts.length;index++) {
+            total+=addedProducts[index].price*addedProducts[index].quantity;
+        }
 
         return (
             <div>
@@ -38,18 +48,22 @@ class PaymentPage extends Component {
                             {addedProducts&&addedProducts.map((item,index) => {
                                 return (
                                     <li className="list-group-item d-flex justify-content-between lh-condensed" key={index}>
-                                        <div>
+                                        <div className="text-right">
+                                            <button className="btn" onClick={this.onRemoveItem(item)}>x</button>
+                                        </div>
+                                        <div className="text-left">
                                             <h6 className="my-0">{item.name} ({item.price}$)</h6>
+
                                             <small className="text-muted">{item.description}</small>
                                             <h6>Quantity: {item.quantity}</h6>
+                                            <span className="text-muted">${item.price*item.quantity}</span>
                                         </div>
-                                        <span className="text-muted">${item.price*item.quantity}</span>
                                     </li>
                                 )
                             })}
-                            <li className="list-group-item d-flex justify-content-between">
-                                <span>Total (USD)</span>
-                                <strong>$20</strong>
+                            <li className="list-group-item d-flex justify-content-between text-right">
+                                <span>Total ($) = </span>
+                                <strong className='text-danger'>{total}</strong>
                             </li>
                         </ul>
 
@@ -194,6 +208,9 @@ const mapDispatchToProps=(dispatch) => {
     return {
         getCart: () => {
             dispatch(getCart())
+        },
+        removeItem: (product) => {
+            dispatch(removeItem(product))
         }
     }
 }

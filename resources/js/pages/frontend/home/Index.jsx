@@ -52,20 +52,20 @@ class Index extends React.Component {
                 <div className="row">
                     <Banner />
                 </div>
-                <div className="header row">
+                <div className="container mg-10">
                     <div id="logo" className="row">
                         <div className="col-sm-4">
 
                         </div>
                         <div className="col-sm-2 mg-10">
                             <a href="/">
-                                <img className="img-responsive" src="/images/logo1.png" alt="Eden Valley Hospice" title="Eden Valley Hospice" /></a>
+                                <img className="img-responsive" src="/images/givenowlogo.png" alt="Eden Valley Hospice" title="Eden Valley Hospice" /></a>
                         </div>
                         <div className="col-sm-1">
 
                         </div>
                         <div className="col-sm-4">
-                            <div className="header_bar">
+                            <div className="">
                                 <p>
                                     <a id="header_donate_btn" className="btn btn-primary btn-lg" href="/events"><i className="fa fa-heart"></i> Donate</a>
                                 </p>
@@ -87,7 +87,7 @@ class Index extends React.Component {
                     </div>
                 </div>
                 <div className="container">
-                    <nav className="navbar navbar-dark bg-black mg-10" role="navigation">
+                    <nav className="navbar navbar-dark bg-primary mg-10" role="navigation">
                         <ul className="nav navbar-nav navbar-default">
                             {this.showMenus(
                                 menus
@@ -101,7 +101,7 @@ class Index extends React.Component {
                         <span>Or</span>
                         <a className="btn btn-danger hard-button" href={RouteConst.frontEnd.events.index.path} role="button">Donate a cause</a>
                     </div> */}
-                    <div className="row text-center text-intro">
+                    {/* <div className="row text-center text-intro">
                         <h1>What are we doing?</h1>
                         <hr></hr>
                     </div>
@@ -132,15 +132,16 @@ class Index extends React.Component {
 
                         </div>
 
-                    </div>
+                    </div> */}
                     <hr></hr>
+
                     <div className="container text-center">
                         <h4><i>Support any charity with an online drive for brand-new items they need</i></h4>
                     </div>
                     <Cause />
                     <hr></hr>
                     <div className="container text-center">
-                        <p><i>Looking to support a charity close to your heart but want an alternative to traditional fundraising? Raise much-needed, brand-new goods for donation to charity with a YouGiveGoods online drive. Corporations, schools, religious organizations, groups, and individuals can start a drive free-of-charge at YouGiveGoods and start raising items charities need most.</i></p>
+                        <h4><i>Looking to support a charity close to your heart but want an alternative to traditional fundraising? Raise much-needed, brand-new goods for donation to charity with a YouGiveGoods online drive. Corporations, schools, religious organizations, groups, and individuals can start a drive free-of-charge at YouGiveGoods and start raising items charities need most.</i></h4>
                         <div className="container">
                             {/* <div className="row col-sm-4"></div> */}
                             <div className="col-sm-6 col-md-4 col-xs-12">
@@ -150,6 +151,55 @@ class Index extends React.Component {
                                 <div className="col-4 col-md-4">
                                     <a href={RouteConst.frontEnd.contactUs.path} type="button" className="btn btn-info">Contact us</a>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-6 col-lg-4 mb-4 text-center">
+                                    <span className="flaticon-piggy-bank d-block mb-3 display-3 text-secondary">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </span>
+                                    <h3 className="text-primary h4 mb-2">Make Donation</h3>
+                                    <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
+                                </div>
+                                <div className="col-md-6 col-lg-4 mb-4 text-center">
+                                    <span className="flaticon-blood d-block mb-3 display-3 text-secondary">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </span>
+
+                                    <h3 className="text-primary h4 mb-2">Medical Health</h3>
+                                    <p>Praesentium magnam pariatur quae necessitatibus eligendi voluptate ducimus.</p>
+                                </div>
+                                <div className="col-md-6 col-lg-4 mb-4 text-center">
+                                    <span className="flaticon-food d-block mb-3 display-3 text-secondary">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </span>
+                                    <h3 className="text-primary h4 mb-2">Food for the Poor</h3>
+                                    <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
+                                </div>
+
+                                <div className="col-md-6 col-lg-4 mb-4 text-center">
+                                    <span className="flaticon-donation d-block mb-3 display-3 text-secondary">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </span>
+                                    <h3 className="text-primary h4 mb-2">Help &amp; Love</h3>
+                                    <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
+                                </div>
+                                <div className="col-md-6 col-lg-4 mb-4 text-center">
+                                    <span className="flaticon-dollar d-block mb-3 display-3 text-secondary">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </span>
+                                    <h3 className="text-primary h4 mb-2">Give To The Needy</h3>
+                                    <p>Praesentium magnam pariatur quae necessitatibus eligendi voluptate ducimus.</p>
+                                </div>
+                                <div className="col-md-6 col-lg-4 mb-4 text-center">
+                                    <span className="flaticon-unity d-block mb-3 display-3 text-secondary">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </span>
+                                    <h3 className="text-primary h4 mb-2">Volunteer</h3>
+                                    <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
+                                </div>
+
                             </div>
                         </div>
                         <div className="container">
@@ -177,6 +227,15 @@ class Index extends React.Component {
                             </div>
                         </div>
                         <hr></hr>
+                        {/* <div className="container">
+                            <div className="row align-items-center justify-content-center">
+                                <div className="col-lg-5 text-center">
+                                    <h2 className="text-black mb-4">Make A Donation Now! You May Change Lives Forever</h2>
+                                    <p><a href="#" className="btn btn-primary px-4 py-3 btn-block">Donate Now</a></p>
+                                </div>
+                            </div>
+                        </div> */}
+
                         <div className="container">
                             <h1>Ready to raise for your cause?</h1>
                             <div className="row mg-10 text-center">

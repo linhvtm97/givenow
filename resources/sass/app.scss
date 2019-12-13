@@ -142,7 +142,7 @@ hr.style4 {
           width: 100%;
 }
 .carousel-inner {
-          height: auto !important;
+          height: 600px !important;
 }
 .w-50 {
           width: 40rem;
@@ -172,6 +172,9 @@ hr.style4 {
 .charity-image {
           width: 320px;
           height: 250px;
+}
+.position-relative {
+          position: relative !important;
 }
 
 // Fonts
