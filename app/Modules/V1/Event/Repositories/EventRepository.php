@@ -30,6 +30,6 @@ class EventRepository extends BaseRepository
      */
     public function getAll(array $data = null)
     {
-        return $this->model->with(['cause', 'user'])->querySearch()->paginate();
+        return $this->model->with(['cause', 'user', 'city'])->querySearch()->queryOrder()->queryFilter()->paginate();
     }
 }

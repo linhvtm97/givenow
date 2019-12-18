@@ -142,7 +142,7 @@ hr.style4 {
           width: 100%;
 }
 .carousel-inner {
-          height: 600px !important;
+          height: auto !important;
 }
 .w-50 {
           width: 40rem;
@@ -166,6 +166,9 @@ hr.style4 {
           font-family: "Titillium Web", sans-serif;
 }
 
+.navbar {
+          padding: 0 !important;
+}
 .navbar-nav > li > a {
           font-size: 20px;
 }

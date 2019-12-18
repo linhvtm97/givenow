@@ -1,5 +1,5 @@
 import React from 'react'
-import EventsRequests from '../../../requests/backend/EventsRequests';
+import EventsRequests from '../../../requests/frontend/EventsRequests';
 import CausesRequests from '../../../requests/backend/CausesRequests';
 
 class Index extends React.Component {
@@ -124,6 +124,15 @@ class Index extends React.Component {
                         <div className="col-xs-9 col-sm-8 col-8 col-md-9 col-lg-9 mg-10">
                             {
                                 events.map((item,index) => {
+                                    console.log(item.end_date);
+
+                                    var end_date=Date.parse(item.end_date);
+                                    var today=new Date();
+                                    var now=Date.parse(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate());
+                                    var isvalid=false;
+                                    if(end_date>=now) {
+                                        isvalid=true;
+                                    }
                                     return (
                                         <div className="col-xs-12 col-sm-12 col-12 col-md-6 col-lg-6 mg-10" key={index}>
                                             <div className="panel panel-default">
@@ -139,9 +148,11 @@ class Index extends React.Component {
                                                                 <i className="fa fa-map-marker"></i>{item.location}
                                                             </p>
                                                         </div>
-                                                        <p>End date: {item.end_date}</p>
+                                                        <p className="text-danger">End date: {item.end_date}</p>
                                                         <div className="text-center">
-                                                            <a className="btn btn-danger" href={`shop/event/${item.id}`} role="button">Shop now</a>
+                                                            <div className={isvalid? "":"hidden"}>
+                                                                <a className="btn btn-danger" href={`/shop/event/${event.id}`} role="button">Shop now</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

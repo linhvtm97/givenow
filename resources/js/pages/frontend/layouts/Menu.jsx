@@ -24,6 +24,11 @@ const menus=[
         name: "About us",
         to: "/about",
         exact: true
+    },
+    {
+        name: "Contact us",
+        to: "/contact-us",
+        exact: true
     }
 ];
 

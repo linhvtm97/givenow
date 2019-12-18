@@ -12,10 +12,10 @@ class Index extends Component {
             products: [],
             event: {},
             filter: '',
-            cartNotification: ''
+            cartNotification: '',
+            totalProducts: 0
         }
     }
-
     componentDidMount() {
         this.setState({
             cartNotification: LocalStorageHelper.getItem('addedProducts')!==null?
@@ -149,7 +149,7 @@ class Index extends Component {
                                             })}
                                             <li className="list-group-item d-flex justify-content-between">
                                                 <span>Total ($) = </span>
-                                                <strong className="text-danger">{total}</strong>
+                                                <strong className="text-danger">{total.toFixed(1)}</strong>
                                             </li>
                                         </ul>
                                     </div>

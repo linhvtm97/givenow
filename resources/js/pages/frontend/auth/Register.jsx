@@ -10,6 +10,7 @@ class Register extends React.Component {
             formData: {
                 name: '',
                 username: '',
+                email: '',
                 password: '',
                 phone_number: '',
                 address: '',
@@ -75,6 +76,12 @@ class Register extends React.Component {
                                     <label htmlFor="username">Name</label>
                                     <input type="text" id="name" className="form-control" name="name"
                                         placeholder="Name" required onChange={this.OnChange} />
+                                </div>
+
+                                <div className="form-label-group">
+                                    <label htmlFor="username">Email</label>
+                                    <input type="text" id="email" className="form-control" name="email"
+                                        placeholder="Email" required onChange={this.OnChange} />
                                 </div>
 
                                 <div className="form-label-group">

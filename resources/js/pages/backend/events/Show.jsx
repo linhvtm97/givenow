@@ -20,7 +20,6 @@ export default class extends Component {
 
     getInfo=(id) => {
         EventsRequests.showByID(id).then((response) => {
-            console.log(response)
             if(response.meta.status===200) {
                 this.setState({info: response.data});
             } else {
@@ -78,6 +77,10 @@ export default class extends Component {
                             <p className="show-value">{this.state.info.goal_item}</p>
                         </div>
                         <div className="show-info">
+                            <p className="show-label">Current Items</p>
+                            <p className="show-value">{this.state.info.current_items}</p>
+                        </div>
+                        <div className="show-info">
                             <p className="show-label">Location</p>
                             <p className="show-value">{this.state.info.location}</p>
                         </div>
@@ -100,6 +103,10 @@ export default class extends Component {
                         <div className="show-info">
                             <p className="show-label">Updated at</p>
                             <p className="show-value">{this.state.info.updated_at}</p>
+                        </div>
+                        <div className="show-info">
+                            <p className="show-label">Created by</p>
+                            <p className="show-value">{this.state.info.user_name}</p>
                         </div>
                         {linkElement}
                     </div>

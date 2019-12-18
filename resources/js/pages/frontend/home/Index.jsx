@@ -25,6 +25,11 @@ const menus=[
         name: "About us",
         to: "/about",
         exact: true
+    },
+    {
+        name: "Contact us",
+        to: "/contact-us",
+        exact: true
     }
 ];
 const MenuLink=({label,to,activeOnlyWhenExact}) => {
@@ -70,17 +75,9 @@ class Index extends React.Component {
                                     <a id="header_donate_btn" className="btn btn-primary btn-lg" href="/events"><i className="fa fa-heart"></i> Donate</a>
                                 </p>
                                 <p>
-                                    <a id="header_shop_btn" className="btn btn-primary btn-lg" href="/categories"><i className="fa fa-shopping-cart"></i> Shop</a></p>
+                                    <a id="header_shop_btn" className="btn btn-primary btn-lg" href="/categories"><i className="fa fa-shopping-cart"></i>Our Shop</a></p>
                                 <p>
                                     <a id="header_shop_btn" className="btn btn-primary btn-lg" href="/charities"><i className="fa fa-user"></i> Our parner</a></p>
-                                {/* <div className="row">
-                                    <div className="col-sm-8">
-                                        <input type="search" placeholder="Search now ..." aria-describedby="button-addon1" className="form-control border-0 bg-light" />
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <button id="button-addon1" type="submit" className="btn btn-link text-primary"><i className="fa fa-search"></i></button>
-                                    </div>
-                                </div> */}
                             </div>
                         </div>
 
@@ -141,64 +138,27 @@ class Index extends React.Component {
                     <Cause />
                     <hr></hr>
                     <div className="container text-center">
-                        <h4><i>Looking to support a charity close to your heart but want an alternative to traditional fundraising? Raise much-needed, brand-new goods for donation to charity with a YouGiveGoods online drive. Corporations, schools, religious organizations, groups, and individuals can start a drive free-of-charge at YouGiveGoods and start raising items charities need most.</i></h4>
+                        <h4><i>Looking to support a charity close to your heart but want an alternative to traditional fundraising? Raise much-needed, brand-new goods for donation to charity with an online drive. Corporations, schools, religious organizations, groups, and individuals can start a drive free-of-charge at Givenow and start raising items charities need most.</i></h4>
                         <div className="container">
                             {/* <div className="row col-sm-4"></div> */}
-                            <div className="col-sm-6 col-md-4 col-xs-12">
+                            <div className="col-sm-6 col-md-4 col-xs-12 text-center">
                                 <div className="col-sm-8 col-md-8">
                                     <h4>Ready to learn more: </h4>
                                 </div>
                                 <div className="col-4 col-md-4">
-                                    <a href={RouteConst.frontEnd.contactUs.path} type="button" className="btn btn-info">Contact us</a>
+                                    <a href={RouteConst.frontEnd.contactUs.path} type="button" className="btn btn-info hard-button">Contact us</a>
                                 </div>
                             </div>
                         </div>
+                        <hr></hr>
                         <div className="container">
+                            <div className="row text-center">
+                                <img src="/images/makedonation.png"></img>
+                                <h4><i>Make it easy to donate, come with us and find your trusted place for your giving</i></h4>
+                            </div>
                             <div className="row">
-                                <div className="col-md-6 col-lg-4 mb-4 text-center">
-                                    <span className="flaticon-piggy-bank d-block mb-3 display-3 text-secondary">
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    </span>
-                                    <h3 className="text-primary h4 mb-2">Make Donation</h3>
-                                    <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
-                                </div>
-                                <div className="col-md-6 col-lg-4 mb-4 text-center">
-                                    <span className="flaticon-blood d-block mb-3 display-3 text-secondary">
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    </span>
-
-                                    <h3 className="text-primary h4 mb-2">Medical Health</h3>
-                                    <p>Praesentium magnam pariatur quae necessitatibus eligendi voluptate ducimus.</p>
-                                </div>
-                                <div className="col-md-6 col-lg-4 mb-4 text-center">
-                                    <span className="flaticon-food d-block mb-3 display-3 text-secondary">
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    </span>
-                                    <h3 className="text-primary h4 mb-2">Food for the Poor</h3>
-                                    <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
-                                </div>
-
-                                <div className="col-md-6 col-lg-4 mb-4 text-center">
-                                    <span className="flaticon-donation d-block mb-3 display-3 text-secondary">
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    </span>
-                                    <h3 className="text-primary h4 mb-2">Help &amp; Love</h3>
-                                    <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
-                                </div>
-                                <div className="col-md-6 col-lg-4 mb-4 text-center">
-                                    <span className="flaticon-dollar d-block mb-3 display-3 text-secondary">
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    </span>
-                                    <h3 className="text-primary h4 mb-2">Give To The Needy</h3>
-                                    <p>Praesentium magnam pariatur quae necessitatibus eligendi voluptate ducimus.</p>
-                                </div>
-                                <div className="col-md-6 col-lg-4 mb-4 text-center">
-                                    <span className="flaticon-unity d-block mb-3 display-3 text-secondary">
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    </span>
-                                    <h3 className="text-primary h4 mb-2">Volunteer</h3>
-                                    <p>Accusantium dignissimos voluptas rem consequatur ratione illo sit quasi.</p>
-                                </div>
+                                <img src="/images/volunteer.jpg"></img>
+                                <h4><i>We are still finding all of you guys as a volunteer for helping us building system. Register as a volunteer <a href="/">here</a></i></h4>
 
                             </div>
                         </div>

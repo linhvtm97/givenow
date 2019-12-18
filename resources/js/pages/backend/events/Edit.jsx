@@ -20,11 +20,12 @@ export default class extends Component {
                 end_date: '',
                 location: '',
                 goal_item: '',
+                current_items: 0,
                 cause_id: '',
                 city_id: '',
                 user_id: ''
             },
-            formData: {},
+            formData: new FormData(),
             messageError: '',
             causes: [],
             cities: []
@@ -43,21 +44,24 @@ export default class extends Component {
 
     getInfo=(id) => {
         EventsRequests.showByID(id).then((response) => {
-            console.log(response)
             if(response.meta.status===200) {
                 const form={
                     name: response.data.name,
                     description: response.data.description,
+                    image: response.data.image,
+                    status: response.data.status,
                     start_date: response.data.start_date,
                     end_date: response.data.end_date,
                     location: response.data.location,
                     goal_item: response.data.goal_item,
+                    current_items: response.data.current_items,
                     status: response.data.status,
                     text: response.data.text,
                     cause_id: response.data.cause_id,
                     city_id: response.data.city_id,
                     user_id: response.data.user_id
                 }
+
                 this.setState({form});
             } else {
                 this.props.history.push(RouteConst.backEnd.events.index.path);
@@ -79,7 +83,6 @@ export default class extends Component {
 
         if(fileTmp) {
             reader.readAsDataURL(fileTmp);
-
             reader.onloadend=() => {
                 let formData=new FormData();
                 formData.append('image',fileTmp);
@@ -96,11 +99,13 @@ export default class extends Component {
 
         if(formData instanceof FormData) {
             formData.append('name',form.name);
+            formData.append('status',form.status);
             formData.append('description',form.description);
             formData.append('start_date',form.start_date);
             formData.append('end_date',form.end_date);
             formData.append('location',form.location);
             formData.append('goal_item',form.goal_item);
+            formData.append('current_items',form.current_items);
             formData.append('status',form.status);
             formData.append('text',form.text);
             formData.append('cause_id',form.cause_id);
@@ -110,6 +115,8 @@ export default class extends Component {
         } else {
             formSubmit=form;
         }
+
+        console.log(formSubmit);
 
 
         EventsRequests.update(this.state.id,formSubmit).then((response) => {
@@ -147,8 +154,16 @@ export default class extends Component {
                         name="name" onChange={this.handleOnChange} value={this.state.form.name} />
                 </div>
                 <div className="form-group">
+                    <label htmlFor="description">Status</label>
+                    <select name="status" id="status" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.status}>
+                        <option value='0'>PUBLIC</option>)
+                        <option value='1'>PRIVATE</option>)
+                    </select>
+                </div>
+                <div className="form-group">
                     <label htmlFor="description">Cause</label>
-                    <select name="cause_id" id="cause_id" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.cause_id}>
+                    <select name="cause_id" id="cause_id" className="form-control" required="required" onChange={this.handleOnChange}
+                        value={this.state.form.cause_id}>
                         {
                             causes.map((item,key) => {
                                 return (
@@ -172,6 +187,9 @@ export default class extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="image">Image</label>
+                    <div>
+                        <img src={this.state.form.image}></img>
+                    </div>
                     <input type="file" className="form-control" id="image"
                         name="image" onChange={this.onChangeFile} />
                 </div>
@@ -182,8 +200,13 @@ export default class extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Goal Item</label>
-                    <input type="text" className="form-control" id="goal_item"
+                    <input type="number" className="form-control" id="goal_item" min="0"
                         name="goal_item" onChange={this.handleOnChange} value={this.state.form.goal_item} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Current Item</label>
+                    <input type="number" className="form-control" id="current_items" min="0"
+                        name="current_items" onChange={this.handleOnChange} value={this.state.form.current_items} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Start date</label>
