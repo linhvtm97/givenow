@@ -25,6 +25,11 @@ const menus=[
         name: "About us",
         to: "/about",
         exact: true
+    },
+    {
+        name: "Contact us",
+        to: "/contact-us",
+        exact: true
     }
 ];
 const MenuLink=({label,to,activeOnlyWhenExact}) => {
@@ -52,42 +57,34 @@ class Index extends React.Component {
                 <div className="row">
                     <Banner />
                 </div>
-                <div className="header row">
+                <div className="container mg-10">
                     <div id="logo" className="row">
                         <div className="col-sm-4">
 
                         </div>
                         <div className="col-sm-2 mg-10">
                             <a href="/">
-                                <img className="img-responsive" src="/images/logo1.png" alt="Eden Valley Hospice" title="Eden Valley Hospice" /></a>
+                                <img className="img-responsive" src="/images/givenowlogo.png" alt="Eden Valley Hospice" title="Eden Valley Hospice" /></a>
                         </div>
                         <div className="col-sm-1">
 
                         </div>
                         <div className="col-sm-4">
-                            <div className="header_bar">
+                            <div className="">
                                 <p>
                                     <a id="header_donate_btn" className="btn btn-primary btn-lg" href="/events"><i className="fa fa-heart"></i> Donate</a>
                                 </p>
                                 <p>
-                                    <a id="header_shop_btn" className="btn btn-primary btn-lg" href="/categories"><i className="fa fa-shopping-cart"></i> Shop</a></p>
+                                    <a id="header_shop_btn" className="btn btn-primary btn-lg" href="/categories"><i className="fa fa-shopping-cart"></i>Our Shop</a></p>
                                 <p>
                                     <a id="header_shop_btn" className="btn btn-primary btn-lg" href="/charities"><i className="fa fa-user"></i> Our parner</a></p>
-                                {/* <div className="row">
-                                    <div className="col-sm-8">
-                                        <input type="search" placeholder="Search now ..." aria-describedby="button-addon1" className="form-control border-0 bg-light" />
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <button id="button-addon1" type="submit" className="btn btn-link text-primary"><i className="fa fa-search"></i></button>
-                                    </div>
-                                </div> */}
                             </div>
                         </div>
 
                     </div>
                 </div>
                 <div className="container">
-                    <nav className="navbar navbar-dark bg-black mg-10" role="navigation">
+                    <nav className="navbar navbar-dark bg-primary mg-10" role="navigation">
                         <ul className="nav navbar-nav navbar-default">
                             {this.showMenus(
                                 menus
@@ -101,7 +98,7 @@ class Index extends React.Component {
                         <span>Or</span>
                         <a className="btn btn-danger hard-button" href={RouteConst.frontEnd.events.index.path} role="button">Donate a cause</a>
                     </div> */}
-                    <div className="row text-center text-intro">
+                    {/* <div className="row text-center text-intro">
                         <h1>What are we doing?</h1>
                         <hr></hr>
                     </div>
@@ -132,24 +129,37 @@ class Index extends React.Component {
 
                         </div>
 
-                    </div>
+                    </div> */}
                     <hr></hr>
+
                     <div className="container text-center">
                         <h4><i>Support any charity with an online drive for brand-new items they need</i></h4>
                     </div>
                     <Cause />
                     <hr></hr>
                     <div className="container text-center">
-                        <p><i>Looking to support a charity close to your heart but want an alternative to traditional fundraising? Raise much-needed, brand-new goods for donation to charity with a YouGiveGoods online drive. Corporations, schools, religious organizations, groups, and individuals can start a drive free-of-charge at YouGiveGoods and start raising items charities need most.</i></p>
+                        <h4><i>Looking to support a charity close to your heart but want an alternative to traditional fundraising? Raise much-needed, brand-new goods for donation to charity with an online drive. Corporations, schools, religious organizations, groups, and individuals can start a drive free-of-charge at Givenow and start raising items charities need most.</i></h4>
                         <div className="container">
                             {/* <div className="row col-sm-4"></div> */}
-                            <div className="col-sm-6 col-md-4 col-xs-12">
+                            <div className="col-sm-6 col-md-4 col-xs-12 text-center">
                                 <div className="col-sm-8 col-md-8">
                                     <h4>Ready to learn more: </h4>
                                 </div>
                                 <div className="col-4 col-md-4">
-                                    <a href={RouteConst.frontEnd.contactUs.path} type="button" className="btn btn-info">Contact us</a>
+                                    <a href={RouteConst.frontEnd.contactUs.path} type="button" className="btn btn-info hard-button">Contact us</a>
                                 </div>
+                            </div>
+                        </div>
+                        <hr></hr>
+                        <div className="container">
+                            <div className="row text-center">
+                                <img src="/images/makedonation.png"></img>
+                                <h4><i>Make it easy to donate, come with us and find your trusted place for your giving</i></h4>
+                            </div>
+                            <div className="row">
+                                <img src="/images/volunteer.jpg"></img>
+                                <h4><i>We are still finding all of you guys as a volunteer for helping us building system. Register as a volunteer <a href="/">here</a></i></h4>
+
                             </div>
                         </div>
                         <div className="container">
@@ -177,6 +187,15 @@ class Index extends React.Component {
                             </div>
                         </div>
                         <hr></hr>
+                        {/* <div className="container">
+                            <div className="row align-items-center justify-content-center">
+                                <div className="col-lg-5 text-center">
+                                    <h2 className="text-black mb-4">Make A Donation Now! You May Change Lives Forever</h2>
+                                    <p><a href="#" className="btn btn-primary px-4 py-3 btn-block">Donate Now</a></p>
+                                </div>
+                            </div>
+                        </div> */}
+
                         <div className="container">
                             <h1>Ready to raise for your cause?</h1>
                             <div className="row mg-10 text-center">

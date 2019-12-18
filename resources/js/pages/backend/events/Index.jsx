@@ -49,6 +49,7 @@ export default class extends Component {
                         <th>Name</th>
                         <th>Status</th>
                         <th>Goal items</th>
+                        <th>Current items</th>
                         <th>Location</th>
                         <th>Description</th>
                         <th className="text-center" width="150">Action</th>
@@ -61,6 +62,7 @@ export default class extends Component {
                                 <td>{item.name}</td>
                                 <td>{item.status==0? PUBLIC_STATUS:PRIVATE_STATUS}</td>
                                 <td>{item.goal_item}</td>
+                                <td>{item.current_items}</td>
                                 <td>{item.location}</td>
                                 <td>{item.description}</td>
                                 <td className="text-center">

@@ -1,10 +1,10 @@
 import Request from '../Request';
-import AuthHelper from '../../helpers/AuthHelperBackEnd';
+import AuthHelper from '../../helpers/AuthHelperFrontEnd';
 const API_URL='/api/v1';
 
 export default class {
     static getAll() {
-        const url=`${API_URL}/events`;
+        const url=`${API_URL}/events?filters[]=status,0&sort=end_date,desc`;
         return Request.get(url,AuthHelper.setHeaderToken());
     };
 

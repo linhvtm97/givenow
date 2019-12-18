@@ -12,10 +12,10 @@ class Index extends Component {
             products: [],
             event: {},
             filter: '',
-            cartNotification: ''
+            cartNotification: '',
+            totalProducts: 0
         }
     }
-
     componentDidMount() {
         this.setState({
             cartNotification: LocalStorageHelper.getItem('addedProducts')!==null?
@@ -79,6 +79,11 @@ class Index extends Component {
         let {products,event,filter}=this.state;
         let {cartNotification}=this.state
         const {addedProducts}=this.props;
+        let total=0;
+        for(let index=0;index<addedProducts.length;index++) {
+            total+=addedProducts[index].price*addedProducts[index].quantity;
+        }
+
         if(filter) {
             products=products.sort((a,b) => {
                 if(filter==='0') {
@@ -143,8 +148,8 @@ class Index extends Component {
                                                 )
                                             })}
                                             <li className="list-group-item d-flex justify-content-between">
-                                                <span>Total (USD)</span>
-                                                <strong>$20</strong>
+                                                <span>Total ($) = </span>
+                                                <strong className="text-danger">{total.toFixed(1)}</strong>
                                             </li>
                                         </ul>
                                     </div>

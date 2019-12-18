@@ -17,7 +17,7 @@ class Event extends MainModel
      */
     protected $fillable = [
         'name', 'cause_id', 'user_id', 'image', 'description', 'text', 'goal_item', 'start_date',
-        'end_date', 'location', 'status', 'city_id', 'charity_id'
+        'end_date', 'location', 'status', 'city_id', 'charity_id', 'current_items'
     ];
 
     /**
@@ -26,7 +26,7 @@ class Event extends MainModel
      * @var array
      */
     protected $hidden = [
-        'pivot', 'deleted_at', 'cause_id', 'user_id', 'city_id'
+        'pivot', 'deleted_at'
     ];
 
     /**
@@ -47,5 +47,15 @@ class Event extends MainModel
     public function cause()
     {
         return $this->belongsTo(Cause::class, 'cause_id');
+    }
+
+    /**
+     * Cause relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function city()
+    {
+        return $this->belongsTo(Cause::class, 'city_id');
     }
 }

@@ -41,6 +41,16 @@ class EventService extends BaseService
      */
     public function find(string $uid)
     {
-        return $this->repository->with(['cause', 'user'])->find($uid);
+        $result = $this->repository->with(['cause', 'user', 'city'])->find($uid);
+        $cause_name = $result['cause']['name'];
+        $user_name = $result['user']['name'];
+
+        $custom = collect([
+            'cause_name' => $cause_name,
+            'user_name' => $user_name,
+            ]);
+        $result = $custom->merge($result);
+
+        return $result;
     }
 }

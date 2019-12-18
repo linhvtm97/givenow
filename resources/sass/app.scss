@@ -166,12 +166,18 @@ hr.style4 {
           font-family: "Titillium Web", sans-serif;
 }
 
+.navbar {
+          padding: 0 !important;
+}
 .navbar-nav > li > a {
           font-size: 20px;
 }
 .charity-image {
           width: 320px;
           height: 250px;
+}
+.position-relative {
+          position: relative !important;
 }
 
 // Fonts

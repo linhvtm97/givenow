@@ -59,8 +59,6 @@ class Login extends React.Component {
                         <div className="modal-body">
                             <form className="form-signin" onSubmit={this.onSubmit}>
                                 <div className="text-center mb-4">
-                                    <img className="mb-4" src="http://lophoctiengnhat.edu.vn/images/2016/04/01/0-cach-phat-am-am-g-tieng-nhat.png"
-                                        alt="" width="150" height="150" />
                                     <h1 className="h3 mb-3 font-weight-normal">Sign in</h1>
                                 </div>
 

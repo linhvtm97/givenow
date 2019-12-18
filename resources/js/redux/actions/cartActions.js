@@ -1,4 +1,4 @@
-import {ADD_TO_CART,GET_CART} from './cartActionTypes'
+import {ADD_TO_CART,GET_CART,REMOVE_ITEM_FROM_CART,RESET_CART} from './cartActionTypes'
 
 //add cart action
 export const addToCart=(product,quantity) => {
@@ -15,3 +15,15 @@ export const getCart=() => {
     }
 }
 
+export const removeItem=(product) => {
+    return {
+        product,
+        type: REMOVE_ITEM_FROM_CART,
+    }
+}
+
+export const resetCart=() => {
+    return {
+        type: RESET_CART,
+    }
+}
