@@ -180,6 +180,31 @@ hr.style4 {
           position: relative !important;
 }
 
+.some-network {
+          vertical-align: top;
+          display: inline-block;
+          margin-right: 15px;
+          text-align: center;
+}
+
+.some-network__share-count {
+          margin-top: 3px;
+          font-size: 12px;
+}
+
+.some-network__share-button {
+          cursor: pointer;
+}
+
+.some-network__share-button:hover:not(:active) {
+          opacity: 0.75;
+}
+
+.some-network__custom-icon {
+          width: 32px;
+          height: 32px;
+}
+
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 

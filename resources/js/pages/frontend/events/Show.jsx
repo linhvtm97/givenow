@@ -1,5 +1,17 @@
 import React,{Component} from 'react';
 import EventsRequests from '../../../requests/backend/EventsRequests'
+import AppURL from '../../../constants/App';
+import RouteConst from '../../../constants/Route';
+import {
+    FacebookShareButton,
+    TwitterShareButton,
+    RedditShareButton,
+    TelegramShareButton,
+    FacebookIcon,
+    TwitterIcon,
+    RedditIcon,
+    TelegramIcon,
+} from 'react-share';
 
 class Show extends Component {
     constructor(props) {
@@ -29,7 +41,6 @@ class Show extends Component {
         let {event}=this.state
         var current_items=event.current_items
         var goal_item=event.goal_item
-        // var start_date=Date.parse(event.start_date);
         var end_date=Date.parse(event.end_date);
         var today=new Date();
         var now=Date.parse(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate());
@@ -38,6 +49,8 @@ class Show extends Component {
             isvalid=true;
         }
 
+        const shareUrl=AppURL.url.localhost+'/events/'+event.id;
+        const title='Hurry up, some people are in need! Give now .';
         return (
             <div>
                 <div className="container">
@@ -56,10 +69,49 @@ class Show extends Component {
                         {/* <img src="/images/bg2.jpg" className="img-thumbnail" alt="bg"></img> */}
                         <img src={event.image} className="img-thumbnail" alt="bg"></img>
                         <h3 className="text-white">Share with</h3>
-                        <button type="button" className="btn btn-primary"><i className="fa fa-facebook-f pr-1"></i></button>
-                        <button type="button" className="btn btn-info"><i className="fa fa-instagram pr-1"></i></button>
-                        <button type="button" className="btn btn-danger"><i className="fa fa-youtube"></i></button>
-                        <button type="button" className="btn btn-primary"><i className="fa fa-twitter pr-1"></i></button>
+                        <div>
+                            <div className="some-network">
+                                <FacebookShareButton
+                                    url={shareUrl}
+                                    quote={title}
+                                    className="some-network__share-button">
+                                    <FacebookIcon
+                                        size={32}
+                                        round />
+                                </FacebookShareButton>
+                            </div>
+                            <div className="some-network">
+                                <TwitterShareButton
+                                    url={shareUrl}
+                                    quote={title}
+                                    className="some-network__share-button">
+                                    <TwitterIcon
+                                        size={32}
+                                        round />
+                                </TwitterShareButton>
+                            </div>
+                            <div className="some-network">
+                                <TelegramShareButton
+                                    url={shareUrl}
+                                    quote={title}
+                                    className="some-network__share-button">
+                                    <TelegramIcon
+                                        size={32}
+                                        round />
+                                </TelegramShareButton>
+                            </div>
+                            <div className="some-network">
+                                <RedditShareButton
+                                    url={shareUrl}
+                                    quote={title}
+                                    className="some-network__share-button">
+                                    <RedditIcon
+                                        size={32}
+                                        round />
+                                </RedditShareButton>
+                            </div>
+                        </div>
+
                         <h3>{event.name}</h3>
                         <p>{event.text}</p>
                     </div>
