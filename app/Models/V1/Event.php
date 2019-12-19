@@ -3,6 +3,7 @@
 namespace App\Models\V1;
 
 use App\Models\V1\MainModel;
+use Illuminate\Http\Request;
 
 class Event extends MainModel
 {
@@ -57,5 +58,34 @@ class Event extends MainModel
     public function city()
     {
         return $this->belongsTo(Cause::class, 'city_id');
+    }
+    /**
+     * Scope query order
+     *
+     * @param Builder $query QueryBuilder
+     *
+     * @return Builder
+     */
+    public function scopeQueryFilter($query)
+    {
+        $request = app(Request::class);
+
+        $filterArray = $request->get('filters');
+        if (!empty($filterArray)) {
+            foreach ($filterArray as $filter) {
+                $split = explode(',', $filter);
+                if (count($split) == 2) {
+                    $key = $split[0];
+                    $value = $split[1];
+                    if($key == 'cause_id') {
+                        $causes = explode(';', $value);
+                        $query = $query->whereIn($key, $causes);
+                    } else {
+                        $query = $query->where($key, $value);
+                    }
+                }
+            }
+        }
+        return $query;
     }
 }

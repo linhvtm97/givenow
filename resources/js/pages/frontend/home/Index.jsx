@@ -91,47 +91,7 @@ class Index extends React.Component {
                             )}
                         </ul>
                     </nav>
-                    {/* <Event /> */}
-                    {/* <div className="row mg-10 text-center">
-                        <br></br>
-                        <a className="btn btn-primary hard-button" href={RouteConst.frontEnd.events.create.path} role="button">Start an event</a>
-                        <span>Or</span>
-                        <a className="btn btn-danger hard-button" href={RouteConst.frontEnd.events.index.path} role="button">Donate a cause</a>
-                    </div> */}
-                    {/* <div className="row text-center text-intro">
-                        <h1>What are we doing?</h1>
-                        <hr></hr>
-                    </div>
-                    <div className="container">
-                        <div className="module">
-                            <div className="row">
-                                <div className="col-sm-3">
-                                    <a href="/our-care"><img src="/images/aboutus4.jpg" alt="Our Care" className="img-responsive" /></a>
-                                    <h3><a href="/our-care">Our Care</a></h3>
-                                </div>
-
-                                <div className="col-sm-3">
-                                    <a href="/volunteer"><img src="/images/aboutus4.jpg" alt="Volunteers" className="img-responsive" /></a>
-                                    <h3><a href="/volunteer">Volunteers</a></h3>
-                                </div>
-
-                                <div className="col-sm-3">
-                                    <a href="/support-us/fundraise"><img src="/images/aboutus4.jpg" alt="Fundraisers" className="img-responsive" /></a>
-                                    <h3><a href="/support-us/fundraise">Fundraisers</a></h3>
-                                </div>
-
-                                <div className="col-sm-3">
-                                    <a href="/professionals"><img src="/images/aboutus4.jpg" alt="Professionals" className="img-responsive" /></a>
-                                    <h3><a href="/professionals">Professionals</a></h3>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div> */}
                     <hr></hr>
-
                     <div className="container text-center">
                         <h4><i>Support any charity with an online drive for brand-new items they need</i></h4>
                     </div>

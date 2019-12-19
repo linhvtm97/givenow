@@ -3,8 +3,8 @@ import AuthHelper from '../../helpers/AuthHelperFrontEnd';
 const API_URL='/api/v1';
 
 export default class {
-    static getAll() {
-        const url=`${API_URL}/events?filters[]=status,0&sort=end_date,desc`;
+    static getAll($param='') {
+        const url=`${API_URL}/events?filters[]=status,0&sort=end_date,desc&`+$param;
         return Request.get(url,AuthHelper.setHeaderToken());
     };
 

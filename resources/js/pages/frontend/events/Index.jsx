@@ -1,6 +1,7 @@
 import React from 'react'
 import EventsRequests from '../../../requests/frontend/EventsRequests';
 import CausesRequests from '../../../requests/backend/CausesRequests';
+import Route from '../../../constants/Route';
 
 class Index extends React.Component {
     constructor(props) {
@@ -10,16 +11,27 @@ class Index extends React.Component {
             searchValue: '',
             location: '',
             filter: '',
-            causes: []
+            causes: [],
+            searchCauses: [],
         }
     }
     handleOnChange=(e) => {
         let target=e.target;
         let name=target.name;
+        let searchCauses=this.state.searchCauses
+        if(target.type==="checkbox"&&target.checked) {
+            searchCauses.push(target.value)
+        } else {
+            var index=searchCauses.indexOf(target.value);
+            if(index>-1) {
+                searchCauses.splice(index,1);
+            }
+        }
         let value=
             target.type==="checkbox"
-                ? target.checked
+                ? searchCauses
                 :target.value;
+
         this.setState({
             [name]: value
         });
@@ -49,11 +61,17 @@ class Index extends React.Component {
         })
     }
     render() {
-        let {causes,events,searchValue,filter}=this.state
+        let {causes,events,searchValue,filter,searchCauses}=this.state
+
+        searchCauses.forEach(element => {
+            events=events.filter(event => {
+                return event.cause_id.toString().indexOf(element)!==-1
+            })
+        });
 
         if(searchValue) {
             events=events.filter(event => {
-                return event.name.toLowerCase().indexOf(searchValue)!==-1
+                return event.name.toLowerCase().indexOf(searchValue.toLowerCase())!==-1
             })
         }
         if(filter) {
@@ -98,7 +116,7 @@ class Index extends React.Component {
                                         return (
                                             <div key={index}>
                                                 <label>
-                                                    <input type="checkbox" value={item.id} onChange={this.handleOnChange} />
+                                                    <input type="checkbox" value={item.id} name="searchCauses" onChange={this.handleOnChange} />
                                                     {item.name}
                                                 </label>
                                                 <br></br>
@@ -106,9 +124,6 @@ class Index extends React.Component {
                                         )
                                     })
                                 }
-                            </div>
-                            <div className="text-center">
-                                <button type="button" className="btn btn-primary mg-10">Search</button>
                             </div>
                             <h3>Sort by</h3>
                             <hr></hr>
@@ -124,8 +139,6 @@ class Index extends React.Component {
                         <div className="col-xs-9 col-sm-8 col-8 col-md-9 col-lg-9 mg-10">
                             {
                                 events.map((item,index) => {
-                                    console.log(item.end_date);
-
                                     var end_date=Date.parse(item.end_date);
                                     var today=new Date();
                                     var now=Date.parse(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate());
@@ -146,6 +159,7 @@ class Index extends React.Component {
                                                             </a>
                                                             <p>
                                                                 <i className="fa fa-map-marker"></i>{item.location}
+                                                                <br></br>
                                                             </p>
                                                         </div>
                                                         <p className="text-danger">End date: {item.end_date}</p>

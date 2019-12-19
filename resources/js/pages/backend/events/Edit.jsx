@@ -205,7 +205,7 @@ export default class extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Current Item</label>
-                    <input type="number" className="form-control" id="current_items" min="0"
+                    <input type="number" className="form-control" id="current_items" min="0" disabled
                         name="current_items" onChange={this.handleOnChange} value={this.state.form.current_items} />
                 </div>
                 <div className="form-group">
