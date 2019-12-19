@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import CharitiesRequests from '../../../requests/backend/CharitiesRequests';
+import CharitiesRequests from '../../../requests/frontend/CharitiesRequests';
 import SearchBar from '../layouts/SearchBar'
 import RouteConst from '../../../constants/Route';
 
@@ -19,11 +19,27 @@ class Index extends Component {
                 address: '',
                 phone_number: '',
             },
-            formData: {},
+            formData: new FormData(),
             messageError: '',
         }
     }
+    onChangeFile=(e) => {
+        e.preventDefault();
 
+        let reader=new FileReader();
+        let fileTmp=e.target.files[0];
+
+        if(fileTmp) {
+            reader.readAsDataURL(fileTmp);
+
+            reader.onloadend=() => {
+                let formData=new FormData();
+                formData.append('image',fileTmp);
+                console.log(formData)
+                this.setState({formData})
+            };
+        }
+    };
 
     handleOnChange=event => {
         let {form}=this.state;
@@ -39,16 +55,12 @@ class Index extends Component {
         formData.append('address',form.address);
         formData.append('website',form.website);
         formData.append('phone_number',form.phone_number);
-
+        formData.append('status',1);
 
         CharitiesRequests.create(formData).then((response) => {
             if(response.meta.status===201) {
-                console.log(response.data.id);
-                if(response.data.id) {
-                    this.props.history.push(`${RouteConst.backEnd.charities.index.path}/${response.data.id}`);
-                } else {
-                    this.props.history.push(RouteConst.backEnd.charities.index.path);
-                }
+                alert('Your request has been sent successfully!')
+                window.location.href=RouteConst.frontEnd.charities.index.path;
             } else {
                 this.state.messageError=response.meta.message;
             }

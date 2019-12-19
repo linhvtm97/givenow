@@ -30,6 +30,9 @@ export default class extends Component {
     deleteRecord=(event) => {
         event.preventDefault();
         CategoriesRequests.deleteByID(this.state.idDelete).then((response) => {
+            if(response.meta.status==400) {
+                alert('Sorry! You can not delete this record because some relationships has been set up with this record.');
+            }
             this.getAllRecords();
         });
     }
@@ -46,7 +49,6 @@ export default class extends Component {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
                         <th className="text-center" width="150">Action</th>
                     </tr>
                 </thead>
@@ -55,7 +57,6 @@ export default class extends Component {
                         return (
                             <tr key={index}>
                                 <td>{item.name}</td>
-                                <td>{item.description}</td>
                                 <td className="text-center">
                                     <Link className="btn btn-info btn-sm mr-2"
                                         to={`${RouteConst.backEnd.categories.index.path}/${item.id}`}>

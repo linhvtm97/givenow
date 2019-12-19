@@ -16,7 +16,7 @@ export default class extends Component {
                 category_id: '',
                 description: '',
             },
-            formData: {},
+            formData: new FormData(),
             messageError: '',
             categories: []
         };

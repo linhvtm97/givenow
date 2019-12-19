@@ -30,6 +30,6 @@ class CharityRepository extends BaseRepository
      */
     public function getAll(array $data = null)
     {
-        return $this->model->querySearch()->paginate();
+        return $this->model->querySearch()->queryOrder()->queryFilter()->paginate();
     }
 }

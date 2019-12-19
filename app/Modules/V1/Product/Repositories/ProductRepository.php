@@ -29,6 +29,6 @@ class ProductRepository extends BaseRepository
      */
     public function getAll(array $data = null)
     {
-        return $this->model->with(['category'])->querySearch()->paginate();
+        return $this->model->with(['category'])->querySearch()->queryOrder()->paginate();
     }
 }

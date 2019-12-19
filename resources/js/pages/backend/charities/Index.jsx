@@ -46,11 +46,11 @@ export default class extends Component {
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Status</th>
                         <th>Email</th>
                         <th>Website</th>
                         <th>Phone Number</th>
                         <th>Address</th>
-                        <th>Description</th>
                         <th className="text-center" width="150">Action</th>
                     </tr>
                 </thead>
@@ -59,11 +59,11 @@ export default class extends Component {
                         return (
                             <tr key={index}>
                                 <td>{item.name}</td>
+                                <td>{item.status==0? 'PUBLIC':'PRIVATE'}</td>
                                 <td>{item.email}</td>
                                 <td>{item.website}</td>
                                 <td>{item.phone_number}</td>
                                 <td>{item.address}</td>
-                                <td>{item.description}</td>
                                 <td className="text-center">
                                     <Link className="btn btn-info btn-sm mr-2"
                                         to={`${RouteConst.backEnd.charities.index.path}/${item.id}`}>
