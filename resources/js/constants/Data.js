@@ -1,6 +1,7 @@
 const Data = {
 
     authLocalStorage: 'authToken',
+    userInfo: 'userInfo',
 
     /*RouteSignIn*/
     routeSignInFrontEnd: '/login',

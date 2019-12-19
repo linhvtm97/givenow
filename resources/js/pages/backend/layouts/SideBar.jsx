@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
+import RoleHelper from '../../../helpers/RoleHelper';
 
 export default class extends Component {
     constructor(props) {
@@ -28,20 +29,36 @@ export default class extends Component {
     }
 
     render() {
+        const roleUser = RoleHelper.getRole();
         const listStaticMenus = [
-            { icon: 'fas fa-folder', label: 'Cities', link: RouteConst.backEnd.cities.index.path },
-            { icon: 'fas fa-folder', label: 'Categories', link: RouteConst.backEnd.categories.index.path },
-            { icon: 'fas fa-folder', label: 'Causes', link: RouteConst.backEnd.causes.index.path },
-            { icon: 'fas fa-folder', label: 'Charities', link: RouteConst.backEnd.charities.index.path },
+            { icon: 'fas fa-folder', label: 'Cities', link: RouteConst.backEnd.cities.index.path, roleNeed: 1 },
+            { icon: 'fas fa-folder', label: 'Categories', link: RouteConst.backEnd.categories.index.path, roleNeed: 1 },
+            { icon: 'fas fa-folder', label: 'Causes', link: RouteConst.backEnd.causes.index.path, roleNeed: 1 },
+            { icon: 'fas fa-folder', label: 'Charities', link: RouteConst.backEnd.charities.index.path, roleNeed: 1 },
         ];
 
         const listDynamicMenus = [
-            { icon: 'fas fa-folder', label: 'Users', link: RouteConst.backEnd.users.index.path },
-            { icon: 'fas fa-folder', label: 'Events', link: RouteConst.backEnd.events.index.path },
-            { icon: 'fas fa-folder', label: 'Products', link: RouteConst.backEnd.products.index.path },
-            { icon: 'fas fa-folder', label: 'Orders', link: RouteConst.backEnd.orders.index.path },
-            { icon: 'fas fa-folder', label: 'Posts', link: RouteConst.backEnd.posts.index.path },
+            { icon: 'fas fa-folder', label: 'Users', link: RouteConst.backEnd.users.index.path, roleNeed: 1 },
+            { icon: 'fas fa-folder', label: 'Events', link: RouteConst.backEnd.events.index.path, roleNeed: 1 },
+            { icon: 'fas fa-folder', label: 'Products', link: RouteConst.backEnd.products.index.path, roleNeed: 1 },
+            { icon: 'fas fa-folder', label: 'Orders', link: RouteConst.backEnd.orders.index.path, roleNeed: 1 },
+            { icon: 'fas fa-folder', label: 'Posts', link: RouteConst.backEnd.posts.index.path, roleNeed: 1 },
         ];
+
+        listRoleStaticMenus = [];
+        listRoleDynamicMenus = [];
+
+        for (let i = 0; i < listStaticMenus; i++) {
+            if (listStaticMenus[i].roleNeed < roleUser) {
+                listRoleStaticMenus.push(listStaticMenus[i]);
+            }
+        }
+
+        for (let i = 0; i < listDynamicMenus; i++) {
+            if (listDynamicMenus[i].roleNeed < roleUser) {
+                listRoleDynamicMenus.push(listDynamicMenus[i]);
+            }
+        }
 
         return (
             <div className="sidebar navbar-nav">
@@ -54,7 +71,7 @@ export default class extends Component {
                     </div>
                 </div>
                 <div id='static-menu' className="collapse sidebar-submenu show">
-                    {listStaticMenus.map((menu, i) => {
+                    {listRoleStaticMenus.map((menu, i) => {
                         return (
                             <div className={`nav-item ${this.state.pathMenuCurrent === menu.link ? 'active' : '' }`} key={i}>
                                 <Link to={menu.link} className="nav-link">
@@ -73,7 +90,7 @@ export default class extends Component {
                     </div>
                 </div>
                 <div id='dynamic-menu' className="collapse sidebar-submenu show">
-                {listDynamicMenus.map((menu, i) => {
+                {listRoleDynamicMenus.map((menu, i) => {
                     return (
                         <div className={`nav-item ${this.state.pathMenuCurrent === menu.link ? 'active' : ''}`} key={i}>
                             <Link to={menu.link} className="nav-link">
