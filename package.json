@@ -27,6 +27,8 @@
           },
           "dependencies": {
                     "moment": "^2.24.0",
+                    "react-alert": "^6.0.0",
+                    "react-alert-template-basic": "^1.0.0",
                     "react-datepicker": "^2.10.1",
                     "react-notifications": "^1.4.3",
                     "react-paginate": "^6.3.2",

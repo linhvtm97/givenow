@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import EventsRequests from '../../../requests/backend/EventsRequests';
-import moment from 'moment';
 import CharitiesRequests from '../../../requests/backend/CharitiesRequests';
 import CausesRequests from '../../../requests/backend/CausesRequests';
 import CitiesRequests from '../../../requests/backend/CitiesRequests';
@@ -18,7 +17,7 @@ export default class extends Component {
                 end_date: '',
                 description: '',
                 cause_id: '',
-                charity_id: '',
+                charity: '',
                 text: '',
                 city_id: '',
                 image: '',
@@ -88,7 +87,7 @@ export default class extends Component {
         formData.append('description',form.description);
         formData.append('goal_item',form.goal_item);
         formData.append('location',form.location);
-        formData.append('charity_id',form.charity_id);
+        formData.append('charity',form.charity);
         formData.append('city_id',form.city_id);
         formData.append('cause_id',form.cause_id);
         formData.append('text',form.text);
@@ -100,8 +99,10 @@ export default class extends Component {
             if(response.meta.status===201) {
                 console.log(response.data.id);
                 if(response.data.id) {
-                    this.props.history.push(RouteConst.frontEnd.events.index.path);
-                    // this.props.history.push(`${RouteConst.frontEnd.events.index.path}/${response.data.id}`);
+                    setTimeout(() => {
+                        alert('Request has been sent successfully!')
+                        this.props.history.push(RouteConst.frontEnd.events.index.path);
+                    },1000);
                 } else {
                     this.props.history.push(RouteConst.frontEnd.events.index.path);
                 }
@@ -201,12 +202,12 @@ export default class extends Component {
                                                 <div className="col-sm-6 mg-10">
                                                     <div className="form-group">
                                                         <label htmlFor="description">Choose charity</label>
-                                                        <select name="charity_id" id="charity_id" className="form-control" required="required"
-                                                            onChange={this.handleOnChange} value={this.state.form.charity_id}>
+                                                        <select name="charity" id="charity" className="form-control" required="required"
+                                                            onChange={this.handleOnChange} value={this.state.form.charity}>
                                                             {
                                                                 charities.map((item,index) => {
                                                                     return (
-                                                                        <option key={index} value={item.id}>{item.name}</option>
+                                                                        <option key={index} value={item.name}>{item.name}</option>
                                                                     )
                                                                 })
                                                             }

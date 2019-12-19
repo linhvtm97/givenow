@@ -16,6 +16,7 @@ class EditEventsTable extends Migration
         Schema::table('events', function (Blueprint $table) {
             $table->dropColumn('charity_id');
             $table->string('charity')->nullable();
+            $table->string('status')->default(1)->change();
             $table->integer('current_items')->default(0);
         });
     }
