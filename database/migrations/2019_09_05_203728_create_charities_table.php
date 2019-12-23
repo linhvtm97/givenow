@@ -21,7 +21,7 @@ class CreateCharitiesTable extends Migration
             $table->string('website')->nullable();
             $table->string('phone_number');
             $table->string('address');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

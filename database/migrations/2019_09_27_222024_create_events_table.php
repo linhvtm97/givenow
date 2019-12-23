@@ -19,10 +19,12 @@ class CreateEventsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('city_id');
             $table->string('name');
-            $table->string('status')->default(0);
+            $table->integer('current_items')->default(0);
+            $table->string('status')->default(1);
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->text('text');
+            $table->string('charity')->nullable();
             $table->integer('goal_item');
             $table->date('start_date');
             $table->date('end_date');

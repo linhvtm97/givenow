@@ -17,7 +17,7 @@ class CreateCausesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('image');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
