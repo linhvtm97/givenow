@@ -1,6 +1,7 @@
-const Data = {
+const Data={
 
     authLocalStorage: 'authToken',
+    userInfo: 'authToken',
 
     /*RouteSignIn*/
     routeSignInFrontEnd: '/login',

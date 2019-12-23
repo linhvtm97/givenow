@@ -16,4 +16,14 @@ class OrderProduct extends MainModel
     protected $fillable = [
         'order_id', 'product_id', 'quantity', 'money'
     ];
+
+    /**
+     * Cause relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
 }
