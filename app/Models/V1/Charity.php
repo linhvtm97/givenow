@@ -15,7 +15,7 @@ class Charity extends MainModel
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone_number', 'address', 'image', 'website', 'description'
+        'name', 'email', 'phone_number', 'address', 'image', 'website', 'description', 'status'
     ];
 
     /**

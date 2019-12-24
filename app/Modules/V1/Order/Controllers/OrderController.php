@@ -15,7 +15,7 @@ class OrderController extends BaseController
      */
     public function __construct(OrderService $orderService)
     {
-        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+        $this->middleware(['auth:api', 'check.admin'], ['except' => ['index', 'show']]);
         $this->service = $orderService;
     }
 }

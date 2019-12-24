@@ -16,8 +16,9 @@ export default class extends Component {
                 website: '',
                 address: '',
                 phone_number: '',
+                status: '',
             },
-            formData: {},
+            formData: new FormData(),
             messageError: '',
         };
     }
@@ -36,6 +37,7 @@ export default class extends Component {
                     email: response.data.email,
                     address: response.data.address,
                     website: response.data.website,
+                    status: response.data.status,
                     phone_number: response.data.phone_number
                 }
                 this.setState({form});
@@ -76,6 +78,7 @@ export default class extends Component {
 
         if(formData instanceof FormData) {
             formData.append('name',form.name);
+            formData.append('status',form.status);
             formData.append('description',form.description);
             formData.append('address',form.address);
             formData.append('email',form.email);
@@ -121,6 +124,13 @@ export default class extends Component {
                         name="name" onChange={this.handleOnChange} value={this.state.form.name} />
                 </div>
                 <div className="form-group">
+                    <label htmlFor="description">Status</label>
+                    <select name="status" id="status" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.status}>
+                        <option value='0'>PUBLIC</option>)
+                        <option value='1'>PRIVATE</option>)
+                    </select>
+                </div>
+                <div className="form-group">
                     <label htmlFor="image">Image</label>
                     <input type="file" className="form-control" id="image"
                         name="image" onChange={this.onChangeFile} />
@@ -142,7 +152,7 @@ export default class extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Phone Number</label>
-                    <input type="text" className="form-control" id="phone_number"
+                    <input type="number" className="form-control" id="phone_number"
                         name="phone_number" onChange={this.handleOnChange} value={this.state.form.phone_number} />
                 </div>
                 <div className="form-group">

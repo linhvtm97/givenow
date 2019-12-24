@@ -122,9 +122,8 @@ class Index extends Component {
                         </select>
                     </div>
                     <div className="text-right">
-                        <a href="/cart/payment" role="button" className="btn btn-primary hard-button" data-toggle="modal" href='#cart_modal'><i
-                            className="fa fa-shopping-cart"></i>Cart <span
-                                className="badge badge-danger">{cartNotification}</span></a>
+                        <a href="/cart/payment" role="button" className="btn btn-primary hard-button" data-toggle="modal" href='#cart_modal'><i className="fa fa-shopping-cart"></i>Cart</a>
+                        {/* <span className="badge badge-danger">{cartNotification}</span>*/}
                         <div className="modal fade" id="cart_modal">
                             <div className="modal-dialog">
                                 <div className="modal-content">

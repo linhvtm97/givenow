@@ -17,4 +17,30 @@ class OrderService extends BaseService
     {
         parent::__construct($orderRepository);
     }
+
+    /**
+     * Get object by uid
+     *
+     * @param string $uid uid of object
+     * @param mixed  $data Data
+     *
+     * @return mixed
+     */
+    public function find(string $uid)
+    {
+        return $this->repository->with(['products', 'user', 'event'])->find($uid);
+    }
+
+
+    /**
+     * Get All object
+     *
+     * @param array|null $data data
+     *
+     * @return \Model\Eloquent\Builder
+     */
+    public function getAll(array $data = null)
+    {
+        return $this->repository->getAll();
+    }
 }

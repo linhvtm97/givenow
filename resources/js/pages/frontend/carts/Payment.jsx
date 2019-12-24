@@ -5,6 +5,7 @@ import {removeItem} from '../../../redux/actions/cartActions';
 import LocalStorageHelper from '../../../helpers/LocalStorageHelper';
 import Login from '../../frontend/auth/Login';
 import RouteConst from '../../../constants/Route';
+import OrderRequests from '../../../requests/frontend/OrdersRequests'
 
 
 class PaymentPage extends Component {
@@ -12,10 +13,64 @@ class PaymentPage extends Component {
         super(props);
         this.state={
             errors: [],
-            user: []
+            user: [],
+
+            form: {
+                user_id: '',
+                event_id: '',
+                email: '',
+                card_name: '',
+                card_number: '',
+                expiration: '',
+                products: []
+            },
+            formData: new FormData(),
         }
     }
 
+    handleOnChange=event => {
+        let {form}=this.state;
+        form={...form,...{[event.target.name]: event.target.value}}
+        this.setState({form})
+    }
+    submitForm=event => {
+        event.preventDefault();
+        let {formData,form}=this.state;
+
+
+
+
+        formData.append('user_id',LocalStorageHelper.getItem('authToken').user.id);
+        formData.append('event_id',1);
+        formData.append('card_name',form.card_name);
+        formData.append('card_number',form.card_number);
+        formData.append('expiration',form.expiration);
+
+        // $products = LocalStorageHelper.getItem('authToken').user.id)
+        const {addedProducts}=this.props;
+        let products=[]
+        addedProducts.forEach(element => {
+            products.push(element.id+'.'+element.quantity+'.'+element.price)
+        });
+        let order={
+            user_id: LocalStorageHelper.getItem('authToken').user.id,
+            event_id: 1,
+            products: products
+        };
+
+        console.log(order);
+
+        OrderRequests.create(order).then((response) => {
+            console.log(response);
+
+            if(response.meta.status===201) {
+                alert('Your request has been sent successfully!')
+                window.location.href=RouteConst.frontEnd.charities.index.path;
+            } else {
+                this.state.messageError=response.meta.message;
+            }
+        });
+    }
     componentDidMount() {
         this.props.getCart();
         this.setState({user: LocalStorageHelper.getItem('authToken').user});
@@ -55,12 +110,6 @@ class PaymentPage extends Component {
                     </hr>
                 </div>
                 <div className="container mg-10">
-                    {/* <div className="text-left">
-                        <button className="btn btn-primary" >
-                            <span><i class="fa fa-chevron-left" aria-hidden="true"></i>
-                            </span>Back to shop</button>
-                        <hr></hr>
-                    </div> */}
                     <div className="col-md-4 order-md-2 mb-4">
                         <h4 className="d-flex justify-content-between align-items-center mb-3">
                             <span className="text-muted">Your cart</span>
@@ -155,35 +204,22 @@ class PaymentPage extends Component {
                                 <div className="row">
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="cc-name">Name on card</label>
-                                        <input type="text" className="form-control" id="cc-name" placeholder="" value="" />
+                                        <input type="text" className="form-control" id="cc-name" name="card_name" placeholder="" value="" onChange={this.handleOnChange} />
                                         <small className="text-muted">Full name as displayed on card</small>
                                     </div>
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="cc-number">Credit card number</label>
-                                        <input type="text" className="form-control" id="cc-number" placeholder="" value="" />
+                                        <input type="text" className="form-control" id="cc-number" name="card_number" placeholder="" value="" onChange={this.handleOnChange} />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-3 mb-3">
                                         <label htmlFor="cc-expiration">Expiration</label>
-                                        <input type="text" className="form-control" id="cc-expiration" placeholder="" value="" />
-                                    </div>
-                                    <div className="col-md-3 mb-3">
-                                        <label htmlFor="cc-expiration">CVV</label>
-                                        <input type="text" className="form-control" id="cc-cvv" placeholder="" value="" />
+                                        <input type="text" className="form-control" id="cc-expiration" name="expiration" placeholder="" value="" onChange={this.handleOnChange} />
                                     </div>
                                 </div>
                                 <hr className="mb-4" />
-                                <button className="btn btn-lg btn-primary btn-block" type="submit" data-toggle="modal" data-target="#checkout">Checkout</button>
-                                {/* <div className="modal fade" id="checkout">
-                                    <div className="modal-dialog">
-                                        <div className="modal-content">
-                                            <div className="modal-body">
-                                                <h4>Created successfully!</h4>
-                                            </div>
-                                        </div>
-                                    </div>>
-                                </div> */}
+                                <button className="btn btn-lg btn-primary btn-block" type="submit" data-toggle="modal" data-target="#checkout" onClick={this.submitForm} >Checkout</button>
                             </form>
                         </div>
                         }

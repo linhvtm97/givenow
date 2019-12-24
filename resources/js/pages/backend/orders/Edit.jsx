@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React,{Component} from 'react';
+import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import OrdersRequests from '../../../requests/backend/OrdersRequests';
 
 export default class extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state={
             id: this.props.match.params.id,
             info: {},
             form: {
-                name: '',
-                description: '',
+                status: '',
+                event_id: '',
+                user_id: '',
+                total: ''
             },
-            formData: {},
             messageError: '',
         };
     }
@@ -22,75 +23,50 @@ export default class extends Component {
         this.getInfo(this.state.id);
     }
 
-    getInfo = (id) => {
+    getInfo=(id) => {
         OrdersRequests.showByID(id).then((response) => {
             console.log(response)
-            if (response.meta.status === 200) {
-                const form = {
-                    name: response.data.name,
-                    description: response.data.description,
+            if(response.meta.status===200) {
+                const form={
+                    event_id: response.data.event_id,
+                    user_id: response.data.user_id,
+                    status: response.data.status,
+                    total: response.data.products.length
                 }
-                this.setState({ form });
+                this.setState({form});
             } else {
                 this.props.history.push(RouteConst.backEnd.orders.index.path);
             }
         });
     }
 
-    handleOnChange = event => {
-        let { form } = this.state;
-        form = { ...form, ...{ [event.target.name]: event.target.value } }
-        this.setState({ form })
+    handleOnChange=event => {
+        let {form}=this.state;
+        form={...form,...{[event.target.name]: event.target.value}}
+        this.setState({form})
     }
 
-    onChangeFile = (e) => {
-        e.preventDefault();
-
-        let reader = new FileReader();
-        let fileTmp = e.target.files[0];
-
-        if (fileTmp) {
-            reader.readAsDataURL(fileTmp);
-
-            reader.onloadend = () => {
-                let formData = new FormData();
-                formData.append('image', fileTmp);
-                this.setState({ formData });
-            };
-        }
-    };
-
-    submitForm = event => {
+    submitForm=event => {
         event.preventDefault();
-        let { formData, form } = this.state;
+        let {form}=this.state;
+        let formData=new FormData();
+        formData.append('status',form.status)
 
-        let formSubmit;
-
-        if (formData instanceof FormData) {
-            formData.append('name', form.name);
-            formData.append('description', form.description);
-
-            formSubmit = formData;
-        } else {
-            formSubmit = form;
-        }
-        
-
-        OrdersRequests.update(this.state.id, formSubmit).then((response) => {
-            if (response.meta.status === 200) {
-                if (response.data.id) {
+        OrdersRequests.update(this.state.id,form.status).then((response) => {
+            if(response.meta.status===200) {
+                if(response.data.id) {
                     this.props.history.push(`${RouteConst.backEnd.orders.index.path}/${response.data.id}`);
                 } else {
                     this.props.history.push(RouteConst.backEnd.orders.index.path);
                 }
             } else {
-                this.state.messageError = response.meta.message;
+                this.state.messageError=response.meta.message;
             }
         });
     }
 
     render() {
-        const breadcrumbElement = (
+        const breadcrumbElement=(
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
@@ -102,22 +78,29 @@ export default class extends Component {
             </ol>
         );
 
-        const formElement = (
+        const formElement=(
             <div>
                 <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" className="form-control" id="name"
-                        name="name" onChange={this.handleOnChange} value={this.state.form.name} />
+                    <label htmlFor="description">Status</label>
+                    <select name="status" id="status" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.status}>
+                        <option value='0'>PUBLIC</option>)
+                        <option value='1'>PRIVATE</option>)
+                    </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="image">Image</label>
-                    <input type="file" className="form-control" id="image"
-                        name="image" onChange={this.onChangeFile} />
+                    <label htmlFor="name">Event</label>
+                    <input type="text" className="form-control" id="event_id"
+                        name="event_id" disabled value={this.state.form.event_id} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    <input type="text" className="form-control" id="description"
-                        name="description" onChange={this.handleOnChange} value={this.state.form.description} />
+                    <label htmlFor="name">Created By User</label>
+                    <input type="text" className="form-control" id="user_id"
+                        name="user_id" disabled value={this.state.form.user_id} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="name">Created By User</label>
+                    <input type="text" className="form-control" id="total"
+                        name="total" disabled value={this.state.form.total} />
                 </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>
