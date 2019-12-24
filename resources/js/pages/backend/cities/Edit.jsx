@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React,{Component} from 'react';
+import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import CitiesRequests from '../../../requests/backend/CitiesRequests';
 
 export default class extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state={
             id: this.props.match.params.id,
             info: {},
             form: {
                 name: '',
             },
-            formData: {},
+            formData: new FormData(),
             messageError: '',
         };
     }
@@ -21,44 +21,56 @@ export default class extends Component {
         this.getInfo(this.state.id);
     }
 
-    getInfo = (id) => {
+    getInfo=(id) => {
         CitiesRequests.showByID(id).then((response) => {
             console.log(response)
-            if (response.meta.status === 200) {
-                const form = {
+            if(response.meta.status===200) {
+                const form={
                     name: response.data.name,
                 }
-                this.setState({ form });
+                this.setState({form});
             } else {
                 this.props.history.push(RouteConst.backEnd.cities.index.path);
             }
         });
     }
 
-    handleOnChange = event => {
-        let { form } = this.state;
-        form = { ...form, ...{ [event.target.name]: event.target.value } }
-        this.setState({ form })
+    handleOnChange=event => {
+        let {form}=this.state;
+        form={...form,...{[event.target.name]: event.target.value}}
+        this.setState({form})
     }
 
-    submitForm = event => {
-        event.preventDefault();        
+    submitForm=event => {
+        event.preventDefault();
+        let {formData,form}=this.state;
 
-        CitiesRequests.update(this.state.id, this.state.form).then((response) => {
-            if (response.meta.status === 200) {
-                if (response.data.id) {
+        let formSubmit;
+
+        if(formData instanceof FormData) {
+            formData.append('name',form.name);
+            formSubmit=formData;
+        } else {
+            formSubmit=form;
+        }
+
+        console.log(formData)
+
+        CitiesRequests.update(this.state.id,formSubmit).then((response) => {
+            if(response.meta.status===200) {
+                if(response.data.id) {
                     this.props.history.push(`${RouteConst.backEnd.cities.index.path}/${response.data.id}`);
                 } else {
                     this.props.history.push(RouteConst.backEnd.cities.index.path);
                 }
             } else {
-                this.state.messageError = response.meta.message;
+                this.state.messageError=response.meta.message;
             }
         });
     }
 
     render() {
-        const breadcrumbElement = (
+        const breadcrumbElement=(
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
@@ -70,7 +82,7 @@ export default class extends Component {
             </ol>
         );
 
-        const formElement = (
+        const formElement=(
             <div>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>

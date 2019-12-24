@@ -16,9 +16,6 @@ class StoreOrderRequest extends Request
         return [
             'event_id' => 'required|exists:events,id',
             'products' => 'required|array',
-            'products.*.product_id' => 'required|exists:products,id',
-            'products.*.quantity' => 'required|integer',
-            'products.*.money' => 'required|float',
         ];
     }
 

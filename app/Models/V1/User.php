@@ -15,9 +15,9 @@ class User extends Authenticatable implements JWTSubject
     protected $table = "users";
 
     const ROLE_NORMAL_USER = 0;
-    const ROLE_ADMIN = 1;
-    const ROLE_SUPER_ADMIN = 2;
-    const ROLE_CHARITY = 3;
+    const ROLE_ADMIN = 2;
+    const ROLE_SUPER_ADMIN = 3;
+    const ROLE_CHARITY = 1;
     const LIST_ROLE = [self::ROLE_ADMIN, self::ROLE_NORMAL_USER, self::ROLE_SUPER_ADMIN, self::ROLE_CHARITY];
 
     /**

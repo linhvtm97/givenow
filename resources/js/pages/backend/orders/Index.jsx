@@ -20,6 +20,7 @@ export default class extends Component {
     getAllRecords=() => {
         OrdersRequests.getAll().then((response) => {
             if(response.meta.status===200) {
+                console.log(response);
                 this.setState({listRecords: response.data});
             } else {
                 this.state.messageError=response.meta.message;
@@ -45,8 +46,10 @@ export default class extends Component {
             <table className="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Event</th>
+                        <th>Created By</th>
+                        <th>Total</th>
                         <th className="text-center" width="150">Action</th>
                     </tr>
                 </thead>
@@ -54,8 +57,10 @@ export default class extends Component {
                     {this.state.listRecords.map((item,index) => {
                         return (
                             <tr key={index}>
-                                <td>{item.name}</td>
-                                <td>{item.description}</td>
+                                <td>{item.status==0? 'Processed':'Processing'}</td>
+                                <td>{item.event.name}</td>
+                                <td>{item.user.name}</td>
+                                <td>{item.products.length}</td>
                                 <td className="text-center">
                                     <Link className="btn btn-info btn-sm mr-2"
                                         to={`${RouteConst.backEnd.orders.index.path}/${item.id}`}>
@@ -65,10 +70,10 @@ export default class extends Component {
                                         to={`${RouteConst.backEnd.orders.index.path}/${item.id}/edit`}>
                                         <i className="fas fa-edit"></i>
                                     </Link>
-                                    <button className="btn btn-danger btn-sm"
+                                    {/* <button className="btn btn-danger btn-sm"
                                         onClick={this.confirmDetele(item.id)} data-toggle="modal" data-target="#deleteModal">
                                         <i className="fas fa-trash"></i>
-                                    </button>
+                                    </button> */}
                                 </td>
                             </tr>
                         );
@@ -97,7 +102,7 @@ export default class extends Component {
             </div>
         );
 
-        const breadcrumbElement = (
+        const breadcrumbElement=(
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>

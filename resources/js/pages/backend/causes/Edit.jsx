@@ -13,7 +13,7 @@ export default class extends Component {
                 name: '',
                 description: '',
             },
-            formData: {},
+            formData: new FormData(),
             messageError: '',
         };
     }
