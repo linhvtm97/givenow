@@ -14,17 +14,17 @@ class UserTableSeeder extends Seeder
     {
         for ($i = 0; $i < 5; $i++) {
             factory(App\Models\V1\User::class)->create([
-                'name' => 'Admin' . ($i > 0 ? ' ' . $i : ''), 
-                'username' => 'admin' . ($i > 0 ? $i : ''), 
-                'role' => 1
+                'name' => 'Admin' . ($i > 0 ? ' ' . $i : ''),
+                'username' => 'admin' . ($i > 0 ? $i : ''),
+                'role' => 2
             ]);
         }
 
         for ($i = 0; $i < 5; $i++) {
             factory(App\Models\V1\User::class)->create([
-                'name' => 'Normal user ' . ($i > 0 ? ' ' . $i : ''), 
-                'username' => 'user' . ($i > 0 ? $i : ''), 
-                'role' => 0
+                'name' => 'Charity user ' . ($i > 0 ? ' ' . $i : ''),
+                'username' => 'user' . ($i > 0 ? $i : ''),
+                'role' => 1
             ]);
         }
     }
