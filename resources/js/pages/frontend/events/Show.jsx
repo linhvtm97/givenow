@@ -49,7 +49,7 @@ class Show extends Component {
             isvalid=true;
         }
 
-        const shareUrl=AppURL.url.localhost+'/events/'+event.id;
+        const shareUrl=AppURL.url.heroku+'/events/'+event.id;
         const title='Hurry up, some people are in need! Give now .';
         return (
             <div>

@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('event_id');
-            $table->string('status');
+            $table->string('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
 
