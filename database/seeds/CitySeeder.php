@@ -80,7 +80,7 @@ class CitySeeder extends Seeder
 
         foreach($cities as $city) {
             factory(App\Models\V1\City::class, 1)->create(
-                ['name' => transliterator_transliterate('Any-Latin; Latin-ASCII', $city)]
+                ['name' => $city]
             );
         }
     }
