@@ -37,16 +37,15 @@ class PaymentPage extends Component {
         event.preventDefault();
         let {formData,form}=this.state;
 
-
-
+        let {match}=this.props;
+        let id=match.params.id
 
         formData.append('user_id',LocalStorageHelper.getItem('authToken').user.id);
-        formData.append('event_id',1);
+        formData.append('event_id',id);
         formData.append('card_name',form.card_name);
         formData.append('card_number',form.card_number);
         formData.append('expiration',form.expiration);
 
-        // $products = LocalStorageHelper.getItem('authToken').user.id)
         const {addedProducts}=this.props;
         let products=[]
         addedProducts.forEach(element => {
@@ -54,18 +53,15 @@ class PaymentPage extends Component {
         });
         let order={
             user_id: LocalStorageHelper.getItem('authToken').user.id,
-            event_id: 1,
+            event_id: id,
             products: products
         };
 
-        console.log(order);
-
         OrderRequests.create(order).then((response) => {
-            console.log(response);
-
             if(response.meta.status===201) {
+                this.props.resetCart();
                 alert('Your request has been sent successfully!')
-                window.location.href=RouteConst.frontEnd.charities.index.path;
+                window.location.href=RouteConst.frontEnd.events.index.path+"/"+id;
             } else {
                 this.state.messageError=response.meta.message;
             }

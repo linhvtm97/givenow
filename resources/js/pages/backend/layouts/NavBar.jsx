@@ -41,9 +41,9 @@ export default class extends Component {
         return (
             <div>
                 <nav className="navbar navbar-expand navbar-dark bg-dark static-top">
-                    <Link className="navbar-brand mr-1 mg-0" to={RouteConst.backEnd.home.index.path}>
+                    <a className="navbar-brand mr-1 mg-0" href={RouteConst.frontEnd.home.index.path}>
                         <img src="/images/givenowlogo.png"></img>
-                    </Link>
+                    </a>
 
                     <button className="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
                         <i className="fas fa-bars"></i>

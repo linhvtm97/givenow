@@ -15,7 +15,6 @@ import Login from './auth/Login';
 import Register from './auth/Register';
 // Carts
 import CartPayment from './carts/Payment';
-import CartShow from './carts/Show';
 // Causes
 import CausesShow from './causes/Show';
 // Products
@@ -45,7 +44,6 @@ class RouteBackEnd extends Component {
                 <Route exact path={RouteConst.frontEnd.categories.index.path} component={CategoriesIndex} />
                 <Route exact path={RouteConst.frontEnd.causes.show.path} component={CausesShow} />
 
-                <Route exact path={RouteConst.frontEnd.cart.show.path} component={CartShow} />
                 <Route exact path={RouteConst.frontEnd.cart.pay.path} component={CartPayment} />
 
                 <Route exact path={RouteConst.frontEnd.aboutUs.path} component={AboutUs} />

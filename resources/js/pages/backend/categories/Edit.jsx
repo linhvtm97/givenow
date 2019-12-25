@@ -112,7 +112,7 @@ export default class extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="image">Image</label>
-                    <input type="file" className="form-control" id="image"
+                    <input type="file" className="form-control" id="image" accept="image/*"
                         name="image" onChange={this.onChangeFile} />
                 </div>
                 <div className="form-group">

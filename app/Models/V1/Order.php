@@ -46,6 +46,6 @@ class Order extends MainModel
      */
     public function event()
     {
-        return $this->belongsTo(Cause::class, 'event_id');
+        return $this->belongsTo(Event::class, 'event_id');
     }
 }

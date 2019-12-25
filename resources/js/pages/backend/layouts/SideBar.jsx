@@ -36,10 +36,11 @@ export default class extends Component {
             {icon: 'fas fa-folder',label: 'Categories',link: RouteConst.backEnd.categories.index.path,roleNeed: 1},
             {icon: 'fas fa-folder',label: 'Causes',link: RouteConst.backEnd.causes.index.path,roleNeed: 1},
             {icon: 'fas fa-folder',label: 'Charities',link: RouteConst.backEnd.charities.index.path,roleNeed: 1},
+            {icon: 'fas fa-folder',label: 'Setting',link: RouteConst.backEnd.users.editInfo.path,roleNeed: -1},
         ];
 
         const listDynamicMenus=[
-            // {icon: 'fas fa-folder',label: 'Users',link: RouteConst.backEnd.users.index.path,roleNeed: 1},
+            {icon: 'fas fa-folder',label: 'Users',link: RouteConst.backEnd.users.index.path,roleNeed: 1},
             {icon: 'fas fa-folder',label: 'Events',link: RouteConst.backEnd.events.index.path,roleNeed: 0},
             {icon: 'fas fa-folder',label: 'Products',link: RouteConst.backEnd.products.index.path,roleNeed: 1},
             {icon: 'fas fa-folder',label: 'Orders',link: RouteConst.backEnd.orders.index.path,roleNeed: 1},
