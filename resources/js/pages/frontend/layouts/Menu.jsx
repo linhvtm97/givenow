@@ -3,6 +3,7 @@ import {Route,Link} from "react-router-dom";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
 import LocalStorageHelper from "../../../helpers/LocalStorageHelper";
+import RouteConst from "../../../constants/Route";
 
 const menus=[
     {
@@ -65,6 +66,7 @@ class Menu extends React.Component {
     }
     render() {
         let {cartNotification}=this.state
+        let user = LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user:null
         return (
             <div className="position-relative">
                 <nav className="navbar navbar-inverse mg-0 ">
@@ -82,7 +84,7 @@ class Menu extends React.Component {
                                 menus
                             )}
                         </ul>
-                        <div className={(LocalStorageHelper.getItem('authToken')!=null? 'hidden':'')}>
+                        <div className={user!=null? 'hidden':''}>
                             <ul className="nav navbar-nav navbar-right">
                                 <li>
                                     <a
@@ -94,7 +96,7 @@ class Menu extends React.Component {
                                                                       </a>
                                     <Register />
                                 </li>
-                                <li className={(LocalStorageHelper.getItem('authToken')!=null? ' d-none':'')}>
+                                <li className={user!=null? ' d-none':''}>
                                     <a
                                         href="#login"
                                         data-toggle="modal"
@@ -106,16 +108,16 @@ class Menu extends React.Component {
                                 </li>
                             </ul>
                         </div>
-                        <div className={(LocalStorageHelper.getItem('authToken')==null? 'hidden':'')}>
+                        <div className={user==null? 'hidden':''}>
                             <ul className="nav navbar-nav navbar-right">
-                                {/* <li> <a href="/cart/payment"> <i className="fa fa-shopping-cart"></i>Cart <span className="badge badge-danger">{cartNotification}</span></a>
-                            </li> */}
-                                <li className={(LocalStorageHelper.getItem('user')!=null? ' d-none':'')}>
+                                <li> <a href="/cart/payment"> <i className="fa fa-shopping-cart"></i>Cart <span className="badge badge-danger">{cartNotification}</span></a>
+                            </li>
+                                <li className={user!=null?' d-none':''}>
                                     <a
                                         href='#user'
                                         data-toggle="modal"
                                     >
-                                        <span className="glyphicon glyphicon-user "></span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.name:'Admin'}
+                                        <span className="glyphicon glyphicon-user "></span>{user !==null? user.name:'Admin'}
                                     </a>
                                     <div className="modal fade" id="user">
                                         <div className="modal-dialog">
@@ -125,6 +127,9 @@ class Menu extends React.Component {
                                                     <h4 className="modal-title text-center">User Information</h4>
                                                 </div>
                                                 <div className="modal-body">
+                                                <div className={user!=null? ' ':' hidden'}>
+                                                    <img src={user!=null? user.image:''} className="charity-image text-center"></img>
+                                                </div>
                                                     <div className="row">
                                                         <div className="col-sm-2">
                                                         </div>
@@ -133,7 +138,7 @@ class Menu extends React.Component {
                                                         </div>
                                                         <div className="col-sm-6">
 
-                                                            <span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.name:'Admin'}</span>
+                                                            <span>{user !==null? user.name:'Admin'}</span>
                                                         </div>
                                                     </div>
                                                     <div className="row">
@@ -144,7 +149,7 @@ class Menu extends React.Component {
                                                         </div>
                                                         <div className="col-sm-6">
 
-                                                            <span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.email:'Admin'}</span>
+                                                            <span>{user!==null? user.email:'Admin'}</span>
                                                         </div>
                                                     </div>
                                                     <div className="row">
@@ -155,7 +160,7 @@ class Menu extends React.Component {
                                                         </div>
                                                         <div className="col-sm-6">
 
-                                                            <span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.address:'Admin'}</span>
+                                                            <span>{user!==null? user.address:'Admin'}</span>
                                                         </div>
 
                                                     </div>
@@ -167,13 +172,13 @@ class Menu extends React.Component {
                                                         </div>
                                                         <div className="col-sm-6">
 
-                                                            <span>{LocalStorageHelper.getItem('authToken')!==null? LocalStorageHelper.getItem('authToken').user.phone_number:'Admin'}</span>
+                                                            <span>{user!==null? user.phone_number:'Admin'}</span>
                                                         </div>
 
                                                     </div>
                                                     <div className="text-right">
-                                                        <button type="button" className="btn btn-default" data-dismiss="modal">Edit</button>
-                                                        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <a type="button" href={RouteConst.backEnd.users.editInfo.path} className="btn btn-primary">Edit</a>
+                                                        <a type="button" className="btn btn-default" data-dismiss="modal">Close</a>
                                                     </div>
                                                 </div>
                                             </div>

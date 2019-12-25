@@ -188,7 +188,7 @@ export default class extends Component {
                     <div>
                         <img src={this.state.form.image}></img>
                     </div>
-                    <input type="file" className="form-control" id="image"
+                    <input type="file" className="form-control" id="image" accept="image/*"
                         name="image" onChange={this.onChangeFile} />
                 </div>
                 <div className="form-group">

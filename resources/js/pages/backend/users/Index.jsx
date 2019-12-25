@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
-import CategoriesRequests from '../../../requests/backend/CategoriesRequests';
+import UsersRequests from '../../../requests/backend/UsersRequests';
 
 export default class extends Component {
     constructor(props) {
@@ -18,8 +18,9 @@ export default class extends Component {
     }
 
     getAllRecords=() => {
-        CategoriesRequests.getAll().then((response) => {
+        UsersRequests.getAll().then((response) => {
             if(response.meta.status===200) {
+                console.log(response.data);
                 this.setState({listRecords: response.data});
             } else {
                 this.state.messageError=response.meta.message;
@@ -29,7 +30,7 @@ export default class extends Component {
 
     deleteRecord=(event) => {
         event.preventDefault();
-        CategoriesRequests.deleteByID(this.state.idDelete).then((response) => {
+        UsersRequests.deleteByID(this.state.idDelete).then((response) => {
             this.getAllRecords();
         });
     }
@@ -46,7 +47,7 @@ export default class extends Component {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
+                        <th>Role</th>
                         <th className="text-center" width="150">Action</th>
                     </tr>
                 </thead>
@@ -55,14 +56,14 @@ export default class extends Component {
                         return (
                             <tr key={index}>
                                 <td>{item.name}</td>
-                                <td>{item.description}</td>
+                                <td>{item.role}</td>
                                 <td className="text-center">
                                     <Link className="btn btn-info btn-sm mr-2"
-                                        to={`${RouteConst.backEnd.categories.index.path}/${item.id}`}>
+                                        to={`${RouteConst.backEnd.users.index.path}/${item.id}`}>
                                         <i className="fas fa-eye"></i>
                                     </Link>
                                     <Link className="btn btn-warning btn-sm mr-2"
-                                        to={`${RouteConst.backEnd.categories.index.path}/${item.id}/edit`}>
+                                        to={`${RouteConst.backEnd.users.index.path}/${item.id}/edit`}>
                                         <i className="fas fa-edit"></i>
                                     </Link>
                                     <button className="btn btn-danger btn-sm"
@@ -102,7 +103,7 @@ export default class extends Component {
                 <li className="breadcrumb-item">
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
                 </li>
-                <li className="breadcrumb-item active">Categories</li>
+                <li className="breadcrumb-item active">Users</li>
             </ol>
         );
 
@@ -114,11 +115,11 @@ export default class extends Component {
                     <div className="card-header">
                         <div className="float-left">
                             <p className="mb-0 mt-1">
-                                <i className="fas fa-table"></i> List categories
+                                <i className="fas fa-table"></i> List users
                             </p>
                         </div>
                         <div className="float-right">
-                            <Link to={RouteConst.backEnd.categories.create.path}>
+                            <Link to={RouteConst.backEnd.users.create.path}>
                                 <button className="btn btn-success">Create</button>
                             </Link>
                         </div>

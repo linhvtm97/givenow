@@ -30,4 +30,5 @@ Route::group([
     require base_path("app/Modules/V1/Post/routes.php");
     require base_path("app/Modules/V1/Order/routes.php");
     require base_path("app/Modules/V1/City/routes.php");
+    require base_path("app/Modules/V1/User/routes.php");
 });

@@ -93,6 +93,9 @@ export default Object.freeze({
             edit: {
                 path: '/management/users/:id/edit'
             },
+            editInfo: {
+                path: '/management/information'
+            },
         },
         charities: {
             index: {
@@ -174,10 +177,10 @@ export default Object.freeze({
         },
         cart: {
             show: {
-                path: '/cart'
+                path: '/cart/payment'
             },
             pay: {
-                path: '/cart/payment'
+                path: '/cart/payment/event/:id'
             }
         },
         causes: {

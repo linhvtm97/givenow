@@ -4,6 +4,7 @@ import EventsRequests from '../../../requests/backend/EventsRequests';
 import {connect} from 'react-redux';
 import {addToCart,getCart} from '../../../redux/actions/cartActions';
 import LocalStorageHelper from "../../../helpers/LocalStorageHelper";
+import RouteConst from '../../../constants/Route';
 
 class Index extends Component {
     constructor(props) {
@@ -98,7 +99,6 @@ class Index extends Component {
             })
         }
         return (
-
             <div>
                 <div className="container">
                     <div className="col-sm-6 col-md-6 col-xs-6 col-lg-6">
@@ -154,7 +154,7 @@ class Index extends Component {
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                                        <a href="/cart/payment" role="button" className="btn btn-danger">Checkout</a>
+                                        <a href={RouteConst.frontEnd.cart.show.path+"/event/"+event.id} role="button" className="btn btn-danger">Checkout</a>
                                     </div>
                                 </div>
                             </div>

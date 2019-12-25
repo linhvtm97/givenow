@@ -41,6 +41,7 @@ class OrderRepository extends BaseRepository
         ]);
         $order = Order::create($attributes);
         $products = $attributes['products'];
+        $totalItems = 0;
        foreach($products as $product) {
            $product = explode('.', $product);
            $data = array(
@@ -49,8 +50,12 @@ class OrderRepository extends BaseRepository
                "money" => $product[2],
                'order_id' => $order->id
            );
-            $record = OrderProduct::create($data);
+           $totalItems+= $product[1];
+           $record = OrderProduct::create($data);
        }
+        $event = $order->event;
+        $event->current_items += $totalItems;
+        $event->save();
 
         return Order::with(['products', 'user', 'event'])->where('id',$order->id)->firstOrFail();
     }

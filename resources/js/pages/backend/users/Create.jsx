@@ -9,6 +9,13 @@ export default class extends Component {
         this.state = {
             form: {
                 name: '',
+                email: '',
+                address: '',
+                phone_number: '',
+                role: '',
+                username: '',
+                password: '',
+                password_confirm: '',
                 description: '',
             },
             formData: {},

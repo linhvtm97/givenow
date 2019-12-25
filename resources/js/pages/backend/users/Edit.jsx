@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
-import CategoriesRequests from '../../../requests/backend/CategoriesRequests';
+import UsersRequests from '../../../requests/backend/UsersRequests';
 
 export default class extends Component {
     constructor(props) {
@@ -11,7 +11,11 @@ export default class extends Component {
             info: {},
             form: {
                 name: '',
+                username: '',
+                email: '',
+                phone_number: '',
                 description: '',
+                address: '',
             },
             formData: new FormData(),
             messageError: '',
@@ -23,16 +27,20 @@ export default class extends Component {
     }
 
     getInfo=(id) => {
-        CategoriesRequests.showByID(id).then((response) => {
+        UsersRequests.showByID(id).then((response) => {
             console.log(response)
             if(response.meta.status===200) {
                 const form={
                     name: response.data.name,
+                    email: response.data.email,
+                    username: response.data.username,
+                    address: response.data.address,
+                    phone_number: response.data.phone_number,
                     description: response.data.description,
                 }
                 this.setState({form});
             } else {
-                this.props.history.push(RouteConst.backEnd.categories.index.path);
+                this.props.history.push(RouteConst.backEnd.users.index.path);
             }
         });
     }
@@ -68,6 +76,9 @@ export default class extends Component {
 
         if(formData instanceof FormData) {
             formData.append('name',form.name);
+            formData.append('email',form.email);
+            formData.append('address',form.address);
+            formData.append('phone_number',form.phone_number);
             formData.append('description',form.description);
 
             formSubmit=formData;
@@ -75,13 +86,12 @@ export default class extends Component {
             formSubmit=form;
         }
 
-
-        CategoriesRequests.update(this.state.id,formSubmit).then((response) => {
+        UsersRequests.update(this.state.id,formSubmit).then((response) => {
             if(response.meta.status===200) {
                 if(response.data.id) {
-                    this.props.history.push(`${RouteConst.backEnd.categories.index.path}/${response.data.id}`);
+                    this.props.history.push(`${RouteConst.backEnd.users.index.path}/${response.data.id}`);
                 } else {
-                    this.props.history.push(RouteConst.backEnd.categories.index.path);
+                    this.props.history.push(RouteConst.backEnd.users.index.path);
                 }
             } else {
                 this.state.messageError=response.meta.message;
@@ -96,7 +106,7 @@ export default class extends Component {
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
                 </li>
                 <li className="breadcrumb-item">
-                    <Link to={RouteConst.backEnd.categories.index.path}>Categories</Link>
+                    <Link to={RouteConst.backEnd.users.index.path}>Users</Link>
                 </li>
                 <li className="breadcrumb-item active">Edit</li>
             </ol>
@@ -110,8 +120,23 @@ export default class extends Component {
                         name="name" onChange={this.handleOnChange} value={this.state.form.name} />
                 </div>
                 <div className="form-group">
+                    <label htmlFor="name">Phone number</label>
+                    <input type="text" className="form-control" id="name"
+                        name="phone_number" onChange={this.handleOnChange} value={this.state.form.phone_number} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="name">Address</label>
+                    <input type="text" className="form-control" id="name"
+                        name="address" onChange={this.handleOnChange} value={this.state.form.address} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="name">Username</label>
+                    <input type="text" className="form-control" id="name" disabled
+                        name="username" onChange={this.handleOnChange} value={this.state.form.username} />
+                </div>
+                <div className="form-group">
                     <label htmlFor="image">Image</label>
-                    <input type="file" className="form-control" id="image"
+                    <input type="file" className="form-control" id="image" accept="image/*"
                         name="image" onChange={this.onChangeFile} />
                 </div>
                 <div className="form-group">
@@ -121,7 +146,7 @@ export default class extends Component {
                 </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>
-                <Link to={`${RouteConst.backEnd.categories.index.path}/${this.state.id}`}>
+                <Link to={`${RouteConst.backEnd.users.index.path}/${this.state.id}`}>
                     <button type="button" className="btn btn-secondary ml-2">Cancel</button>
                 </Link>
             </div>
