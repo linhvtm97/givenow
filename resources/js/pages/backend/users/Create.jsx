@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
-import CategoriesRequests from '../../../requests/backend/CategoriesRequests';
+import UsersRequests from '../../../requests/backend/UsersRequests';
+import RoleHelper from '../../../helpers/RoleHelper';
 
 export default class extends Component {
     constructor(props) {
@@ -12,13 +13,13 @@ export default class extends Component {
                 email: '',
                 address: '',
                 phone_number: '',
-                role: '',
+                role: '0',
                 username: '',
                 password: '',
                 password_confirm: '',
                 description: '',
             },
-            formData: {},
+            formData: new FormData(),
             messageError: '',
         };
     }
@@ -41,7 +42,6 @@ export default class extends Component {
             reader.onloadend = () => {
                 let formData = new FormData();
                 formData.append('image', fileTmp);
-                console.log(formData)
                 this.setState({ formData })
             };
         }
@@ -51,15 +51,21 @@ export default class extends Component {
         event.preventDefault();
         let { formData, form } = this.state;
         formData.append('name', form.name);
+        formData.append('username', form.username);
+        formData.append('role', form.role);
+        formData.append('password', form.password);
+        formData.append('address', form.address);
+        formData.append('phone_number', form.phone_number);
+        formData.append('password_confirm', form.password_confirm);
+        formData.append('email', form.email);
         formData.append('description', form.description);
 
-        CategoriesRequests.create(formData).then((response) => {
+        UsersRequests.create(formData).then((response) => {
             if (response.meta.status === 201) {
-                console.log(response.data.id);
                 if (response.data.id) {
-                    this.props.history.push(`${RouteConst.backEnd.categories.index.path}/${response.data.id}`);
+                    this.props.history.push(`${RouteConst.backEnd.users.index.path}/${response.data.id}`);
                 } else {
-                    this.props.history.push(RouteConst.backEnd.categories.index.path);
+                    this.props.history.push(RouteConst.backEnd.users.index.path);
                 }
             } else {
                 this.state.messageError = response.meta.message;
@@ -68,13 +74,20 @@ export default class extends Component {
     }
 
     render() {
+        const roleUser=RoleHelper.getRole();
+        let roles = {}
+        if(roleUser<3) {
+            roles = [0,1]
+        } else {
+            roles = [0,1,2]
+        }
         const breadcrumbElement = (
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                     <Link to={RouteConst.backEnd.home.index.path}>Home</Link>
                 </li>
                 <li className="breadcrumb-item">
-                    <Link to={RouteConst.backEnd.categories.index.path}>Categories</Link>
+                    <Link to={RouteConst.backEnd.users.index.path}>Users</Link>
                 </li>
                 <li className="breadcrumb-item active">Create</li>
             </ol>
@@ -83,25 +96,64 @@ export default class extends Component {
         const formElement = (
             <div>
                 <div className="form-group">
+                    <label htmlFor="name">Role</label>
+                    <select name="role" id="role" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.role}>
+                        {
+                        roles.map((item, index) => {
+                            return(
+                                <option key={index} name="role" value={item}>{item==0?"Donor":item==1?"Charity":"Admin"}</option>
+                            )
+                        })
+                        }
+                    </select>
+                </div>
+                <div className="form-group">
                     <label htmlFor="name">Name</label>
                     <input type="text" className="form-control" id="name"
-                        name="name" onChange={this.handleOnChange} />
+                        name="name" onChange={this.handleOnChange}  />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="name">Phone number</label>
+                    <input type="text" className="form-control" id="phone_number"
+                        name="phone_number" onChange={this.handleOnChange}  />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="name">Address</label>
+                    <input type="text" className="form-control" id="address"
+                        name="address" onChange={this.handleOnChange}  />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="name">Email</label>
+                    <input type="text" className="form-control" id="email"
+                        name="email" onChange={this.handleOnChange}  />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="name">Username</label>
+                    <input type="text" className="form-control" id="username"
+                        name="username" onChange={this.handleOnChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input type="password" id="password" className="form-control" name="password"
+                        required onChange={this.handleOnChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Password Confirm</label>
+                    <input type="password" id="password_confirm" className="form-control" name="password_confirm"
+                        required onChange={this.handleOnChange} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="image">Image</label>
-                    <input type="file" className="form-control" id="image"
-                        name="image" onChange={this.onChangeFile} />
+                    <input type="file" className="form-control" id="image" accept="image/*"
+                        name="image" onChange={this.onChangeFile}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
                     <input type="text" className="form-control" id="description"
-                        name="description" onChange={this.handleOnChange} />
+                        name="description" onChange={this.handleOnChange} value={this.state.form.description != null ? this.state.form.description : "" } />
                 </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>
-                <Link to={RouteConst.backEnd.categories.index.path}>
-                    <button type="button" className="btn btn-secondary ml-2">Cancel</button>
-                </Link>
             </div>
         );
 

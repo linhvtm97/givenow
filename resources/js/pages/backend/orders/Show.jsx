@@ -84,7 +84,7 @@ export default class extends Component {
                                 <tr>
                                     <th>Product ID</th>
                                     <th>Quatity</th>
-                                    <th>Total</th>
+                                    <th>Total Money ($)</th>
                                 </tr>
                             </thead>
                             <tbody>

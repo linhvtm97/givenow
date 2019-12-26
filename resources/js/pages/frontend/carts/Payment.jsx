@@ -49,7 +49,7 @@ class PaymentPage extends Component {
         const {addedProducts}=this.props;
         let products=[]
         addedProducts.forEach(element => {
-            products.push(element.id+'.'+element.quantity+'.'+element.price)
+            products.push(element.id+'.'+element.quantity+'.'+element.price*element.quantity)
         });
         let order={
             user_id: LocalStorageHelper.getItem('authToken').user.id,

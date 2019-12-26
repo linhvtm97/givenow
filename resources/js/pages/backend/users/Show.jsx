@@ -62,6 +62,26 @@ export default class extends Component {
                             <p className="show-value">{this.state.info.name}</p>
                         </div>
                         <div className="show-info">
+                            <p className="show-label">Role</p>
+                            <p className="show-value">{this.state.info.role==0?"Donor":this.state.info.role==1?"Charity":"Admin"}</p>
+                        </div>
+                        <div className="show-info">
+                            <p className="show-label">Username</p>
+                            <p className="show-value">{this.state.info.username}</p>
+                        </div>
+                        <div className="show-info">
+                            <p className="show-label">Email</p>
+                            <p className="show-value">{this.state.info.email}</p>
+                        </div>
+                        <div className="show-info">
+                            <p className="show-label">Address</p>
+                            <p className="show-value">{this.state.info.address}</p>
+                        </div>
+                        <div className="show-info">
+                            <p className="show-label">Phone number</p>
+                            <p className="show-value">{this.state.info.phone_number}</p>
+                        </div>
+                        <div className="show-info">
                             <p className="show-label">Image</p>
                             <p className="show-value">
                                 <img src={this.state.info.image} className="img-fluid"/>
@@ -91,7 +111,7 @@ export default class extends Component {
 
                 <div className="card mb-3">
                     <div className="card-header">
-                        <i className="fas fa-table"></i> Info category
+                        <i className="fas fa-table"></i> Info user
                     </div>
                     <div className="card-body">
                         {infoElement}

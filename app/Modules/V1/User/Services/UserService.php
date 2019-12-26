@@ -29,7 +29,7 @@ class UserService extends BaseService
      */
     public function getAll(array $data = null)
     {
-        return $this->repository->paginate();
+        return $this->repository->getAll($data);
     }
 
     /**
