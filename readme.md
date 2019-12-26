@@ -2,6 +2,6 @@
 
 - npm run watch
 
-http://domain.test
+http://givenowapp.herokuapp.com
 
-http://domain.test/management
+http://givenowapp.herokuapp.com/management
