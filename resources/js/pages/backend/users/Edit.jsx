@@ -16,6 +16,7 @@ export default class extends Component {
                 phone_number: '',
                 description: '',
                 address: '',
+                image: '',
             },
             formData: new FormData(),
             messageError: '',
@@ -35,6 +36,7 @@ export default class extends Component {
                     email: response.data.email,
                     username: response.data.username,
                     address: response.data.address,
+                    image: response.data.image,
                     phone_number: response.data.phone_number,
                     description: response.data.description,
                 }
@@ -136,6 +138,9 @@ export default class extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="image">Image</label>
+                    <p className="show-value">
+                                <img src={this.state.form.image} className="img-fluid"/>
+                    </p>
                     <input type="file" className="form-control" id="image" accept="image/*"
                         name="image" onChange={this.onChangeFile} />
                 </div>

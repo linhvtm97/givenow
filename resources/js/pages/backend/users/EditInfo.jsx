@@ -30,7 +30,6 @@ export default class extends Component {
 
     getInfo=(id) => {
         UsersRequests.showByID(id).then((response) => {
-            console.log(response)
             if(response.meta.status===200) {
                 const form={
                     name: response.data.name,
@@ -122,17 +121,17 @@ export default class extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="name">Phone number</label>
-                    <input type="text" className="form-control" id="name"
+                    <input type="text" className="form-control" id="phone_number"
                         name="phone_number" onChange={this.handleOnChange} value={this.state.form.phone_number} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="name">Address</label>
-                    <input type="text" className="form-control" id="name"
+                    <input type="text" className="form-control" id="address"
                         name="address" onChange={this.handleOnChange} value={this.state.form.address} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="name">Username</label>
-                    <input type="text" className="form-control" id="name" disabled
+                    <input type="text" className="form-control" id="username" disabled
                         name="username" onChange={this.handleOnChange} value={this.state.form.username} />
                 </div>
                 <div className="form-group">
@@ -141,12 +140,12 @@ export default class extends Component {
                                 <img src={this.state.form.image} className="img-fluid"/>
                     </p>
                     <input type="file" className="form-control" id="image" accept="image/*"
-                        name="image" onChange={this.onChangeFile} />
+                        name="image" onChange={this.onChangeFile}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
                     <input type="text" className="form-control" id="description"
-                        name="description" onChange={this.handleOnChange} value={this.state.form.description} />
+                        name="description" onChange={this.handleOnChange} value={this.state.form.description != null ? this.state.form.description : "" } />
                 </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>

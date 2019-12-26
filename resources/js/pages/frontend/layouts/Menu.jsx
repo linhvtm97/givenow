@@ -110,8 +110,6 @@ class Menu extends React.Component {
                         </div>
                         <div className={user==null? 'hidden':''}>
                             <ul className="nav navbar-nav navbar-right">
-                                <li> <a href="/cart/payment"> <i className="fa fa-shopping-cart"></i>Cart <span className="badge badge-danger">{cartNotification}</span></a>
-                            </li>
                                 <li className={user!=null?' d-none':''}>
                                     <a
                                         href='#user'

@@ -10,6 +10,7 @@ export default class extends Component {
             listRecords: [],
             messageError: '',
             idDelete: '',
+            status: 0
         };
     }
 
@@ -17,10 +18,22 @@ export default class extends Component {
         this.getAllRecords();
     }
 
+    onChange = event => {
+        let status = event.target.checked ? 1 : 0;
+        let data = new FormData();
+        data.append("status", status)
+        UsersRequests.update(event.target.value,data).then((response) => {
+            if(response.meta.status===200) {
+                window.location.href=RouteConst.backEnd.users.index.path;
+            } else {
+                this.state.messageError=response.meta.message;
+            }
+        });
+    }
+
     getAllRecords=() => {
         UsersRequests.getAll().then((response) => {
             if(response.meta.status===200) {
-                console.log(response.data);
                 this.setState({listRecords: response.data});
             } else {
                 this.state.messageError=response.meta.message;
@@ -47,7 +60,8 @@ export default class extends Component {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Role</th>
+                        <th className="text-center" width="150">Role</th>
+                        <th className="text-center" width="150">Status</th>
                         <th className="text-center" width="150">Action</th>
                     </tr>
                 </thead>
@@ -56,20 +70,22 @@ export default class extends Component {
                         return (
                             <tr key={index}>
                                 <td>{item.name}</td>
-                                <td>{item.role}</td>
+                                <td>{item.role==0?"Donor":item.role==1?"Charity":"Admin"}</td>
                                 <td className="text-center">
-                                    <Link className="btn btn-info btn-sm mr-2"
-                                        to={`${RouteConst.backEnd.users.index.path}/${item.id}`}>
-                                        <i className="fas fa-eye"></i>
-                                    </Link>
-                                    <Link className="btn btn-warning btn-sm mr-2"
-                                        to={`${RouteConst.backEnd.users.index.path}/${item.id}/edit`}>
-                                        <i className="fas fa-edit"></i>
-                                    </Link>
-                                    <button className="btn btn-danger btn-sm"
-                                        onClick={this.confirmDetele(item.id)} data-toggle="modal" data-target="#deleteModal">
-                                        <i className="fas fa-trash"></i>
-                                    </button>
+                                    <label className="switch">
+                                    <input type="checkbox" name="status" value={item.id} checked={item.status==1} onChange={this.onChange}/>
+                                    <span className="slider round"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                <Link className="btn btn-info btn-sm mr-2 ml-4"
+                                    to={`${RouteConst.backEnd.users.index.path}/${item.id}`}>
+                                    <i className="fas fa-eye"></i>
+                                </Link>
+                                <Link className="btn btn-warning btn-sm mr-2"
+                                    to={`${RouteConst.backEnd.users.index.path}/${item.id}/edit`}>
+                                    <i className="fas fa-edit"></i>
+                                </Link>
                                 </td>
                             </tr>
                         );

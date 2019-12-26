@@ -20,7 +20,6 @@ export default class extends Component {
     getAllRecords=() => {
         OrdersRequests.getAll().then((response) => {
             if(response.meta.status===200) {
-                console.log(response);
                 this.setState({listRecords: response.data});
             } else {
                 this.state.messageError=response.meta.message;
@@ -57,7 +56,9 @@ export default class extends Component {
                     {this.state.listRecords.map((item,index) => {
                         return (
                             <tr key={index}>
-                                <td>{item.status==0? 'Processed':'Processing'}</td>
+                                <td>
+                                <span className={item.status==0?"text-success":"text-danger"}>{item.status==0? "Processed" : "Processing"}</span>
+                                </td>
                                 <td>{item.event.name}</td>
                                 <td>{item.user.name}</td>
                                 <td>{item.products.length}</td>

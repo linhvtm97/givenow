@@ -30,8 +30,8 @@ class User extends Authenticatable implements JWTSubject
     //define per page for paginator
     protected $perPage = 20;
 
-    public $order = 'updated_at';
-    public $orderMethod = 'desc';
+    public $order = 'name';
+    public $orderMethod = 'asc';
 
     public $order2nd = 'updated_at';
     public $orderMethod2nd = 'desc';
@@ -50,7 +50,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'phone_number', 'address', 'role', 'image'
+        'name', 'email', 'password', 'username', 'phone_number', 'address', 'role', 'image', 'status'
     ];
 
     /**
