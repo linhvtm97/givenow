@@ -120,6 +120,11 @@ export default class extends Component {
                         name="name" onChange={this.handleOnChange} value={this.state.form.name} />
                 </div>
                 <div className="form-group">
+                    <label htmlFor="name">Email</label>
+                    <input type="text" className="form-control" id="email"
+                        name="email" onChange={this.handleOnChange} value={this.state.form.email} />
+                </div>
+                <div className="form-group">
                     <label htmlFor="name">Phone number</label>
                     <input type="text" className="form-control" id="phone_number"
                         name="phone_number" onChange={this.handleOnChange} value={this.state.form.phone_number} />

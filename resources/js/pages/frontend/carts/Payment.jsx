@@ -200,18 +200,18 @@ class PaymentPage extends Component {
                                 <div className="row">
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="cc-name">Name on card</label>
-                                        <input type="text" className="form-control" id="cc-name" name="card_name" placeholder="" value="" onChange={this.handleOnChange} />
+                                        <input type="text" className="form-control" id="cc-name" name="card_name" placeholder="" value={this.state.card_name} onChange={this.handleOnChange} />
                                         <small className="text-muted">Full name as displayed on card</small>
                                     </div>
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="cc-number">Credit card number</label>
-                                        <input type="text" className="form-control" id="cc-number" name="card_number" placeholder="" value="" onChange={this.handleOnChange} />
+                                        <input type="text" className="form-control" id="cc-number" name="card_number" placeholder="" value={this.state.card_number} onChange={this.handleOnChange} />
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-md-3 mb-3">
                                         <label htmlFor="cc-expiration">Expiration</label>
-                                        <input type="text" className="form-control" id="cc-expiration" name="expiration" placeholder="" value="" onChange={this.handleOnChange} />
+                                        <input type="text" className="form-control" id="cc-expiration" name="expiration" placeholder="" value={this.state.expiration} onChange={this.handleOnChange} />
                                     </div>
                                 </div>
                                 <hr className="mb-4" />

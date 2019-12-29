@@ -47,6 +47,7 @@ export default class extends Component {
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Created by</th>
                         <th>Status</th>
                         <th>Goal items</th>
                         <th>Current items</th>
@@ -60,6 +61,7 @@ export default class extends Component {
                         return (
                             <tr key={index}>
                                 <td>{item.name}</td>
+                                <td>{item.user.name}</td>
                                 <td>{item.status==0? PUBLIC_STATUS:PRIVATE_STATUS}</td>
                                 <td>{item.goal_item}</td>
                                 <td>{item.current_items}</td>
