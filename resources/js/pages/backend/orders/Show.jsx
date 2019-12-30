@@ -65,7 +65,7 @@ export default class extends Component {
                     <div className="col-sm-12 col-md-8 show-info-container">
                         <div className="show-info">
                             <p className="show-label">Status</p>
-                            <p className="show-value text-danger">{this.state.info.status==0? 'Processed':'Processing'}</p>
+                            <p className={this.state.info.status==0?"text-success":"text-danger"}>{this.state.info.status==0? "Processed" : "Processing"}</p>
                         </div>
                         <div className="show-info">
                             <p className="show-label">Event</p>

@@ -9,7 +9,7 @@ export default class AuthHelperFrontEnd {
     static checkAuthError(error) {
         if(error.response.status===401) {
             AuthHelperFrontEnd.removeToken();
-            window.location.href=Route.frontEnd.auth.login.path;
+            window.location.href=Route.frontEnd.home.index.path;
         }
 
         if(error.response.status===403) {

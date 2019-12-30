@@ -138,11 +138,11 @@ class Index extends Component {
                                                 return (
                                                     <li className="list-group-item d-flex justify-content-between lh-condensed text-left" key={index}>
                                                         <div>
-                                                            <h6 className="my-0">{item.name} ({item.price}$)</h6>
+                                                            <h6 className="my-0">{item.name} ({parseFloat(item.price).toFixed(1)}$)</h6>
                                                             <small className="text-muted">{item.description}</small>
                                                             <h6>Quantity: {item.quantity}</h6>
                                                         </div>
-                                                        <span className="text-muted text-red">${item.price*item.quantity}</span>
+                                                        <span className="text-muted text-red">${parseFloat(item.price*item.quantity).toFixed(1)}</span>
                                                     </li>
                                                 )
                                             })}
@@ -178,7 +178,7 @@ class Index extends Component {
                                     </div>
                                     <div className=" col-sm-6 col-md-6 col-xs-6 col-lg-6 ">
                                         <h3>{product.name}</h3>
-                                        <h4 className="text-left text-red">Price: {product.price}$</h4>
+                                        <h4 className="text-left text-red">Price: {parseFloat(product.price).toFixed(1)}$</h4>
                                         <h4>{product.description}</h4>
                                     </div>
                                     <div className="col-sm-1 col-md-1 col-xs-1 col-lg-1">
@@ -186,7 +186,7 @@ class Index extends Component {
                                     <div className="col-sm-2 col-md-2 col-xs-2 col-lg-2">
                                         <input type="number" min="1" className="form-control" value={product.quantity} required
                                             onChange={this.orderProduct(product)} />
-                                        <h3 className="text-right">{product.price*product.quantity}$</h3>
+                                        <h3 className="text-right">{parseFloat(product.price*product.quantity).toFixed(1)}$</h3>
                                     </div>
                                 </div>
                             )

@@ -44,7 +44,7 @@ export default class extends Component {
             {icon: 'fas fa-folder',label: 'Events',link: RouteConst.backEnd.events.index.path,roleNeed: 0},
             {icon: 'fas fa-folder',label: 'Products',link: RouteConst.backEnd.products.index.path,roleNeed: 1},
             {icon: 'fas fa-folder',label: 'Orders',link: RouteConst.backEnd.orders.index.path,roleNeed: 1},
-            // {icon: 'fas fa-folder',label: 'Posts',link: RouteConst.backEnd.posts.index.path,roleNeed: 0},
+            {icon: 'fas fa-folder',label: 'Posts',link: RouteConst.backEnd.posts.index.path,roleNeed: 0},
         ];
 
         let listRoleStaticMenus=[];

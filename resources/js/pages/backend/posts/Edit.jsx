@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import PostsRequests from '../../../requests/backend/PostsRequests';
+import EventsRequests from '../../../requests/frontend/EventsRequests';
 
 export default class extends Component {
     constructor(props) {
@@ -10,9 +11,14 @@ export default class extends Component {
             id: this.props.match.params.id,
             info: {},
             form: {
-                name: '',
                 description: '',
+                title: '',
+                event_id: '',
+                image: '',
+                text: '',
+                status: '',
             },
+            events: [],
             formData: new FormData(),
             messageError: '',
         };
@@ -20,15 +26,21 @@ export default class extends Component {
 
     componentDidMount() {
         this.getInfo(this.state.id);
+        EventsRequests.getAll().then((response) => {
+            this.setState({events: response.data})
+        });
     }
 
     getInfo=(id) => {
         PostsRequests.showByID(id).then((response) => {
-            console.log(response)
             if(response.meta.status===200) {
                 const form={
-                    name: response.data.name,
+                    title: response.data.title,
                     description: response.data.description,
+                    event_id: response.data.event_id,
+                    image: response.data.image,
+                    text: response.data.text,
+                    status: response.data.status,
                 }
                 this.setState({form});
             } else {
@@ -67,9 +79,11 @@ export default class extends Component {
         let formSubmit;
 
         if(formData instanceof FormData) {
-            formData.append('name',form.name);
+            formData.append('title',form.title);
             formData.append('description',form.description);
-
+            formData.append('text',form.text);
+            formData.append('status',form.status);
+            formData.append('event_id',form.event_id);
             formSubmit=formData;
         } else {
             formSubmit=form;
@@ -90,6 +104,7 @@ export default class extends Component {
     }
 
     render() {
+        let {events} = this.state
         const breadcrumbElement=(
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -104,10 +119,29 @@ export default class extends Component {
 
         const formElement=(
             <div>
+             <div className="form-group">
+                    <label htmlFor="description">Event</label>
+                    <select name="event_id" id="event_id" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.event_id}>
+                        {
+                            events.map((item,key) => {
+                                return (
+                                    <option key={key} value={item.id}>{item.name}</option>)
+                            })
+                        }
+
+                    </select>
+                </div>
                 <div className="form-group">
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="name">Title</label>
                     <input type="text" className="form-control" id="name"
-                        name="name" onChange={this.handleOnChange} value={this.state.form.name} />
+                        name="name" onChange={this.handleOnChange} value={this.state.form.title} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Status</label>
+                    <select name="status" id="status" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.status}>
+                        <option value='0'>PUBLIC</option>)
+                        <option value='1'>PRIVATE</option>)
+                    </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="image">Image</label>
@@ -118,6 +152,11 @@ export default class extends Component {
                     <label htmlFor="description">Description</label>
                     <input type="text" className="form-control" id="description"
                         name="description" onChange={this.handleOnChange} value={this.state.form.description} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Text</label>
+                    <input type="text" className="form-control" id="text"
+                        name="text" onChange={this.handleOnChange} value={this.state.form.text} />
                 </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>

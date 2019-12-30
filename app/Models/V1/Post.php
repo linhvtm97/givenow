@@ -16,7 +16,7 @@ class Post extends MainModel
      * @var array
      */
     protected $fillable = [
-        'name', 'event_id', 'image', 'description', 'text', 'title'
+        'event_id', 'image', 'description', 'text', 'title', 'user_id'
     ];
 
     /**
@@ -25,7 +25,7 @@ class Post extends MainModel
      * @var array
      */
     protected $hidden = [
-        'pivot', 'deleted_at', 'event_id'
+        'pivot', 'deleted_at', 'user_id'
     ];
 
     /**
@@ -36,5 +36,15 @@ class Post extends MainModel
     public function event()
     {
         return $this->belongsTo(Event::class, 'event_id');
+    }
+
+    /**
+     * User relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

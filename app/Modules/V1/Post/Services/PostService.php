@@ -41,6 +41,6 @@ class PostService extends BaseService
      */
     public function find(string $uid)
     {
-        return $this->repository->with(['cause', 'user'])->find($uid);
+        return $this->repository->with(['event', 'user'])->find($uid);
     }
 }

@@ -23,9 +23,9 @@ class User extends Authenticatable implements JWTSubject
     const LIST_ROLE = [self::ROLE_ADMIN, self::ROLE_NORMAL_USER, self::ROLE_SUPER_ADMIN, self::ROLE_CHARITY];
 
 
-    const PUBLIC_STATUS = 0;
-    const PRIVATE_STATUS = 1;
-    const LIST_STATUS = [self::PUBLIC_STATUS, self::PRIVATE_STATUS];
+    const DEACTIVE_STATUS = 0;
+    const ACTIVE_STATUS = 1;
+    const LIST_STATUS = [self::ACTIVE_STATUS, self::DEACTIVE_STATUS];
 
     //define per page for paginator
     protected $perPage = 20;

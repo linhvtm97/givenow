@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import PostsRequests from '../../../requests/backend/PostsRequests';
 
+const PUBLIC_STATUS='PUBLIC';
+const PRIVATE_STATUS='PRIVATE';
 export default class extends Component {
     constructor(props) {
         super(props);
@@ -45,8 +47,11 @@ export default class extends Component {
             <table className="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Title</th>
+                        <th>Event</th>
                         <th>Description</th>
+                        <th>Text</th>
                         <th className="text-center" width="150">Action</th>
                     </tr>
                 </thead>
@@ -54,8 +59,11 @@ export default class extends Component {
                     {this.state.listRecords.map((item,index) => {
                         return (
                             <tr key={index}>
-                                <td>{item.name}</td>
+                                <td>{item.status==0? PUBLIC_STATUS:PRIVATE_STATUS}</td>
+                                <td>{item.title}</td>
+                                <td>{item.event.name}</td>
                                 <td>{item.description}</td>
+                                <td>{item.text}</td>
                                 <td className="text-center">
                                     <Link className="btn btn-info btn-sm mr-2"
                                         to={`${RouteConst.backEnd.posts.index.path}/${item.id}`}>

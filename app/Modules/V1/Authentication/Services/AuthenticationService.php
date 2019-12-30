@@ -50,9 +50,10 @@ class AuthenticationService
      */
     public function checkAuth(array $credentials)
     {
-        if (!($token = JWTAuth::attempt($credentials))) {
+        if (!($token = JWTAuth::attempt($credentials)) ||  Auth::user()->status == User::DEACTIVE_STATUS) {
             throw new AuthenticationException(trans('auth.errors.login-unauthenticated'));
         }
+
         return [
             'data' => [
                 'access_token' => $token,

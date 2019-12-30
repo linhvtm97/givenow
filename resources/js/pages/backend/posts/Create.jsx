@@ -2,18 +2,30 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RouteConst from '../../../constants/Route';
 import PostsRequests from '../../../requests/backend/PostsRequests';
+import EventsRequests from '../../../requests/frontend/EventsRequests';
+import LocalStorageHelper from '../../../helpers/LocalStorageHelper';
 
 export default class extends Component {
     constructor(props) {
         super(props);
         this.state = {
             form: {
-                name: '',
                 description: '',
+                title: '',
+                event_id: '',
+                image: '',
+                text: '',
+                status: 0
             },
-            formData: {},
+            events: [],
+            formData: new FormData(),
             messageError: '',
         };
+    }
+    componentDidMount() {
+        EventsRequests.getAll().then((response) => {
+            this.setState({events: response.data})
+        });
     }
 
     handleOnChange = event => {
@@ -43,8 +55,15 @@ export default class extends Component {
     submitForm = event => {
         event.preventDefault();
         let { formData, form } = this.state;
-        formData.append('name', form.name);
+        let user_id = LocalStorageHelper.getItem('authToken').user.id;
+
+        formData.append('title', form.title);
+        formData.append('status', form.status);
+        formData.append('text', form.text);
+        formData.append('event_id', parseInt(form.event_id));
         formData.append('description', form.description);
+        formData.append('user_id', parseInt(user_id));
+
 
         PostsRequests.create(formData).then((response) => {
             if (response.meta.status === 201) {
@@ -61,6 +80,7 @@ export default class extends Component {
     }
 
     render() {
+        let {events} = this.state
         const breadcrumbElement = (
             <ol className="breadcrumb">
                 <li className="breadcrumb-item">
@@ -75,10 +95,29 @@ export default class extends Component {
 
         const formElement = (
             <div>
+             <div className="form-group">
+                    <label htmlFor="description">Event</label>
+                    <select name="event_id" id="event_id" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.event_id}>
+                        {
+                            events.map((item,key) => {
+                                return (
+                                    <option key={key} value={item.id}>{item.name}</option>)
+                            })
+                        }
+
+                    </select>
+                </div>
                 <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" className="form-control" id="name"
-                        name="name" onChange={this.handleOnChange} />
+                    <label htmlFor="name">Title</label>
+                    <input type="text" className="form-control" id="title"
+                        name="title" onChange={this.handleOnChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Status</label>
+                    <select name="status" id="status" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.status}>
+                        <option value='0'>PUBLIC</option>)
+                        <option value='1'>PRIVATE</option>)
+                    </select>
                 </div>
                 <div className="form-group">
                     <label htmlFor="image">Image</label>
@@ -89,6 +128,11 @@ export default class extends Component {
                     <label htmlFor="description">Description</label>
                     <input type="text" className="form-control" id="description"
                         name="description" onChange={this.handleOnChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Text</label>
+                    <input type="text" className="form-control" id="text"
+                        name="text" onChange={this.handleOnChange} />
                 </div>
                 <button type="button" className="btn btn-primary"
                     onClick={this.submitForm}>Submit</button>

@@ -38,6 +38,8 @@ class AuthenticationRepository
             'password' => $data['password'],
         ];
         $data['password'] = bcrypt($data['password']);
+        $data['role'] = User::ROLE_NORMAL_USER;
+        $data['status'] = User::PUBLIC_STATUS;
         $user = User::create($data);
 
         return $credentials;

@@ -52,7 +52,7 @@ export default class extends Component {
         let formData=new FormData();
         formData.append('status',form.status)
 
-        OrdersRequests.update(this.state.id,form.status).then((response) => {
+        OrdersRequests.update(this.state.id,formData).then((response) => {
             if(response.meta.status===200) {
                 if(response.data.id) {
                     this.props.history.push(`${RouteConst.backEnd.orders.index.path}/${response.data.id}`);
@@ -83,8 +83,8 @@ export default class extends Component {
                 <div className="form-group">
                     <label htmlFor="description">Status</label>
                     <select name="status" id="status" className="form-control" required="required" onChange={this.handleOnChange} value={this.state.form.status}>
-                        <option value='0'>PUBLIC</option>)
-                        <option value='1'>PRIVATE</option>)
+                        <option value='0'>Processed</option>
+                        <option value='1'>Processing</option>
                     </select>
                 </div>
                 <div className="form-group">

@@ -1,6 +1,6 @@
 import React from 'react';
 import AuthRequests from '../../../requests/backend/AuthRequests';
-import AuthHelper from '../../../helpers/AuthHelperBackEnd';
+import AuthHelper from '../../../helpers/AuthHelperFrontEnd';
 import Route from '../../../constants/Route';
 
 export const statusCode={

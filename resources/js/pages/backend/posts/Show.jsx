@@ -58,8 +58,12 @@ export default class extends Component {
                             <p className="show-value">{this.state.info.id}</p>
                         </div>
                         <div className="show-info">
-                            <p className="show-label">Name</p>
-                            <p className="show-value">{this.state.info.name}</p>
+                            <p className="show-label">Status</p>
+                            <p className="show-value">{this.state.info.status}</p>
+                        </div>
+                        <div className="show-info">
+                            <p className="show-label">Title</p>
+                            <p className="show-value">{this.state.info.title}</p>
                         </div>
                         <div className="show-info">
                             <p className="show-label">Image</p>
@@ -69,6 +73,10 @@ export default class extends Component {
                         </div>
                         <div className="show-info">
                             <p className="show-label">Description</p>
+                            <p className="show-value">{this.state.info.description}</p>
+                        </div>
+                        <div className="show-info">
+                            <p className="show-label">Text</p>
                             <p className="show-value">{this.state.info.description}</p>
                         </div>
                         <div className="show-info">
